@@ -2,12 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
        1. TYPEWRITER PLACEHOLDER
-       Cycles animated placeholder text across all search inputs.
     ═══════════════════════════════════════════════════════ */
     const searchInputs = document.querySelectorAll('input[name="search"]');
 
     if (searchInputs.length > 0) {
-        const phrases = ['Search Batik...', 'Search Silk...', 'Search Chiffon...', 'Search Tie-Dye...'];
+        const phrases =['Search Batik...', 'Search Silk...', 'Search Chiffon...', 'Search Tie-Dye...'];
         let phraseIndex = 0;
         let charIndex   = 0;
         let isDeleting  = false;
@@ -42,28 +41,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
        2. DESKTOP DROPDOWN
-       Handles click-to-toggle, keyboard (Enter/Space/Escape),
-       and closes when clicking anywhere outside.
     ═══════════════════════════════════════════════════════ */
     const shopTrigger  = document.getElementById('shop-trigger');
     const shopDropdown = document.getElementById('shop-dropdown');
 
     if (shopTrigger && shopDropdown) {
-
-        /* Open / close helper */
         function setDropdown(open) {
             shopTrigger.setAttribute('aria-expanded', String(open));
-            /* CSS reads aria-expanded="true" on the trigger via the ~ sibling selector */
         }
 
-        /* Click toggle */
         shopTrigger.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = shopTrigger.getAttribute('aria-expanded') === 'true';
             setDropdown(!isOpen);
         });
 
-        /* Keyboard: Enter / Space open; Escape closes */
         shopTrigger.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
@@ -76,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        /* Escape from anywhere inside the dropdown */
         shopDropdown.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 setDropdown(false);
@@ -84,14 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        /* Close on outside click */
         document.addEventListener('click', (e) => {
             if (!shopTrigger.closest('li').contains(e.target)) {
                 setDropdown(false);
             }
         });
 
-        /* Close on outside touch (mobile browsers) */
         document.addEventListener('touchstart', (e) => {
             if (!shopTrigger.closest('li').contains(e.target)) {
                 setDropdown(false);
@@ -102,9 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
        3. MOBILE HAMBURGER
-       Toggles aria-expanded on the button.
-       The CSS :has() selector drives the actual open/close
-       animation — no class toggling needed here.
     ═══════════════════════════════════════════════════════ */
     const hamburger = document.getElementById('hamburger');
 
@@ -114,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
             hamburger.setAttribute('aria-expanded', String(!isOpen));
         });
 
-        /* Close mobile menu on Escape */
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
                 hamburger.setAttribute('aria-expanded', 'false');
@@ -126,8 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
        4. MOBILE SHOP SUB-MENU
-       Toggles the .open class on the sub-panel.
-       The CSS max-height transition handles animation.
     ═══════════════════════════════════════════════════════ */
     const mobileShopToggle = document.getElementById('mobileShopToggle');
     const mobileShopSub    = document.getElementById('mobileShopSub');
@@ -143,14 +126,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
        5. ACTIVE PAGE HIGHLIGHT
-       Reads data-page from nav links and marks the current
-       page link with aria-current="page".
-       Replace getCurrentPage() with your own routing logic
-       if you move to a multi-page or SPA setup.
     ═══════════════════════════════════════════════════════ */
     function getCurrentPage() {
-        /* For a flat file site, derive the page name from the filename.
-           e.g. "/about.html" → "about", "/" or "/index.html" → "home"  */
         const path = window.location.pathname.replace(/\/$/, '').split('/').pop();
         return path.replace('.html', '') || 'home';
     }
@@ -163,5 +140,134 @@ document.addEventListener("DOMContentLoaded", () => {
             el.removeAttribute('aria-current');
         }
     });
+
+
+    /* ═══════════════════════════════════════════════════════
+       6. HERO SECTION LOGIC
+    ═══════════════════════════════════════════════════════ */
+    const heroWord = document.getElementById('heroWord');
+    const heroPills = document.getElementById('heroPills');
+    const heroDots = document.getElementById('heroDots');
+    const heroImgStack = document.getElementById('heroImgStack');
+    const heroRightArea = document.getElementById('heroRightArea');
+
+    // SAFETY CHECK: Only run this if the hero elements exist on this specific page
+    if (heroWord && heroPills && heroDots && heroImgStack && heroRightArea) {
+        
+        const categories =[
+            {
+              word: 'Batik',
+              images:[
+                { img: 'assets/batik/batik1.webp', label: 'Traditional Batik', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/batik/batik2.webp', label: 'Modern Batik', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/batik/batik3.webp', label: 'Elegant Batik', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/batik/batik4.webp', label: 'Artistic Batik', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+              ]
+            },
+            {
+              word: 'Chiffon',
+              images:[
+                { img: 'assets/images/products/tissue-chiffon/chiffon1.webp', label: 'Light Chiffon', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon2.webp', label: 'Silk Chiffon', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon3.webp', label: 'Floral Chiffon', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon4.webp', label: 'Tissue Chiffon', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+              ]
+            },
+            {
+              word: 'Silk',
+              images:[
+                { img: 'assets/images/products/silk-batik/silk1.webp', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/silk-batik/silk2.webp', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/silk-batik/silk3.webp', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/silk-batik/silk4.webp', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+              ]
+            },
+            {
+              word: 'Tie-Dye',
+              images:[
+                { img: 'assets/images/products/tie-dye/tie-dye1.webp', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye2.webp', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye3.webp', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye4.webp', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+              ]
+            }
+        ];
+
+        let current = 0;
+        let autoPlayInterval;
+        const fadeDelay = 500;
+
+        function initHero() {
+            categories.forEach((cat, index) => {
+                const pill = document.createElement('button');
+                pill.className = `hero-pill ${index === 0 ? 'active' : ''}`;
+                pill.textContent = cat.word;
+                pill.onclick = () => goTo(index);
+                heroPills.appendChild(pill);
+
+                const dot = document.createElement('button');
+                dot.className = `hero-dot ${index === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to ${cat.word}`);
+                dot.onclick = () => goTo(index);
+                heroDots.appendChild(dot);
+            });
+
+            renderCategory(0);
+            startTimer();
+        }
+
+        function renderCategory(index) {
+            const cat = categories[index];
+            heroWord.textContent = cat.word;
+            heroRightArea.setAttribute('aria-label', `${cat.word} images`);
+
+            Array.from(heroPills.children).forEach((pill, i) => pill.classList.toggle('active', i === index));
+            Array.from(heroDots.children).forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+            heroImgStack.innerHTML = cat.images.map((img, i) => {
+                let styles = `width: ${img.size.w}px; height: ${img.size.h}px; transform: rotate(${img.rotate});`;
+                if (img.pos.top) styles += ` top: ${img.pos.top};`;
+                if (img.pos.bottom) styles += ` bottom: ${img.pos.bottom};`;
+                if (img.pos.left) styles += ` left: ${img.pos.left};`;
+                if (img.pos.right) styles += ` right: ${img.pos.right};`;
+
+                return `
+                <div class="hero-img-card hero-img-card--${i + 1}" style="${styles}">
+                    ${img.img 
+                    ? `<img src="${img.img}" alt="${img.label}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                        <div style="background: #e0e0e0; width: 100%; height: 100%; display: none;"></div>` 
+                    : `<div style="background: #e0e0e0; width: 100%; height: 100%;"></div>`
+                    }
+                    <span class="hero-img-label">${img.label}</span>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function goTo(index) {
+            if (index === current) return;
+            clearInterval(autoPlayInterval);
+            heroWord.classList.remove('visible');
+            heroImgStack.classList.remove('visible');
+
+            setTimeout(() => {
+                current = index;
+                renderCategory(index);
+                heroWord.classList.add('visible');
+                heroImgStack.classList.add('visible');
+                startTimer(); 
+            }, fadeDelay);
+        }
+
+        function startTimer() {
+            autoPlayInterval = setInterval(() => {
+                const nextIndex = (current + 1) % categories.length;
+                goTo(nextIndex);
+            }, 4000); 
+        }
+
+        // Initialize immediately because we are already inside DOMContentLoaded!
+        initHero(); 
+    }
 
 });

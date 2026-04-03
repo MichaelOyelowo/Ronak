@@ -188,6 +188,43 @@
   </nav>
 </header>
 
+<section class="hero" aria-label="Hero section">
+  <div class="hero-container">
+
+    <!-- ── Left side ── -->
+    <div class="hero-left">
+      <p class="hero-tag">Premium Handcrafted Adire</p>
+      <h1 class="hero-h1">Worn With Pride<br />
+        <span class="hero-scribble">Yoruba</span>Artistry<br />
+        <!-- This word will update dynamically -->
+        <span class="hero-changing visible" id="heroWord">Chocolates</span>
+      </h1>
+
+      <p class="hero-sub">
+        Shop premium Adire collections made to stand out. Unique designs, rich fabrics, and styles that turn heads wherever you go.
+      </p>
+
+      <!-- Buttons injected by JS -->
+      <div class="hero-pills" id="heroPills" role="tablist" aria-label="Snack categories"></div>
+
+      <div class="hero-btns">
+        <button class="hero-btn-primary">Shop Now</button>
+        <button class="hero-btn-secondary">View Menu</button>
+      </div>
+
+      <!-- Dots injected by JS -->
+      <div class="hero-dots" id="heroDots" role="tablist"></div>
+    </div>
+
+    <!-- ── Right side — 4 stacked images ── -->
+    <div class="hero-right" id="heroRightArea" aria-label="Snack images">
+      <!-- Image cards injected by JS -->
+      <div class="hero-img-stack visible" id="heroImgStack"></div>
+    </div>
+
+  </div>
+</section>
+
 <script src="assets/js/main.js"></script>
 </body>
 </html>
