@@ -1,0 +1,759 @@
+/* ═══════════════════════════════════════
+   RONAKS ADIRE – EDITORIAL VARIABLES
+═══════════════════════════════════════ */
+:root {
+    --bg:           #fbf9f4;
+    --bg-low:       #f5f3ee;
+    --bg-card:      #f0eee9;
+    --navy:         #0A1128;
+    --navy-light:   #1A2442;
+    --text-dark:    #111111;
+    --text-mid:     #444444;
+    --text-faint:   #777777;
+    --border:       #e4e2dd;
+    --border-mid:   #d1cfca;
+
+    --display:      'Noto Serif', Georgia, serif;
+    --body:         'Manrope', system-ui, sans-serif;
+
+    --nav-height-desk: 90px;
+    --nav-height-mob:  70px;
+    --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+html {
+    overflow-x: hidden;
+}
+
+body {
+    /* Do NOT use overflow-x: hidden on body — it creates a block formatting
+       context that clips position:absolute descendants like dropdowns.
+       Instead we clip overflow on html only, which avoids that side effect. */
+    overflow-x: clip;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text-dark);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    background: none;
+    border: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+:focus-visible {
+    outline: 2px solid var(--navy);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+
+/* ═══════════════════════════════════════
+   TOP BAR
+═══════════════════════════════════════ */
+.topbar {
+    background: var(--navy);
+    color: #ffffff;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.topbar-msg-slider {
+    position: relative;
+    height: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    perspective: 400px;
+}
+
+.topbar-msg {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    transform-origin: center;
+    animation: flipRotate 5.7s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.topbar-msg strong {
+    color: #ffffff;
+    font-weight: 700;
+    opacity: 0.8;
+}
+
+.topbar-msg:nth-child(1) { animation-delay: 0s; }
+.topbar-msg:nth-child(2) { animation-delay: 1.9s; }
+.topbar-msg:nth-child(3) { animation-delay: 3.8s; }
+
+@keyframes flipRotate {
+    0%              { opacity: 0; transform: rotateX(-90deg); }
+    8%, 25%         { opacity: 1; transform: rotateX(0deg); }
+    33.33%, 100%    { opacity: 0; transform: rotateX(90deg); }
+}
+
+.topbar-socials {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.topbar-socials a {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.topbar-socials a:hover {
+    color: #ffffff;
+}
+
+.topbar-socials svg {
+    width: 15px;
+    height: 15px;
+    fill: currentColor;
+}
+
+
+/* ═══════════════════════════════════════
+   DESKTOP NAVBAR
+═══════════════════════════════════════ */
+
+/*
+   CRITICAL: The sticky header must NEVER have overflow:hidden (default for
+   positioned elements in some browsers). Every ancestor of the dropdown
+   needs overflow:visible so the absolutely-positioned panel isn't clipped.
+   backdrop-filter is also removed — it creates a stacking context that
+   clips z-index children regardless of overflow setting.
+*/
+.desk-nav,
+.desk-nav .navbar,
+.desk-nav .nav-menu-wrapper,
+.desk-nav .nav-links,
+.desk-nav .nav-links > li {
+    overflow: visible !important;
+}
+
+.desk-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.desk-nav .navbar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    height: var(--nav-height-desk);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ── Logo ── */
+.nav-logo {
+    flex-shrink: 0;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    transition: opacity 0.3s;
+}
+
+.logo:hover img {
+    opacity: 0.7;
+}
+
+/* ── Nav links ── */
+.desk-nav .nav-menu-wrapper {
+    margin-right: auto;
+}
+
+.desk-nav .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.desk-nav .nav-links > li {
+    position: relative;
+}
+
+.desk-nav .nav-links a,
+.desk-nav .nav-dropdown-trigger {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    padding: 0.55rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    transition: color 0.22s var(--ease);
+    white-space: nowrap;
+}
+
+/* Underline indicator */
+.desk-nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background: var(--navy);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+}
+
+.desk-nav .nav-links a:hover,
+.desk-nav .nav-dropdown-trigger:hover,
+.desk-nav .nav-dropdown-trigger[aria-expanded="true"] {
+    color: var(--navy);
+}
+
+.desk-nav .nav-links a:hover::after,
+.desk-nav .nav-links a[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+.desk-nav .nav-links a[aria-current="page"] {
+    color: var(--navy);
+    font-weight: 800;
+}
+
+/* Chevron — global, used in both desktop and mobile */
+.chevron {
+    display: inline-flex;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s var(--ease);
+}
+
+.chevron svg {
+    width: 100%;
+    height: 100%;
+}
+
+.nav-dropdown-trigger[aria-expanded="true"] .chevron,
+.desk-nav .has-dropdown:hover .nav-dropdown-trigger .chevron {
+    transform: rotate(180deg);
+}
+
+/* ── Dropdown panel ── */
+.desk-nav .dropdown {
+    position: absolute;
+    top: calc(100% + 1px); /* 1px clears the navbar bottom border */
+    left: 0;
+    min-width: 220px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--navy);
+    border-radius: 2px;
+    box-shadow: 0 10px 30px rgba(10, 17, 40, 0.08);
+    padding: 0.5rem 0;
+    z-index: 9999;
+
+    /* Hidden state */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition:
+        opacity     0.2s var(--ease),
+        transform   0.2s var(--ease),
+        visibility  0.2s;
+}
+
+/*
+   Invisible hover bridge — prevents the dropdown from closing
+   when the mouse travels from the trigger down into the panel.
+   Must be taller than any gap between trigger and panel.
+*/
+.desk-nav .dropdown::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: transparent;
+}
+
+/* Visible state — CSS hover (mouse) */
+.desk-nav .has-dropdown:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Visible state — JS click/keyboard sets aria-expanded="true" on trigger.
+   Uses ~ (general sibling) not + (adjacent) because whitespace text nodes
+   can sit between the <button> and <ul> in the source. */
+.desk-nav .nav-dropdown-trigger[aria-expanded="true"] ~ .dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Dropdown items */
+.desk-nav .dropdown li a {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--text-mid);
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s;
+    border-radius: 0;
+}
+
+.desk-nav .dropdown li a:hover {
+    background: var(--bg-card);
+    color: var(--navy);
+    padding-left: 1.8rem;
+}
+
+
+/* ═══════════════════════════════════════
+   DESKTOP NAV — RIGHT SIDE (SEARCH + CTA)
+═══════════════════════════════════════ */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+.search-input {
+    width: 260px;
+    height: 40px;
+    padding: 0 2rem 0 1rem;
+    border: 1px solid var(--border-mid);
+    border-radius: 16px;
+    background: #fffefe;
+    outline: none;
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--navy);
+    transition:
+        border-color 0.3s var(--ease),
+        background   0.3s var(--ease);
+}
+
+.search-input::placeholder {
+    color: var(--text-faint);
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+.search-input:focus {
+    background: var(--bg);
+    border-color: var(--navy);
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--text-faint);
+    transition: fill 0.3s var(--ease);
+}
+
+.search-input:focus ~ .search-icon svg {
+    fill: var(--navy);
+}
+
+/* CTA button */
+.desk-nav .nav-cta {
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: var(--navy);
+    padding: 0.75rem 1.8rem;
+    border-radius: 25px;
+    border: 1px solid var(--navy);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.desk-nav .nav-cta:hover {
+    background: #ffffff;
+    color: var(--navy);
+    box-shadow: 0 6px 16px rgba(10, 17, 40, 0.15);
+}
+
+
+/* ═══════════════════════════════════════
+   MOBILE HEADER
+═══════════════════════════════════════ */
+.mobile-header {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+}
+
+.mobile-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.25rem;
+    height: var(--nav-height-mob);
+    gap: 12px;
+}
+
+.mobile-header .logo img {
+    height: 40px;
+}
+
+/* Hamburger icon swap */
+.hamburger .menu-close { display: none; }
+.hamburger[aria-expanded="true"] .menu-open  { display: none; }
+.hamburger[aria-expanded="true"] .menu-close { display: block; }
+
+.hamburger svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--navy);
+    transition: fill 0.2s;
+    display: block;
+}
+
+/* ── Mobile drawer ──
+   Driven purely by :has() watching aria-expanded on the hamburger.
+   No JS class toggling needed — JS only sets aria-expanded.
+*/
+.mobile-nav-inner {
+    width: 100%;
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    background: var(--bg);
+    padding: 0 1.5rem;
+    transition:
+        max-height  0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity     0.3s ease,
+        visibility  0.4s;
+}
+
+#mobileNav:has(.hamburger[aria-expanded="true"]) .mobile-nav-inner {
+    max-height: 600px;
+    opacity: 1;
+    visibility: visible;
+    padding-bottom: 2rem;
+    border-top: 1px solid var(--border);
+    transition:
+        max-height  0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity     0.4s ease 0.1s,
+        visibility  0.5s;
+}
+
+/* Drawer links */
+.mobile-nav-inner > a {
+    display: block;
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.mobile-nav-inner > a:hover,
+.mobile-nav-inner > a[aria-current="page"] {
+    color: var(--navy);
+}
+
+.mobile-nav-inner > a[aria-current="page"] {
+    border-left: 2px solid var(--navy);
+    padding-left: 1rem;
+}
+
+/* Shop sub-toggle */
+.mobile-shop-toggle {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    transition: color 0.2s;
+}
+
+.mobile-shop-toggle[aria-expanded="true"] {
+    color: var(--navy);
+}
+
+.mobile-shop-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(180deg);
+}
+
+/* Sub-panel */
+.mobile-sub {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s var(--ease);
+    background: var(--bg-card);
+}
+
+.mobile-sub.open {
+    max-height: 280px;
+}
+
+.mobile-sub a {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    padding: 1rem 0 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.mobile-sub a:last-child {
+    border-bottom: none;
+}
+
+.mobile-sub a:hover {
+    color: var(--navy);
+    padding-left: 2rem;
+}
+
+/* Mobile CTA */
+.mobile-nav-cta {
+    display: block;
+    margin-top: 1.5rem;
+    text-align: center;
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #ffffff !important;
+    background: var(--navy);
+    padding: 1.1rem;
+    border-radius: 25px;
+    border: 1px solid var(--navy) !important;
+    box-shadow: 0 4px 12px rgba(10, 17, 40, 0.2);
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-cta:hover {
+    background: #ffffff;
+    color: var(--navy) !important;
+    box-shadow: 0 6px 16px rgba(10, 17, 40, 0.15);
+}
+
+
+/* ═══════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════ */
+
+/* Switch to mobile nav below 1024px */
+@media (max-width: 1024px) {
+    .desk-nav      { display: none; }
+    .mobile-header { display: block; }
+}
+
+/* ── Tablet (768px – 1024px) ── */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mobile-top-row {
+        padding: 0 2rem;
+        height: 80px;
+    }
+
+    .mobile-header .logo img {
+        height: 48px;
+    }
+    
+
+    .hamburger svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .mobile-nav-inner {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .mobile-nav-inner > a,
+    .mobile-shop-toggle {
+        font-size: 0.8rem;
+        padding: 1.4rem 0;
+    }
+
+    .mobile-sub a {
+        font-size: 0.75rem;
+        padding: 1.1rem 0 1.1rem 2rem;
+    }
+
+    .mobile-nav-cta {
+        font-size: 0.7rem;
+        padding: 1.2rem;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* ── Small mobile (< 480px) ── */
+@media (max-width: 480px) {
+    .mobile-top-row {
+        padding: 0 1rem;
+        gap: 8px;
+    }
+
+    .mobile-header .search-input {
+        width: calc(100vw - 160px);
+        font-size: 0.65rem;
+    }
+
+    .mobile-header .logo img {
+        height: 34px;
+    }
+
+    .hamburger svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .mobile-nav-inner {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .mobile-nav-inner > a,
+    .mobile-shop-toggle {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        padding: 1rem 0;
+    }
+
+    .mobile-sub a {
+        font-size: 0.65rem;
+        padding: 0.9rem 0 0.9rem 1.2rem;
+    }
+
+    .mobile-nav-cta {
+        padding: 1rem;
+        font-size: 0.62rem;
+    }
+}
+
+/* ── Topbar: hide socials on very small screens ── */
+@media (max-width: 600px) {
+    .topbar-socials {
+        display: none;
+    }
+
+    .topbar {
+        justify-content: center;
+    }
+
+    .topbar-msg-slider {
+        flex-grow: 0;
+        width: 100%;
+    }
+}
