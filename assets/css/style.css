@@ -710,7 +710,7 @@ button {
     }
 
     .mobile-header .search-input {
-        width: calc(100vw - 160px);
+        width: calc(100vw - 180px);
         font-size: 0.65rem;
     }
 
