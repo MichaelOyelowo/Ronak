@@ -213,14 +213,14 @@ button {
     display: flex;
     align-items: center;
 }
-
+ 
 .logo img {
-    height: 50px;
+    height: 92px;
     width: auto;
     object-fit: contain;
     transition: opacity 0.3s;
 }
-
+ 
 .logo:hover img {
     opacity: 0.7;
 }
@@ -492,7 +492,7 @@ button {
 }
 
 .mobile-header .logo img {
-    height: 40px;
+    height: 66px;
 }
 
 /* Hamburger icon swap */
@@ -663,8 +663,12 @@ button {
         height: 80px;
     }
 
-    .mobile-header .logo img {
-        height: 48px;
+    .nav-logo {
+        margin-right: 1rem;
+    }
+ 
+    .logo img {
+        height: 60px;
     }
     
 
@@ -711,7 +715,7 @@ button {
     }
 
     .mobile-header .logo img {
-        height: 34px;
+        height: 48px;
     }
 
     .hamburger svg {
