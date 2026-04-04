@@ -1,7 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ═══════════════════════════════════════════════════════
-       1. TYPEWRITER PLACEHOLDER
+      1. SCROLL REVEAL (Intersection Observer)
+    ═══════════════════════════════════════════════════════ */
+    const revealOptions = {
+        threshold: 0.15,
+        rootMargin: "0px 0px -50px 0px" // Triggers slightly before it fully hits the bottom
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
+
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-fade, .reveal-left');
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    /* ═══════════════════════════════════════════════════════
+       2. TYPEWRITER PLACEHOLDER
     ═══════════════════════════════════════════════════════ */
     const searchInputs = document.querySelectorAll('input[name="search"]');
 
@@ -40,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ═══════════════════════════════════════════════════════
-       2. DESKTOP DROPDOWN
+       3. DESKTOP DROPDOWN
     ═══════════════════════════════════════════════════════ */
     const shopTrigger  = document.getElementById('shop-trigger');
     const shopDropdown = document.getElementById('shop-dropdown');
@@ -90,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ═══════════════════════════════════════════════════════
-       3. MOBILE HAMBURGER
+       4. MOBILE HAMBURGER
     ═══════════════════════════════════════════════════════ */
     const hamburger = document.getElementById('hamburger');
 
@@ -110,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ═══════════════════════════════════════════════════════
-       4. MOBILE SHOP SUB-MENU
+       5. MOBILE SHOP SUB-MENU
     ═══════════════════════════════════════════════════════ */
     const mobileShopToggle = document.getElementById('mobileShopToggle');
     const mobileShopSub    = document.getElementById('mobileShopSub');
@@ -125,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ═══════════════════════════════════════════════════════
-       5. ACTIVE PAGE HIGHLIGHT
+       6. ACTIVE PAGE HIGHLIGHT
     ═══════════════════════════════════════════════════════ */
     function getCurrentPage() {
         const path = window.location.pathname.replace(/\/$/, '').split('/').pop();
@@ -143,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* ═══════════════════════════════════════════════════════
-       6. HERO SECTION LOGIC
+       7. HERO SECTION LOGIC
     ═══════════════════════════════════════════════════════ */
     const heroWord = document.getElementById('heroWord');
     const heroPills = document.getElementById('heroPills');
