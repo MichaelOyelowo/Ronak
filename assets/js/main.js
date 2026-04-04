@@ -158,37 +158,37 @@ document.addEventListener("DOMContentLoaded", () => {
             {
               word: 'Batik',
               images:[
-                { img: 'assets/batik/batik1.webp', label: 'Traditional Batik', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
-                { img: 'assets/batik/batik2.webp', label: 'Modern Batik', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
-                { img: 'assets/batik/batik3.webp', label: 'Elegant Batik', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
-                { img: 'assets/batik/batik4.webp', label: 'Artistic Batik', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+                { img: 'assets/images/products/cotton-batik/cotton-batik1.webp', label: 'Traditional Batik', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/cotton-batik/cotton-batik2.webp', label: 'Modern Batik', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/cotton-batik/cotton-batik3.webp', label: 'Elegant Batik', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/cotton-batik/cotton-batik4.webp', label: 'Artistic Batik', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
               ]
             },
             {
               word: 'Chiffon',
               images:[
-                { img: 'assets/images/products/tissue-chiffon/chiffon1.webp', label: 'Light Chiffon', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
-                { img: 'assets/images/products/tissue-chiffon/chiffon2.webp', label: 'Silk Chiffon', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
-                { img: 'assets/images/products/tissue-chiffon/chiffon3.webp', label: 'Floral Chiffon', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
-                { img: 'assets/images/products/tissue-chiffon/chiffon4.webp', label: 'Tissue Chiffon', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon1.png', label: 'Light Chiffon', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon2.png', label: 'Silk Chiffon', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon3.png', label: 'Floral Chiffon', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/tissue-chiffon/chiffon4.png', label: 'Tissue Chiffon', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
               ]
             },
             {
               word: 'Silk',
               images:[
-                { img: 'assets/images/products/silk-batik/silk1.webp', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
-                { img: 'assets/images/products/silk-batik/silk2.webp', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
-                { img: 'assets/images/products/silk-batik/silk3.webp', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
-                { img: 'assets/images/products/silk-batik/silk4.webp', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+                { img: 'assets/images/products/silk-batik/batik1.webp', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/silk-batik/batik2.webp', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/silk-batik/batik3.webp', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/silk-batik/batik4.webp', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
               ]
             },
             {
               word: 'Tie-Dye',
               images:[
-                { img: 'assets/images/products/tie-dye/tie-dye1.webp', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
-                { img: 'assets/images/products/tie-dye/tie-dye2.webp', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
-                { img: 'assets/images/products/tie-dye/tie-dye3.webp', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
-                { img: 'assets/images/products/tie-dye/tie-dye4.webp', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye1.png', label: 'Premium Silk', rotate: '6deg', size: { w: 200, h: 210 }, pos: { top: '0px', right: '0px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye4.png', label: 'Dye Silk', rotate: '-5deg', size: { w: 170, h: 185 }, pos: { top: '10px', left: '0px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye3.png', label: 'Royal Silk', rotate: '3deg', size: { w: 155, h: 165 }, pos: { bottom: '0px', right: '20px' } },
+                { img: 'assets/images/products/tie-dye/tie-dye2.png', label: 'Classic Silk', rotate: '-4deg', size: { w: 140, h: 150 }, pos: { bottom: '10px', left: '10px' } },
               ]
             }
         ];
