@@ -81,7 +81,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .desk-nav {
     position: sticky; top: 0; z-index: 1000;
-    background: #fff; border-bottom: 1px solid var(--border);
+    background: #ffffff; border-bottom: 1px solid var(--border);
 }
 
 .desk-nav .navbar {
@@ -180,7 +180,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .mobile-header {
     display: none; position: sticky; top: 0; z-index: 1000;
-    background: var(--bg); border-bottom: 1px solid var(--border);
+    background: #ffffff; border-bottom: 1px solid var(--border);
 }
 
 .mobile-top-row { display: flex; align-items: center; justify-content: space-between; padding: 0 1.25rem; height: var(--nav-height-mob); gap: 12px; }
