@@ -487,9 +487,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* ═══════════════════════════════════════
    EDITORIAL SECTION
 ═══════════════════════════════════════ */
-/* ═══════════════════════════════════════
-   EDITORIAL SECTION
-═══════════════════════════════════════ */
 .editorial-section {
     background: var(--bg);
     padding: 60px 0;
@@ -537,11 +534,40 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    object-position: top center;
+    will-change: transform; 
 }
 
-/* The Dark Gradient Overlay */
+.large-card img {
+    animation: cinematic3DZoom 20s ease-in-out infinite alternate;
+}
+
+.editorial-stacked .small-card:nth-child(1) img {
+    animation: cinematic3DZoom 20s ease-in-out infinite alternate-reverse;
+}
+
+.editorial-stacked .small-card:nth-child(2) img {
+    animation: cinematic3DZoom 26s ease-in-out infinite alternate 3s;
+}
+
+/* ── THE ANIMATION LOGIC ── */
+@keyframes cinematic3DZoom {
+    0% {
+        /* Starts normal at the top */
+        transform: scale(1.0) translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+        /* Slowly zooms in, pans diagonally, and adds a micro-rotation 
+           to simulate a 3D camera drone moving around the product */
+        transform: scale(1.15) translate3d(-2%, 3%, 0) rotate(0.5deg);
+    }
+    100% {
+        /* Smoothly pulls back and pans to the opposite side */
+        transform: scale(1.05) translate3d(2%, -1%, 0) rotate(-0.5deg);
+    }
+}
+
+
 .editorial-card::after {
     content: '';
     position: absolute;
