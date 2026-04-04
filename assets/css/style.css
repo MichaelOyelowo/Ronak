@@ -412,7 +412,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
    TRUST BAR (Sharp & High Contrast)
 ═══════════════════════════════════════ */
 .trust-bar {
-    background: var(--bg);
+    background: #ffffff;
     border-bottom: 1px solid var(--border);
     padding: 3.5rem 0; 
 }
@@ -483,6 +483,13 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     align-self: start; 
 }
 
+
+/* ═══════════════════════════════════════
+   EDITORIAL SECTION
+═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   EDITORIAL SECTION
+═══════════════════════════════════════ */
 .editorial-section {
     background: var(--bg);
     padding: 60px 0;
@@ -493,16 +500,18 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     margin: 0 auto;
     padding: 0 2.5rem;
     display: grid;
-    /* This creates the asymmetric look (left is 55%, right is 45%) */
-    grid-template-columns: 1.3fr 1fr; 
-    gap: 24px;
-    height: 650px; /* Fixed height for the grid */
+    /* Adjusted ratio to match reference perfectly */
+    grid-template-columns: 1.4fr 1fr; 
+    gap: 20px;
+    
+    /* Reduced height so images are smaller and more cinematic */
+    height: 520px; 
 }
 
 .editorial-stacked {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
     height: 100%;
 }
 
@@ -511,7 +520,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     display: block;
     width: 100%;
     overflow: hidden;
-    /* Optional: Keep it sharp like the reference, or use var(--radius-card) for curves */
     border-radius: 4px; 
     background: var(--bg-low);
 }
@@ -521,7 +529,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .small-card {
-    height: calc(50% - 12px); /* 50% minus half the gap */
+    height: calc(50% - 10px); /* 50% minus half the 20px gap */
 }
 
 /* The Image */
@@ -533,7 +541,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* The Dark Gradient Overlay (for text readability) */
+/* The Dark Gradient Overlay */
 .editorial-card::after {
     content: '';
     position: absolute;
@@ -557,7 +565,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .small-card .editorial-overlay {
-    padding: 1.5rem; /* Less padding for the smaller boxes */
+    padding: 1.5rem;
 }
 
 .editorial-overlay h2 {
@@ -586,7 +594,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     width: fit-content;
 }
 
-/* The underline on the link */
 .editorial-link::after {
     content: '';
     position: absolute;
@@ -600,52 +607,82 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transition: transform 0.4s var(--ease);
 }
 
-/* ── HOVER ANIMATIONS ── */
+/* Hover Effects */
 .editorial-card:hover img {
-    transform: scale(1.05); /* Smooth zoom effect */
+    transform: scale(1.05);
 }
 
 .editorial-card:hover::after {
-    opacity: 1; /* Darkens the gradient slightly */
+    opacity: 1;
 }
 
 .editorial-card:hover .editorial-link::after {
-    transform: scaleX(1); /* Underline animates in */
+    transform: scaleX(1);
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE BREAKPOINTS (Grid & Trust Bar)
+   RESPONSIVE BREAKPOINTS (Grid)
 ═══════════════════════════════════════ */
+
+/* Tablet Adjustment */
 @media (max-width: 1024px) {
     .editorial-container {
-        height: 550px;
+        height: 450px; /* Smaller for iPad */
         padding: 0 2rem;
     }
-    
-   
+    .editorial-overlay { padding: 1.5rem; }
+    .editorial-overlay h2 { font-size: 1.6rem; }
+    .small-card .editorial-overlay { padding: 1.25rem; }
+    .small-card .editorial-overlay h2 { font-size: 1.3rem; }
 }
 
+/* Mobile Adjustment */
 @media (max-width: 768px) {
-
     .editorial-section {
         padding: 40px 0;
     }
 
     .editorial-container {
-        grid-template-columns: 1fr; /* Stacks everything in one column */
+        grid-template-columns: 1fr; /* Stacks Big Image on top */
         height: auto;
         padding: 0 1.5rem;
+        gap: 16px;
     }
 
     .large-card {
-        height: 400px;
+        height: 350px; /* Sleek height for the top image */
+    }
+
+    /* ── MAGIC: Side-by-Side Small Cards ── */
+    .editorial-stacked {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 50/50 Split */
+        gap: 16px;
+        height: auto;
+        flex-direction: unset; /* Removes flex properties */
     }
 
     .small-card {
-        height: 300px;
+        height: 240px; /* Fixed height for the side-by-side squares */
     }
 }
 
+/* Small Mobile Phones (iPhone SE, etc.) */
+@media (max-width: 480px) {
+    /* Scale text down so it fits nicely inside the 50/50 boxes */
+    .small-card .editorial-overlay {
+        padding: 1rem;
+        gap: 4px;
+    }
+    
+    .small-card .editorial-overlay h2 {
+        font-size: 1.1rem;
+    }
+    
+    .editorial-link {
+        font-size: 0.6rem;
+    }
+}
 
 
 
