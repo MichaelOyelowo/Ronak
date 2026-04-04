@@ -512,6 +512,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: 100%;
 }
 
+/* ── THE CARDS (With Custom Layered Shadows) ── */
 .editorial-card {
     position: relative;
     display: block;
@@ -519,6 +520,17 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     overflow: hidden;
     border-radius: 4px; 
     background: var(--bg-low);
+    
+    /* MAGIC: A double-layered shadow tinted with your Indigo brand color. */
+    box-shadow: 
+        0 4px 12px rgba(24, 38, 85, 0.04),
+        0 16px 40px rgba(24, 38, 85, 0.08);
+        
+    /* Smooth transition for the lift effect */
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                
+    will-change: transform, box-shadow; /* Forces the GPU to render this flawlessly */
 }
 
 .large-card {
@@ -529,7 +541,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: calc(50% - 10px); /* 50% minus half the 20px gap */
 }
 
-/* The Image */
+/* ── THE IMAGE (Cinematic 3D Pan Effect) ── */
 .editorial-card img {
     width: 100%;
     height: 100%;
@@ -567,7 +579,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     }
 }
 
-
+/* The Dark Gradient Overlay */
 .editorial-card::after {
     content: '';
     position: absolute;
@@ -633,18 +645,27 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transition: transform 0.4s var(--ease);
 }
 
-/* Hover Effects */
-.editorial-card:hover img {
-    transform: scale(1.05);
+
+/* ── HOVER EFFECTS (The Physical Lift) ── */
+
+/* 1. Lift the entire card off the screen and expand the glowing shadow */
+.editorial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 12px 24px rgba(24, 38, 85, 0.1),
+        0 32px 80px rgba(24, 38, 85, 0.25);
 }
 
+/* 2. Darkens the gradient slightly so text pops more */
 .editorial-card:hover::after {
     opacity: 1;
 }
 
+/* 3. Smooth underline draw effect for the link */
 .editorial-card:hover .editorial-link::after {
     transform: scaleX(1);
 }
+
 
 /* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS (Grid)
