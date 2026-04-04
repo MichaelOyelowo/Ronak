@@ -421,24 +421,20 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2.5rem;
-    
-    /* DESKTOP: 4 Even Columns */
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
 }
 
-/* ── Individual Trust Item ── */
 .trust-content {
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: 1.2rem; /* Slightly wider gap for breathing room */
+    column-gap: 1.2rem;
     row-gap: 0.2rem;
     align-items: center;
     cursor: default;
 }
 
-/* ── The Icon (Sharp Solid Indigo) ── */
 .trust-img {
     grid-row: span 2; 
     display: flex;
@@ -446,9 +442,9 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     justify-content: center;
     width: 50px;
     height: 50px;
-    background: var(--indigo); /* Sharp solid brand color */
+    background: var(--indigo);
     border-radius: 50%; 
-    box-shadow: 0 4px 12px rgba(24, 38, 85, 0.2); /* Soft shadow to make it pop */
+    box-shadow: 0 4px 12px rgba(24, 38, 85, 0.2); 
     transition: transform 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
@@ -456,25 +452,22 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     width: 22px;
     height: 22px;
     object-fit: contain;
-    /* This MAGIC trick turns your black PNGs into pure, sharp white! */
     filter: brightness(0) invert(1); 
 }
 
-/* Hover Effect: Bounces up and glows slightly */
 .trust-content:hover .trust-img {
     transform: translateY(-4px);
     background: var(--indigo-hover);
     box-shadow: 0 8px 20px rgba(24, 38, 85, 0.35);
 }
 
-/* ── Typography (High Contrast) ── */
 .trust-content h3 {
     font-family: var(--body);
-    font-size: 0.8rem; /* Slightly larger for impact */
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--indigo); /* Colored heading to match the icon */
+    color: var(--indigo);
     margin: 0;
     align-self: end; 
 }
@@ -483,54 +476,175 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     font-family: var(--body);
     font-size: 0.68rem;
     font-weight: 600;
-    color: var(--text-mid); /* Darker and sharper than before */
+    color: var(--text-mid);
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     align-self: start; 
 }
 
+.editorial-section {
+    background: var(--bg);
+    padding: 60px 0;
+}
+
+.editorial-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: grid;
+    /* This creates the asymmetric look (left is 55%, right is 45%) */
+    grid-template-columns: 1.3fr 1fr; 
+    gap: 24px;
+    height: 650px; /* Fixed height for the grid */
+}
+
+.editorial-stacked {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+}
+
+.editorial-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    /* Optional: Keep it sharp like the reference, or use var(--radius-card) for curves */
+    border-radius: 4px; 
+    background: var(--bg-low);
+}
+
+.large-card {
+    height: 100%;
+}
+
+.small-card {
+    height: calc(50% - 12px); /* 50% minus half the gap */
+}
+
+/* The Image */
+.editorial-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* The Dark Gradient Overlay (for text readability) */
+.editorial-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(10, 17, 40, 0.8) 0%, transparent 100%);
+    opacity: 0.8;
+    transition: opacity 0.4s ease;
+}
+
+/* The Text Overlay */
+.editorial-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 2.5rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.small-card .editorial-overlay {
+    padding: 1.5rem; /* Less padding for the smaller boxes */
+}
+
+.editorial-overlay h2 {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.small-card .editorial-overlay h2 {
+    font-size: 1.5rem;
+}
+
+.editorial-link {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+}
+
+/* The underline on the link */
+.editorial-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #ffffff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+}
+
+/* ── HOVER ANIMATIONS ── */
+.editorial-card:hover img {
+    transform: scale(1.05); /* Smooth zoom effect */
+}
+
+.editorial-card:hover::after {
+    opacity: 1; /* Darkens the gradient slightly */
+}
+
+.editorial-card:hover .editorial-link::after {
+    transform: scaleX(1); /* Underline animates in */
+}
 
 /* ═══════════════════════════════════════
-   RESPONSIVE BREAKPOINTS (Trust Bar)
+   RESPONSIVE BREAKPOINTS (Grid & Trust Bar)
 ═══════════════════════════════════════ */
-
-/* TABLET: Switch to 2x2 Grid */
 @media (max-width: 1024px) {
-    .trust-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem 2rem;
+    .editorial-container {
+        height: 550px;
+        padding: 0 2rem;
     }
+    
+   
 }
 
-/* MOBILE: Switch to 1 Column Stack */
 @media (max-width: 768px) {
-    .trust-bar {
-        padding: 3rem 0;
-    }
-    
-    .trust-container {
-        grid-template-columns: 1fr;
-        padding: 0 1.5rem;
-        gap: 2rem;
-    }
-    
-    /* Perfect sizing for mobile screens */
-    .trust-img {
-        width: 44px;
-        height: 44px;
-    }
-    
-    .trust-img img {
-        width: 18px;
-        height: 18px;
+
+    .editorial-section {
+        padding: 40px 0;
     }
 
-    .trust-content h3 {
-        font-size: 0.75rem;
+    .editorial-container {
+        grid-template-columns: 1fr; /* Stacks everything in one column */
+        height: auto;
+        padding: 0 1.5rem;
+    }
+
+    .large-card {
+        height: 400px;
+    }
+
+    .small-card {
+        height: 300px;
     }
 }
-
 
 
 
@@ -552,6 +666,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .mobile-nav-inner > a, .mobile-shop-toggle { font-size: 0.8rem; padding: 1.4rem 0; }
     .mobile-sub a { font-size: 0.75rem; padding: 1.1rem 0 1.1rem 2rem; }
     .mobile-nav-cta { font-size: 0.7rem; padding: 1.2rem; max-width: 320px; margin-left: auto; margin-right: auto; }
+    .trust-container { grid-template-columns: repeat(2, 1fr); gap: 3rem 2rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -571,6 +687,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .hero-img-card--1 { top: -5px !important; right: -25px !important; transform: rotate(12deg) scale(0.75) !important; }
     .hero-img-card--4 { bottom: -15px !important; left: -5px !important; transform: rotate(-25deg) scale(0.9) !important; }
     .hero-img-card--3 { bottom: -10px !important; right: -15px !important; transform: rotate(8deg) scale(0.85) !important; }
+    .trust-bar { padding: 3rem 0; }
+    .trust-container { grid-template-columns: 1fr; padding: 0 1.5rem; gap: 2rem;}
+    .trust-img { width: 44px; height: 44px; }
+    .trust-img img { width: 20px; height: 20px; }
+    .trust-content h3 { font-size: 0.75rem;}
 }
 
 @media (max-width: 480px) {
