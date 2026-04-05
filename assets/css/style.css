@@ -414,11 +414,14 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .trust-bar {
     background: #ffffff;
     border-bottom: 1px solid var(--border);
-    padding: 3.5rem 0; 
+    padding: 3.5rem 0;
+    margin: 2rem;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    max-width: 1400px;
 }
 
 .trust-container {
-    max-width: 1400px;
     margin: 0 auto;
     padding: 0 2.5rem;
     display: grid;
@@ -449,8 +452,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .trust-img img {
-    width: 22px;
-    height: 22px;
+    width: 30px;
+    height: 30px;
     object-fit: contain;
     filter: brightness(0) invert(1); 
 }
@@ -488,8 +491,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
    EDITORIAL SECTION
 ═══════════════════════════════════════ */
 .editorial-section {
-    background: var(--bg);
-    padding: 60px 0;
+    background: #ffffff;
+    padding: 40px 0;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin: 2rem;
 }
 
 .editorial-container {
@@ -497,11 +503,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     margin: 0 auto;
     padding: 0 2.5rem;
     display: grid;
-    /* Adjusted ratio to match reference perfectly */
     grid-template-columns: 1.4fr 1fr; 
     gap: 20px;
-    
-    /* Reduced height so images are smaller and more cinematic */
     height: 520px; 
 }
 
@@ -518,7 +521,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     display: block;
     width: 100%;
     overflow: hidden;
-    border-radius: 4px; 
+    border-radius: 8px; 
     background: var(--bg-low);
     
     /* MAGIC: A double-layered shadow tinted with your Indigo brand color. */
@@ -645,23 +648,14 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transition: transform 0.4s var(--ease);
 }
 
-
-/* ── HOVER EFFECTS (The Physical Lift) ── */
-
-/* 1. Lift the entire card off the screen and expand the glowing shadow */
 .editorial-card:hover {
     transform: translateY(-8px);
-    box-shadow: 
-        0 12px 24px rgba(24, 38, 85, 0.1),
-        0 32px 80px rgba(24, 38, 85, 0.25);
 }
 
-/* 2. Darkens the gradient slightly so text pops more */
 .editorial-card:hover::after {
     opacity: 1;
 }
 
-/* 3. Smooth underline draw effect for the link */
 .editorial-card:hover .editorial-link::after {
     transform: scaleX(1);
 }
