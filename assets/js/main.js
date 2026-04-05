@@ -292,82 +292,140 @@ document.addEventListener("DOMContentLoaded", () => {
         initHero(); 
     }
 
-    // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 
-// Target the elements for animation
 const editorialSection = document.querySelector('.editorial-section');
-const largeCard = editorialSection.querySelector('.large-card');
-const largeCardImg = largeCard.querySelector('img');
+const largeCard        = editorialSection.querySelector('.large-card');
+const largeCardImg     = largeCard.querySelector('img');
 const largeCardOverlay = largeCard.querySelector('.editorial-overlay');
-const editorialStacked = editorialSection.querySelector('.editorial-stacked'); // Container for small cards
-const smallCards = editorialSection.querySelectorAll('.small-card');
+const editorialStacked = editorialSection.querySelector('.editorial-stacked');
+const smallCards       = editorialSection.querySelectorAll('.small-card');
+const allSectionImages = editorialSection.querySelectorAll('img[data-new-src]');
 
 if (editorialSection) {
-    // --- Initial State Setup (CSS will handle initial hidden state for FOUC protection) ---
-    // Ensure all animated elements start hidden and slightly offset
-    gsap.set([largeCard, largeCardOverlay, editorialStacked], { opacity: 0, y: 50 });
-    gsap.set(largeCardOverlay, { y: 30 }); // Text starts a bit lower
 
-    // --- 1. Animation for the Large Card Image (Zoom and Parallax) ---
-    // This animation runs as the largeCard itself scrolls into and out of view
+    // --- Initial State Setup ---
+    gsap.set([largeCard, largeCardOverlay, editorialStacked], { opacity: 0, y: 50 });
+    gsap.set(largeCardOverlay, { y: 30 });
+
+    // --- 1. Large Card Image Zoom and Parallax ---
     gsap.fromTo(largeCardImg, {
-        y: 0,    // Start at original y position
-        scale: 1.0 // Start at original scale
+        y: 0, scale: 1.0
     }, {
-        y: -100,   // End slightly pushed up (parallax effect)
-        scale: 1.15, // End zoomed in more (15% larger)
-        ease: "none", // Linear ease for constant speed during scroll
+        y: -100, scale: 1.15, ease: "none",
         scrollTrigger: {
-            trigger: largeCard, // Trigger this animation specifically on the largeCard
-            start: "top bottom", // Starts when the top of the largeCard hits the bottom of the viewport
-            end: "bottom top",   // Ends when the bottom of the largeCard leaves the top of the viewport
-            scrub: 1, // Smoothly link animation to scroll position
-            // markers: true, // Uncomment for debugging
+            trigger: largeCard,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
         }
     });
 
-    // --- 2. Animation for the Large Card Container and Overlay Text (Reveal) ---
-    // This will simply fade in the large card and its text when the section enters view.
+    // --- 2. Large Card Container and Overlay Reveal ---
     gsap.timeline({
         scrollTrigger: {
-            trigger: largeCard, // Trigger when the large card comes into view
-            start: "top 80%",   // Start when 80% of card is in view
-            // markers: true, // Uncomment for debugging
+            trigger: largeCard,
+            start: "top 80%",
         }
     })
-    .to(largeCard, { opacity: 1, y: 0, ease: "power2.out", duration: 0.8 }, 0)
+    .to(largeCard,        { opacity: 1, y: 0, ease: "power2.out", duration: 0.8 }, 0)
     .to(largeCardOverlay, { opacity: 1, y: 0, ease: "power2.out", duration: 0.7 }, 0.2);
 
-    // --- 3. Animation for the Stacked Small Cards (Reveal) ---
-    // This will fade in the small cards when their container enters view.
+    // --- 3. Stacked Small Cards Reveal ---
     gsap.to(editorialStacked, {
         opacity: 1,
         y: 0,
         ease: "power2.out",
         duration: 0.8,
         scrollTrigger: {
-            trigger: editorialStacked, // Trigger when the stacked cards container comes into view
-            start: "top 80%",         // Start when 80% of container is in view
-            // markers: true, // Uncomment for debugging
+            trigger: editorialStacked,
+            start: "top 80%",
         }
     });
 
-    // --- Optional: Individual Small Card Image Parallax ---
+    // --- 4. Responsive Image Swap Trigger ---
+    ScrollTrigger.matchMedia({
+
+        // ── DESKTOP — unchanged ──
+        "(min-width: 769px)": function() {
+            ScrollTrigger.create({
+                trigger: editorialSection,
+                start: "bottom center",
+                onLeave: ()     => swapImages(false),
+                onEnterBack: () => swapImages(true),
+            });
+        },
+
+        // ── MOBILE — 2 second delay after card enters view ──
+        "(max-width: 768px)": function() {
+            let swapTimer = null; // track the timeout so we can cancel it
+
+            ScrollTrigger.create({
+                trigger: largeCard,
+                start: "top 80%",
+                end: "bottom top",
+                onEnter: () => {
+                    // Clear any pending timer first
+                    clearTimeout(swapTimer);
+                    // User sees original images for 2s, then swap
+                    swapTimer = setTimeout(() => swapImages(false), 2000);
+                },
+                onLeaveBack: () => {
+                    // Cancel the timer if user scrolls back up before 2s
+                    clearTimeout(swapTimer);
+                    swapImages(true);
+                },
+                // markers: true,
+            });
+        },
+
+        "all": function() {
+            allSectionImages.forEach(img => {
+                if (!img.getAttribute('data-original-src')) {
+                    img.setAttribute('data-original-src', img.src);
+                }
+                img.setAttribute('data-current-src', img.src);
+            });
+        }
+
+    });
+
+    // --- 5. Image Swap Function ---
+    function swapImages(reverse = false) {
+        allSectionImages.forEach(img => {
+            const originalSrc = img.getAttribute('data-original-src');
+            const newSrc      = img.getAttribute('data-new-src');
+            const currentSrc  = img.getAttribute('data-current-src');
+            const targetSrc   = reverse ? originalSrc : newSrc;
+
+            if (currentSrc !== targetSrc) {
+                gsap.to(img, {
+                    opacity: 0,
+                    duration: 0.4,
+                    onComplete: () => {
+                        img.src = targetSrc;
+                        img.setAttribute('data-current-src', targetSrc);
+                        gsap.to(img, { opacity: 1, duration: 0.6 });
+                    }
+                });
+            }
+        });
+    }
+
+    // --- 6. Small Card Individual Parallax ---
     smallCards.forEach(card => {
         const cardImg = card.querySelector('img');
         gsap.to(cardImg, {
-            yPercent: 15, // Move image 15% of its height relative to scroll
-            ease: "none",
+            yPercent: 15, ease: "none",
             scrollTrigger: {
                 trigger: card,
                 start: "top bottom",
                 end: "bottom top",
                 scrub: 0.8,
-                // markers: true, // For debugging individual card parallax
             }
         });
     });
+
 }
 
 });
