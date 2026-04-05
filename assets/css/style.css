@@ -516,7 +516,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: 100%;
 }
 
-/* ── THE CARDS (With Custom Layered Shadows) ── */
 .editorial-card {
     position: relative;
     display: block;
@@ -524,17 +523,12 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     overflow: hidden;
     border-radius: 8px; 
     background: var(--bg-low);
-    
-    /* MAGIC: A double-layered shadow tinted with your Indigo brand color. */
     box-shadow: 
         0 4px 12px rgba(24, 38, 85, 0.04),
         0 16px 40px rgba(24, 38, 85, 0.08);
-        
-    /* Smooth transition for the lift effect */
     transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
                 box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-                
-    will-change: transform, box-shadow; /* Forces the GPU to render this flawlessly */
+    will-change: transform, box-shadow;
 }
 
 .large-card {
@@ -545,16 +539,22 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: calc(50% - 10px); /* 50% minus half the 20px gap */
 }
 
-/* ── THE IMAGE (Cinematic 3D Pan Effect) ── */
 .editorial-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top center;
     will-change: transform; 
+    transform-origin: center center;
 }
 
-.large-card img {
+.editorial-section.is-hidden .editorial-card,
+.editorial-section.is-hidden .editorial-overlay {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* .large-card img {
     animation: cinematic3DZoom 20s ease-in-out infinite alternate;
 }
 
@@ -564,24 +564,20 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .editorial-stacked .small-card:nth-child(2) img {
     animation: cinematic3DZoom 26s ease-in-out infinite alternate 3s;
-}
+} */
 
 /* ── THE ANIMATION LOGIC ── */
-@keyframes cinematic3DZoom {
+/* @keyframes cinematic3DZoom {
     0% {
-        /* Starts normal at the top */
         transform: scale(1.0) translate3d(0, 0, 0) rotate(0deg);
     }
     50% {
-        /* Slowly zooms in, pans diagonally, and adds a micro-rotation 
-           to simulate a 3D camera drone moving around the product */
         transform: scale(1.15) translate3d(-2%, 3%, 0) rotate(0.5deg);
     }
     100% {
-        /* Smoothly pulls back and pans to the opposite side */
         transform: scale(1.05) translate3d(2%, -1%, 0) rotate(-0.5deg);
     }
-}
+} */
 
 /* The Dark Gradient Overlay */
 .editorial-card::after {
@@ -662,6 +658,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 
+
+
 /* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS (Grid)
 ═══════════════════════════════════════ */
@@ -726,7 +724,9 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     }
 }
 
-
+.height {
+    height: 1500px;
+}
 
 /* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS
@@ -828,3 +828,13 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
 .delay-400 { transition-delay: 400ms; }
+
+
+.editorial-card.large-card.reveal-up,
+.editorial-overlay.reveal-left,
+.editorial-card.small-card.reveal-up {
+    /* Temporarily disable these if we're controlling them with GSAP */
+    /* You might remove 'reveal-up' and 'reveal-left' classes from HTML later if GSAP fully takes over */
+    opacity: 1 !important; /* Ensure they are visible by default before JS hides them */
+    transform: none !important; /* Reset any default transforms */
+}

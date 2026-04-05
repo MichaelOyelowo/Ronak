@@ -292,4 +292,82 @@ document.addEventListener("DOMContentLoaded", () => {
         initHero(); 
     }
 
+    // Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+// Target the elements for animation
+const editorialSection = document.querySelector('.editorial-section');
+const largeCard = editorialSection.querySelector('.large-card');
+const largeCardImg = largeCard.querySelector('img');
+const largeCardOverlay = largeCard.querySelector('.editorial-overlay');
+const editorialStacked = editorialSection.querySelector('.editorial-stacked'); // Container for small cards
+const smallCards = editorialSection.querySelectorAll('.small-card');
+
+if (editorialSection) {
+    // --- Initial State Setup (CSS will handle initial hidden state for FOUC protection) ---
+    // Ensure all animated elements start hidden and slightly offset
+    gsap.set([largeCard, largeCardOverlay, editorialStacked], { opacity: 0, y: 50 });
+    gsap.set(largeCardOverlay, { y: 30 }); // Text starts a bit lower
+
+    // --- 1. Animation for the Large Card Image (Zoom and Parallax) ---
+    // This animation runs as the largeCard itself scrolls into and out of view
+    gsap.fromTo(largeCardImg, {
+        y: 0,    // Start at original y position
+        scale: 1.0 // Start at original scale
+    }, {
+        y: -100,   // End slightly pushed up (parallax effect)
+        scale: 1.15, // End zoomed in more (15% larger)
+        ease: "none", // Linear ease for constant speed during scroll
+        scrollTrigger: {
+            trigger: largeCard, // Trigger this animation specifically on the largeCard
+            start: "top bottom", // Starts when the top of the largeCard hits the bottom of the viewport
+            end: "bottom top",   // Ends when the bottom of the largeCard leaves the top of the viewport
+            scrub: 1, // Smoothly link animation to scroll position
+            // markers: true, // Uncomment for debugging
+        }
+    });
+
+    // --- 2. Animation for the Large Card Container and Overlay Text (Reveal) ---
+    // This will simply fade in the large card and its text when the section enters view.
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: largeCard, // Trigger when the large card comes into view
+            start: "top 80%",   // Start when 80% of card is in view
+            // markers: true, // Uncomment for debugging
+        }
+    })
+    .to(largeCard, { opacity: 1, y: 0, ease: "power2.out", duration: 0.8 }, 0)
+    .to(largeCardOverlay, { opacity: 1, y: 0, ease: "power2.out", duration: 0.7 }, 0.2);
+
+    // --- 3. Animation for the Stacked Small Cards (Reveal) ---
+    // This will fade in the small cards when their container enters view.
+    gsap.to(editorialStacked, {
+        opacity: 1,
+        y: 0,
+        ease: "power2.out",
+        duration: 0.8,
+        scrollTrigger: {
+            trigger: editorialStacked, // Trigger when the stacked cards container comes into view
+            start: "top 80%",         // Start when 80% of container is in view
+            // markers: true, // Uncomment for debugging
+        }
+    });
+
+    // --- Optional: Individual Small Card Image Parallax ---
+    smallCards.forEach(card => {
+        const cardImg = card.querySelector('img');
+        gsap.to(cardImg, {
+            yPercent: 15, // Move image 15% of its height relative to scroll
+            ease: "none",
+            scrollTrigger: {
+                trigger: card,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 0.8,
+                // markers: true, // For debugging individual card parallax
+            }
+        });
+    });
+}
+
 });
