@@ -431,21 +431,52 @@ if (editorialSection) {
 }
 
 /* ═══════════════════════════════════════
-   WISHLIST
+   WISHLIST WITH LOCALSTORAGE
 ═══════════════════════════════════════ */
 const wishlistFloat = document.getElementById('wishlistFloat');
 const wishlistCount = document.getElementById('wishlistCount');
-let count = 0;
 
+// Load saved wishlist from localStorage
+let savedWishlist = JSON.parse(localStorage.getItem('ronaks-wishlist') || '[]');
+
+function updateWishlistUI() {
+  const count = savedWishlist.length;
+  wishlistCount.textContent = count;
+  wishlistFloat.classList.toggle('visible', count > 0);
+}
+
+// On page load, restore active state on buttons
 document.querySelectorAll('.wishlist-btn').forEach(btn => {
+  const card = btn.closest('.product-card');
+  const productName = card.querySelector('.product-name')?.textContent.trim();
+
+  // Restore saved state
+  if (savedWishlist.includes(productName)) {
+    btn.classList.add('active');
+  }
+
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
     const isActive = btn.classList.toggle('active');
-    count = isActive ? count + 1 : count - 1;
-    wishlistCount.textContent = count;
-    wishlistFloat.classList.toggle('visible', count > 0);
+
+    if (isActive) {
+      // Add to wishlist
+      if (!savedWishlist.includes(productName)) {
+        savedWishlist.push(productName);
+      }
+    } else {
+      // Remove from wishlist
+      savedWishlist = savedWishlist.filter(name => name !== productName);
+    }
+
+    localStorage.setItem('ronaks-wishlist', JSON.stringify(savedWishlist));
+    updateWishlistUI();
   });
 });
+
+// Run on page load to reflect saved state
+updateWishlistUI();
+
 
 /* ═══════════════════════════════════════
    LIGHTBOX

@@ -891,6 +891,10 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transform: translateY(-50%) translateX(0);
 }
 
+.wishlist-float.visible .wishlist-float-count {
+    opacity: 1;
+}
+
 .wishlist-float svg {
     width: 20px;
     height: 20px;
@@ -915,6 +919,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     align-items: center;
     justify-content: center;
     line-height: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease; 
 }
 
 /* ═══════════════════════════════════════
