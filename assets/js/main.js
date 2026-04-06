@@ -519,6 +519,7 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
+
 /* ═══════════════════════════════════════
    VIDEO MODAL
 ═══════════════════════════════════════ */
@@ -528,6 +529,9 @@ const videoPlayBtn   = document.getElementById('videoPlayBtn');
 const videoModalClose = document.getElementById('videoModalClose');
 
 function openVideoModal() {
+    if (!videoFull.src || videoFull.src === window.location.href) {
+        videoFull.src = "https://res.cloudinary.com/dffuf2gwh/video/upload/q_auto/f_auto/w_1280/v1775481814/Ngande_Textiles_MP4_yfke0l.mp4";
+    }
     videoModal.classList.add('active');
     document.body.style.overflow = 'hidden';
     videoFull.play();
