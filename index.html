@@ -566,7 +566,6 @@
       <article class="product-card reveal-up delay-100" role="listitem" data-category="silk-batik">
         <div class="product-img-wrap">
           <img src="./assets/images/homepage/indigo.webp" alt="Indigo Echo Drape">
-          <span class="product-badge">New Arrival</span>
           <button class="wishlist-btn" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -592,7 +591,6 @@
       <article class="product-card reveal-up delay-200" role="listitem" data-category="customized-cotton">
         <div class="product-img-wrap">
           <img src="./assets/images/homepage/earth_brown.webp" alt="Earth Brown Adire">
-          <span class="product-badge product-badge--best">Bestseller</span>
           <button class="wishlist-btn" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -618,7 +616,6 @@
       <article class="product-card reveal-up delay-200" role="listitem" data-category="customized-cotton">
         <div class="product-img-wrap">
           <img src="./assets/images/homepage/heritage.webp" alt="Heritage Adire">
-          <span class="product-badge product-badge--best">Bestseller</span>
           <button class="wishlist-btn" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -644,7 +641,6 @@
       <article class="product-card reveal-up delay-200" role="listitem" data-category="customized-cotton">
         <div class="product-img-wrap">
           <img src="./assets/images/homepage/midnight_sky_adire.webp" alt="Midnight sky Adire">
-          <span class="product-badge product-badge--best">Bestseller</span>
           <button class="wishlist-btn" aria-label="Add to wishlist">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </button>
@@ -669,6 +665,21 @@
     </div>
   </div>
 </section>
+
+<!-- Wishlist Floating Tag -->
+<div class="wishlist-float" id="wishlistFloat">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+  <span class="wishlist-float-count" id="wishlistCount">0</span>
+</div>
+
+<!-- Image Lightbox -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">✕</button>
+  <div class="lightbox-content">
+    <img src="" alt="" id="lightboxImg">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>

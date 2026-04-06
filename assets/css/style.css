@@ -865,6 +865,172 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 
 /* ═══════════════════════════════════════
+   WISHLIST FLOATING TAG
+═══════════════════════════════════════ */
+.wishlist-float {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) translateX(-100%);
+    background: var(--indigo);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    width: 42px;
+    height: 42px;
+    border-radius: 0 8px 8px 0;
+    z-index: 999;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 4px 0 20px rgba(0, 6, 102, 0.2);
+}
+
+.wishlist-float.visible {
+    transform: translateY(-50%) translateX(0);
+}
+
+.wishlist-float svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+    stroke: #fff;
+    stroke-width: 1.5;
+}
+
+.wishlist-float-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 18px;
+    height: 18px;
+    background: #e63946;
+    color: #fff;
+    font-family: var(--body);
+    font-size: 0.6rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+/* ═══════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════ */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 25, 0.92);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 2rem;
+}
+
+.lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 600px;
+    width: 100%;
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.lightbox-overlay.active .lightbox-content {
+    transform: scale(1);
+}
+
+.lightbox-content img {
+    width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    display: block;
+}
+
+.lightbox-caption {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 38px;
+    height: 38px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 2;
+}
+
+.lightbox-close:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* Make image wrap show pointer so users know it's clickable */
+.product-img-wrap {
+    cursor: zoom-in;
+}
+
+/* ═══════════════════════════════════════
+   VIEW ALL SHIMMER
+═══════════════════════════════════════ */
+.products-view-all {
+    position: relative;
+    overflow: hidden;
+}
+
+.products-view-all::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0) 30%,
+        rgba(var(--indigo-rgb, 24, 38, 180), 0.35) 50%,
+        rgba(255,255,255,0) 70%,
+        transparent 100%
+    );
+    animation: shimmerSlide 2.8s ease-in-out infinite;
+}
+
+@keyframes shimmerSlide {
+    0%   { left: -100%; }
+    60%  { left: 150%; }
+    100% { left: 150%; }
+}
+
+/* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS
 ═══════════════════════════════════════ */
 @media (max-width: 1024px) {

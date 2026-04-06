@@ -430,4 +430,62 @@ if (editorialSection) {
 
 }
 
+/* ═══════════════════════════════════════
+   WISHLIST
+═══════════════════════════════════════ */
+const wishlistFloat = document.getElementById('wishlistFloat');
+const wishlistCount = document.getElementById('wishlistCount');
+let count = 0;
+
+document.querySelectorAll('.wishlist-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isActive = btn.classList.toggle('active');
+    count = isActive ? count + 1 : count - 1;
+    wishlistCount.textContent = count;
+    wishlistFloat.classList.toggle('visible', count > 0);
+  });
+});
+
+/* ═══════════════════════════════════════
+   LIGHTBOX
+═══════════════════════════════════════ */
+const overlay   = document.getElementById('lightboxOverlay');
+const lbImg     = document.getElementById('lightboxImg');
+const lbCaption = document.getElementById('lightboxCaption');
+const lbClose   = document.getElementById('lightboxClose');
+
+document.querySelectorAll('.product-img-wrap').forEach(wrap => {
+  wrap.addEventListener('click', (e) => {
+    if (e.target.closest('.wishlist-btn')) return;
+
+    const img = wrap.querySelector('img');
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+
+    const card = wrap.closest('.product-card');
+    const name = card.querySelector('.product-name')?.textContent || '';
+    const category = card.querySelector('.product-category')?.textContent || '';
+    lbCaption.textContent = category + ' — ' + name;
+
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+lbClose.addEventListener('click', closeLightbox);
+
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+function closeLightbox() {
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
 });
