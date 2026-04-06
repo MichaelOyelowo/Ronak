@@ -1036,6 +1036,198 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     100% { left: 150%; }
 }
 
+
+/* ═══════════════════════════════════════
+   VIDEO SECTION
+═══════════════════════════════════════ */
+.video-section {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    z-index: 1;
+}
+
+/* Dark gradient on top of video for text legibility */
+.video-section::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(5, 8, 25, 0.3) 0%,
+        rgba(5, 8, 25, 0.15) 50%,
+        rgba(5, 8, 25, 0.5) 100%
+    );
+    z-index: 2;
+}
+
+.video-overlay {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    gap: 1.5rem;
+}
+
+.video-eyebrow {
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.video-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+}
+
+.video-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 100px;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.video-play-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.04);
+}
+
+.video-play-icon {
+    width: 38px;
+    height: 38px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.video-play-btn:hover .video-play-icon {
+    transform: scale(1.1);
+}
+
+.video-play-icon svg {
+    width: 12px;
+    height: 12px;
+    fill: var(--indigo);
+    margin-left: 2px; /* optical center for play triangle */
+}
+
+/* ── VIDEO MODAL ── */
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 8, 25, 0.95);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.video-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-content {
+    width: 100%;
+    max-width: 1000px;
+    transform: scale(0.92);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.video-modal.active .video-modal-content {
+    transform: scale(1);
+}
+
+.video-modal-content video {
+    width: 100%;
+    display: block;
+    border-radius: 4px;
+    outline: none;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.video-modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+    .video-section { height: 70vh; }
+    .video-play-btn { padding: 0.85rem 1.5rem; font-size: 0.65rem; gap: 10px; }
+    .video-play-icon { width: 32px; height: 32px; }
+}
+
+@media (max-width: 480px) {
+    .video-section { height: 60vh; }
+    .video-modal { padding: 1rem; }
+}
+
+
 /* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS
 ═══════════════════════════════════════ */

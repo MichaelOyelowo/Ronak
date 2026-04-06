@@ -519,4 +519,36 @@ function closeLightbox() {
   document.body.style.overflow = '';
 }
 
+/* ═══════════════════════════════════════
+   VIDEO MODAL
+═══════════════════════════════════════ */
+const videoModal     = document.getElementById('videoModal');
+const videoFull      = document.getElementById('videoFull');
+const videoPlayBtn   = document.getElementById('videoPlayBtn');
+const videoModalClose = document.getElementById('videoModalClose');
+
+function openVideoModal() {
+    videoModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    videoFull.play();
+}
+
+function closeVideoModal() {
+    videoModal.classList.remove('active');
+    document.body.style.overflow = '';
+    videoFull.pause();
+    videoFull.currentTime = 0;
+}
+
+videoPlayBtn.addEventListener('click', openVideoModal);
+videoModalClose.addEventListener('click', closeVideoModal);
+
+videoModal.addEventListener('click', (e) => {
+    if (e.target === videoModal) closeVideoModal();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeVideoModal();
+});
+
 });
