@@ -555,4 +555,135 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeVideoModal();
 });
 
+/* ═══════════════════════════════════════
+   CHAT STORY
+═══════════════════════════════════════ */
+const MESSAGES = [
+  { from: 'left',  text: 'Babe have you seen the new Ronaks pieces?? 😍', delay: 800 },
+  { from: 'typing', delay: 1200 },
+  { from: 'right', text: 'Yes oh!! I have been staring at the indigo drape since morning 😭', delay: 2400, tick: 3200 },
+  { from: 'typing', delay: 4000 },
+  { from: 'left',  text: 'The craftsmanship is on another level. Real hand-dyed Adire 🙌🏾', delay: 5000 },
+  { from: 'typing', delay: 6000 },
+  { from: 'right', text: 'I ordered the Heritage Wrap last week and it came so beautifully packaged ✨', delay: 7000, tick: 8000 },
+  { from: 'left',  text: 'Wait you already ordered?? 😩 How is it??', delay: 8800 },
+  { from: 'typing', delay: 9600 },
+  { from: 'right', text: 'I wore it to Seun\'s dinner and everyone was asking where I got it from 🔥', delay: 10600, tick: 11400 },
+  { from: 'typing', delay: 12000 },
+  { from: 'left',  text: 'That\'s it. I\'m ordering right now. Which one do you recommend? 👀', delay: 13000 },
+  { from: 'typing', delay: 13800 },
+  { from: 'right', text: 'The Indigo Echo Drape! Just message them on WhatsApp, they\'re super responsive 🛍️', delay: 14800, tick: 15600 },
+];
+
+const waBody    = document.getElementById('waBody');
+const waTimeEl  = document.getElementById('waTime');
+let chatStarted = false;
+
+// Set current time in status bar
+function setWaTime() {
+  const now = new Date();
+  waTimeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+setWaTime();
+
+function getTimeString() {
+  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+function createBubble(msg) {
+  const isRight = msg.from === 'right';
+  const row = document.createElement('div');
+  row.className = `wa-row ${isRight ? 'wa-row-right' : 'wa-row-left'}`;
+
+  const tickHTML = isRight
+    ? `<span class="wa-tick">
+        <svg viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="grey">
+          <path d="M1 5.5L4.5 9L11 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M6 5.5L9.5 9L16 1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>`
+    : '';
+
+  row.innerHTML = `
+    <div class="wa-bubble ${isRight ? 'wa-bubble-right' : 'wa-bubble-left'}">
+      ${msg.text}
+      <div class="wa-meta">
+        <span class="wa-time">${getTimeString()}</span>
+        ${tickHTML}
+      </div>
+    </div>
+  `;
+  return row;
+}
+
+function createTyping() {
+  const row = document.createElement('div');
+  row.className = 'wa-row wa-row-left';
+  row.id = 'waTyping';
+  row.innerHTML = `
+    <div class="wa-typing">
+      <span class="wa-dot"></span>
+      <span class="wa-dot"></span>
+      <span class="wa-dot"></span>
+    </div>
+  `;
+  return row;
+}
+
+function scrollToBottom() {
+  setTimeout(() => {
+    waBody.scrollTop = waBody.scrollHeight;
+  }, 60);
+}
+
+function startChat() {
+  if (chatStarted) return;
+  chatStarted = true;
+
+  MESSAGES.forEach((msg, i) => {
+    if (msg.from === 'typing') {
+      setTimeout(() => {
+        const typing = createTyping();
+        waBody.appendChild(typing);
+        scrollToBottom();
+      }, msg.delay);
+
+      // Remove typing after 900ms
+      setTimeout(() => {
+        const t = document.getElementById('waTyping');
+        if (t) t.remove();
+      }, msg.delay + 900);
+      return;
+    }
+
+    setTimeout(() => {
+      const bubble = createBubble(msg);
+      waBody.appendChild(bubble);
+      scrollToBottom();
+
+      // Blue tick after delay
+      if (msg.tick) {
+        setTimeout(() => {
+          const svg = bubble.querySelector('.wa-tick svg');
+          if (svg) svg.classList.replace('grey', 'blue');
+        }, msg.tick - msg.delay);
+      }
+    }, msg.delay);
+  });
+}
+
+// Trigger when section scrolls into view
+const chatObserver = new IntersectionObserver(
+  ([entry]) => {
+    if (entry.isIntersecting) {
+      startChat();
+      chatObserver.disconnect();
+    }
+  },
+  { threshold: 0.3 }
+);
+
+const chatSection = document.getElementById('chat-story');
+if (chatSection) chatObserver.observe(chatSection);
+
 });
