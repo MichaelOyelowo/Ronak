@@ -287,10 +287,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 goTo(nextIndex);
             }, 4000); 
         }
-
-        // Initialize immediately because we are already inside DOMContentLoaded!
         initHero(); 
     }
+
+/* ═══════════════════════════════════════════════════════
+       8. EDITORIAL SECTION
+    ═══════════════════════════════════════════════════════ */
 
     gsap.registerPlugin(ScrollTrigger);
 
