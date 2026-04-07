@@ -1237,7 +1237,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   overflow: hidden;
 }
 
-/* Header */
 .chat-story-header {
   text-align: center;
   max-width: 560px;
@@ -1277,18 +1276,15 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   line-height: 1.7;
 }
 
-/* Body grid */
+/* Body — centered single column */
 .chat-story-body {
-  max-width: 1100px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 /* ═══════════════════════════════════════
-   PHONE
+   PHONE — TABLET SIZE ON DESKTOP
 ═══════════════════════════════════════ */
 .chat-story-left {
   display: flex;
@@ -1297,10 +1293,10 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .phone-wrapper {
-  width: 290px;
-  height: 580px;
+  width: 420px;        /* Tablet width on desktop */
+  height: 680px;       /* Taller to match tablet proportions */
   background: #fff;
-  border: 10px solid #111;
+  border: 12px solid #111;
   border-radius: 44px;
   box-shadow:
     inset 0 0 0 2px #333,
@@ -1317,7 +1313,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   top: 6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80px;
+  width: 100px;
   height: 22px;
   background: #111;
   border-radius: 16px;
@@ -1326,7 +1322,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .wa-status-bar {
   background: #008069;
-  padding: 12px 18px 6px;
+  padding: 12px 20px 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1334,7 +1330,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .wa-status-bar span {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   color: #fff;
   letter-spacing: 0.3px;
@@ -1348,10 +1344,10 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .wa-header {
   background: #008069;
-  padding: 10px 14px 14px;
+  padding: 10px 16px 14px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   flex-shrink: 0;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
@@ -1359,27 +1355,27 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .wa-back { color: #fff; display: flex; align-items: center; }
 
 .wa-av {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(255,255,255,0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #fff;
   flex-shrink: 0;
 }
 
 .wa-info { flex: 1; }
-.wa-name { font-size: 14px; font-weight: 600; color: #fff; }
-.wa-status { font-size: 11px; color: rgba(255,255,255,0.75); }
-.wa-icons { display: flex; gap: 10px; color: #fff; }
+.wa-name { font-size: 15px; font-weight: 600; color: #fff; }
+.wa-status { font-size: 12px; color: rgba(255,255,255,0.75); }
+.wa-icons { display: flex; gap: 12px; color: #fff; }
 
 .wa-body {
   flex: 1;
-  padding: 14px 10px;
+  padding: 16px 14px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -1398,8 +1394,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .wa-date span {
   background: #fff;
   border-radius: 8px;
-  padding: 3px 10px;
-  font-size: 10px;
+  padding: 3px 12px;
+  font-size: 11px;
   color: #555;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -1421,10 +1417,10 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .wa-bubble {
-  max-width: 80%;
-  padding: 7px 9px 20px;
+  max-width: 75%;
+  padding: 8px 10px 22px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: #111;
   position: relative;
@@ -1434,7 +1430,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .wa-bubble-left {
   background: #fff;
   border-top-left-radius: 0;
-  margin-left: 6px;
+  margin-left: 8px;
 }
 
 .wa-bubble-left::before {
@@ -1449,7 +1445,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .wa-bubble-right {
   background: #E7FFDB;
   border-top-right-radius: 0;
-  margin-right: 6px;
+  margin-right: 8px;
 }
 
 .wa-bubble-right::before {
@@ -1470,7 +1466,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   gap: 3px;
 }
 
-.wa-time { font-size: 9px; color: #999; }
+.wa-time { font-size: 10px; color: #999; }
 
 .wa-tick svg {
   width: 16px;
@@ -1481,7 +1477,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .wa-tick .grey { color: #999; }
 .wa-tick .blue { color: #53bdeb; }
 
-/* Typing indicator */
 .wa-typing {
   background: #fff;
   border-radius: 12px;
@@ -1490,7 +1485,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   display: flex;
   gap: 4px;
   align-items: center;
-  margin-left: 6px;
+  margin-left: 8px;
   position: relative;
   box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
@@ -1505,8 +1500,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .wa-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #aaa;
   animation: waDot 1.4s infinite ease-in-out both;
@@ -1521,119 +1516,30 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .phone-shadow {
-  width: 200px;
-  height: 20px;
+  width: 300px;
+  height: 24px;
   background: radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, transparent 70%);
   border-radius: 50%;
-  margin-top: -6px;
+  margin-top: -8px;
   filter: blur(4px);
-}
-
-/* ═══════════════════════════════════════
-   RIGHT — EDITORIAL IMAGE + QUOTE
-═══════════════════════════════════════ */
-.chat-story-right {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.chat-editorial-img {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.chat-editorial-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.chat-editorial-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(6px);
-  padding: 6px 14px;
-  border-radius: 100px;
-  font-family: var(--body);
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--indigo);
-}
-
-.chat-editorial-overlay {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 2.5rem 1.5rem 1.5rem;
-  background: linear-gradient(to top, rgba(10,17,40,0.75), transparent);
-  color: #fff;
-  font-family: var(--body);
-  font-size: 0.8rem;
-  line-height: 1.6;
-}
-
-.chat-editorial-quote {
-  padding: 1.5rem;
-  border-left: 3px solid var(--indigo);
-  background: rgba(24, 38, 85, 0.04);
-  border-radius: 0 8px 8px 0;
-  position: relative;
-}
-
-.chat-quote-mark {
-  font-family: var(--display);
-  font-size: 4rem;
-  color: var(--indigo);
-  opacity: 0.15;
-  line-height: 1;
-  position: absolute;
-  top: 0.5rem;
-  left: 1rem;
-}
-
-.chat-editorial-quote p {
-  font-family: var(--display);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--indigo);
-  line-height: 1.6;
-  margin-bottom: 0.75rem;
-  padding-left: 1rem;
-}
-
-.chat-editorial-quote cite {
-  font-family: var(--body);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  padding-left: 1rem;
 }
 
 /* ═══════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════ */
-@media (max-width: 900px) {
-  .chat-story-body {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .chat-story-left { order: 1; }
-  .chat-story-right { order: 2; }
-  .chat-editorial-img { aspect-ratio: 16 / 9; }
-}
-
 @media (max-width: 480px) {
   .chat-story { padding: 4rem 1.25rem; }
-  .phone-wrapper { width: 260px; height: 520px; }
+
+  /* Back to regular phone size on mobile */
+  .phone-wrapper {
+    width: 290px;
+    height: 560px;
+    border-width: 10px;
+    border-radius: 40px;
+  }
+
+  .phone-notch { width: 80px; }
+  .phone-shadow { width: 200px; }
 }
 
 
