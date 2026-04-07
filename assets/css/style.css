@@ -1193,8 +1193,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .chat-story {
   padding: 4rem 2.5rem;
-  background: linear-gradient(to bottom, #f5f5f3 0%, /* bright at top */ #f1f1ec 22%, /* very soft warm */
-   var(--bg-low) 55%, /* gentle peach transition */ var(--bg) 100% /* back to warm base */);
+  background: linear-gradient(to bottom, #f5f5f3 0%, /* bright at top */ #f1f1ec 22%, /* very soft warm */ var(--bg) 100% /* back to warm base */);
   position: relative;
   overflow: hidden;
   border-radius: 70px 70px 50px 50px;
@@ -1535,6 +1534,217 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .whatsapp-float.is-visible:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 12px 32px rgba(10, 17, 40, 0.25);
+}
+
+
+/* ═══════════════════════════════════════
+   REVIEWS SECTION
+═══════════════════════════════════════ */
+.reviews-section {
+  padding: 6rem 0;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.reviews-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  padding: 0 2.5rem;
+}
+
+.reviews-eyebrow {
+  font-family: var(--body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.75rem;
+}
+
+.reviews-title {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--indigo);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Track wrapper — clips the scrolling */
+.reviews-track-wrapper {
+  position: relative;
+  width: 100%;
+  /* Fade edges left and right */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 8%,
+    black 92%,
+    transparent 100%
+  );
+}
+
+/* The scrolling strip */
+.reviews-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: reviewsScroll 40s linear infinite;
+  padding: 1rem 0 2rem; /* bottom padding for card shadow */
+}
+
+/* Pause on hover */
+.reviews-track-wrapper:hover .reviews-track {
+  animation-play-state: paused;
+}
+
+@keyframes reviewsScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* -50% because we duplicated the cards */
+}
+
+/* ── Review Card ── */
+.review-card {
+  width: 300px;
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 20px rgba(24, 38, 85, 0.05);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  cursor: default;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(24, 38, 85, 0.1);
+}
+
+/* Featured card — slightly different bg */
+.review-card--featured {
+  background: var(--indigo);
+  border-color: var(--indigo);
+}
+
+.review-card--featured .review-text {
+  color: rgba(255,255,255,0.9);
+}
+
+.review-card--featured .review-stars {
+  color: #ffd700;
+}
+
+.review-card--featured .review-name {
+  color: #fff;
+}
+
+.review-card--featured .review-location {
+  color: rgba(255,255,255,0.6);
+}
+
+/* Stars */
+.review-stars {
+  font-size: 0.9rem;
+  color: #f4a426;
+  letter-spacing: 2px;
+}
+
+/* Review text */
+.review-text {
+  font-family: var(--display);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  line-height: 1.65;
+  flex: 1;
+}
+
+/* Author */
+.review-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.review-card--featured .review-author {
+  border-top-color: rgba(255,255,255,0.15);
+}
+
+.review-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--indigo);
+  color: #fff;
+  font-family: var(--body);
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.review-card--featured .review-avatar {
+  background: rgba(255,255,255,0.2);
+}
+
+.review-name {
+  font-family: var(--body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: 0.05em;
+}
+
+.review-location {
+  font-family: var(--body);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .reviews-section { padding: 4rem 0; }
+  .review-card { width: 260px; padding: 1.4rem; }
+  .reviews-track { gap: 1rem; }
+}
+
+@media (max-width: 480px) {
+  .review-card { width: 230px; }
+  .reviews-track-wrapper {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+  }
 }
 
 
