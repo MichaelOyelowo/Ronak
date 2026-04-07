@@ -1193,7 +1193,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .chat-story {
   padding: 4rem 2.5rem;
-  background: linear-gradient(to bottom, #f7f8ec 0%, /* bright at top */ #f0f1e6 22%, /* very soft warm */
+  background: linear-gradient(to bottom, #f6f7f0 0%, /* bright at top */ #f1f1e8 22%, /* very soft warm */
    var(--bg-low) 55%, /* gentle peach transition */ var(--bg) 100% /* back to warm base */);
   position: relative;
   overflow: hidden;
