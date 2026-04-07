@@ -831,37 +831,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     transform: translateY(-1px);
 }
 
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-@media (max-width: 1024px) {
-    .products-grid { 
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 700px;
-        margin: 0 auto;
-    }
-    .products-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-    .products-view-all { margin-top: 0; }
-}
 
-@media (max-width: 768px) {
-    .products-section { padding: 4rem 0; }
-    .products-inner { padding: 0 1.25rem; }
-    .products-title { font-size: 2rem; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-    .product-name { font-size: 1.1rem; }
-    .product-order-btn { font-size: 0.6rem; padding: 0.75rem; }
-}
-
-@media (max-width: 480px) {
-    .products-inner { padding: 0 1rem; }
-    .products-title { font-size: 1.75rem; }
-    .product-filters { gap: 8px; overflow-x: auto; padding-bottom: 8px; flex-wrap: wrap; }
-    .filter-btn { white-space: nowrap; padding: 6px 14px; }
-    .products-grid { gap: 0.75rem; }
-    .product-name { font-size: 1rem; }
-    .product-order-btn { font-size: 0.58rem; padding: 0.7rem; }
-}
 
 
 /* ═══════════════════════════════════════
@@ -1215,17 +1185,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     background: rgba(255, 255, 255, 0.25);
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-    .video-section { height: 70vh; }
-    .video-play-btn { padding: 0.85rem 1.5rem; font-size: 0.65rem; gap: 10px; }
-    .video-play-icon { width: 32px; height: 32px; }
-}
 
-@media (max-width: 480px) {
-    .video-section { height: 60vh; }
-    .video-modal { padding: 1rem; }
-}
 
 
 /* ═══════════════════════════════════════
@@ -1294,8 +1254,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 .phone-wrapper {
-  width: 420px;        /* Tablet width on desktop */
-  height: 680px;       /* Taller to match tablet proportions */
+  width: 420px; 
+  height: 680px; 
   background: #fff;
   border: 12px solid #111;
   border-radius: 44px;
@@ -1312,11 +1272,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* ── MAGIC ALIGNMENT FIX ── */
 .phone-notch {
   position: absolute;
-  top: 14px; /* Pushed down slightly */
+  top: 14px; 
   left: 50%;
   transform: translateX(-50%);
-  width: 110px; /* Made slightly wider to look like a real dynamic island */
-  height: 26px; /* Perfect height */
+  width: 110px;
+  height: 26px;
   background: #111;
   border-radius: 20px;
   z-index: 50;
@@ -1324,11 +1284,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .wa-status-bar {
   background: #008069;
-  height: 54px; /* Fixed height for perfect math */
-  padding: 0 24px; /* Removed top padding so flexbox can center it perfectly */
+  height: 54px;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
-  align-items: center; /* This perfectly centers the time & icons with the notch! */
+  align-items: center;
   flex-shrink: 0;
 }
 
@@ -1528,21 +1488,52 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE
+   FLOATING WHATSAPP BUTTON
 ═══════════════════════════════════════ */
-@media (max-width: 480px) {
-  .chat-story { padding: 4rem 1.25rem; }
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px; /* Gives it breathing room from the bottom */
+    right: 30px;  /* Gives it breathing room from the right side */
+    width: 60px;
+    height: 60px;
+    background: #ffffff; /* White circle behind the GIF */
+    border-radius: 50%; /* Makes it a perfect circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* A premium drop shadow so it floats above the website */
+    box-shadow: 0 8px 24px rgba(10, 17, 40, 0.15);
+    z-index: 990; /* Keeps it above all content, but just below the navbar */
+    
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
 
-  /* Back to regular phone size on mobile */
-  .phone-wrapper {
-    width: 290px;
-    height: 560px;
-    border-width: 10px;
-    border-radius: 40px;
-  }
+.whatsapp-float img {
+    width: 40px; /* Scales the GIF nicely inside the white circle */
+    height: 40px;
+    object-fit: contain;
+}
 
-  .phone-notch { width: 80px; }
-  .phone-shadow { width: 200px; }
+/* Hover Effect: Lifts up and shadow expands */
+.whatsapp-float:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 32px rgba(10, 17, 40, 0.25);
+}
+
+/* ── RESPONSIVE MOBILE SIZING ── */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px; /* Slightly closer to the edge on mobile to save space */
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-float img {
+        width: 32px;
+        height: 32px;
+    }
 }
 
 
@@ -1552,6 +1543,9 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 @media (max-width: 1024px) {
     .desk-nav      { display: none; }
     .mobile-header { display: block; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); max-width: 700px; margin: 0 auto; }
+    .products-header { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .products-view-all { margin-top: 0; }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1569,6 +1563,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .editorial-overlay h2 { font-size: 1.6rem; }
     .small-card .editorial-overlay { padding: 1.25rem; }
     .small-card .editorial-overlay h2 { font-size: 1.3rem; }
+    
 }
 
 @media (max-width: 768px) {
@@ -1599,6 +1594,17 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .large-card { height: 350px; max-height: 350px; }
     .editorial-stacked { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; height: auto; max-height: none; flex-direction: unset; }
     .small-card { height: 240px; max-height: 240px; }
+
+    .products-section { padding: 4rem 0; }
+    .products-inner { padding: 0 1.25rem; }
+    .products-title { font-size: 2rem; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+    .product-name { font-size: 1.1rem; }
+    .product-order-btn { font-size: 0.6rem; padding: 0.75rem; }
+
+    .video-section { height: 70vh; }
+    .video-play-btn { padding: 0.85rem 1.5rem; font-size: 0.65rem; gap: 10px; }
+    .video-play-icon { width: 32px; height: 32px; }
 }
 
 @media (max-width: 480px) {
@@ -1614,6 +1620,22 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .small-card .editorial-overlay { padding: 1rem; gap: 4px; }
     .small-card .editorial-overlay h2 { font-size: 1.1rem; }
     .editorial-link { font-size: 0.6rem; }
+
+    .products-inner { padding: 0 1rem; }
+    .products-title { font-size: 1.75rem; }
+    .product-filters { gap: 8px; overflow-x: auto; padding-bottom: 8px; flex-wrap: wrap; }
+    .filter-btn { white-space: nowrap; padding: 6px 14px; }
+    .products-grid { gap: 0.75rem; }
+    .product-name { font-size: 1rem; }
+    .product-order-btn { font-size: 0.58rem; padding: 0.7rem; }
+
+    .video-section { height: 60vh; }
+    .video-modal { padding: 1rem; }
+
+    .chat-story { padding: 4rem 1.25rem; }
+    .phone-wrapper { width: 290px; height: 560px; border-width: 10px; border-radius: 40px; }
+    .phone-notch { width: 80px; }
+    .phone-shadow { width: 200px; }
 }
 
 @media (max-width: 600px) {
