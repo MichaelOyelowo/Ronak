@@ -1227,6 +1227,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .video-modal { padding: 1rem; }
 }
 
+
 /* ═══════════════════════════════════════
    CHAT STORY SECTION
 ═══════════════════════════════════════ */
@@ -1308,24 +1309,26 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   position: relative;
 }
 
+/* ── MAGIC ALIGNMENT FIX ── */
 .phone-notch {
   position: absolute;
-  top: 6px;
+  top: 14px; /* Pushed down slightly */
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 22px;
+  width: 110px; /* Made slightly wider to look like a real dynamic island */
+  height: 26px; /* Perfect height */
   background: #111;
-  border-radius: 16px;
+  border-radius: 20px;
   z-index: 50;
 }
 
 .wa-status-bar {
   background: #008069;
-  padding: 12px 20px 6px;
+  height: 54px; /* Fixed height for perfect math */
+  padding: 0 24px; /* Removed top padding so flexbox can center it perfectly */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; /* This perfectly centers the time & icons with the notch! */
   flex-shrink: 0;
 }
 
