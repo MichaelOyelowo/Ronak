@@ -688,8 +688,7 @@ function startChat() {
 }
 
 // Trigger when section scrolls into view
-const chatObserver = new IntersectionObserver(
-  ([entry]) => {
+const chatObserver = new IntersectionObserver(([entry]) => {
     if (entry.isIntersecting) {
       startChat();
       chatObserver.disconnect();
@@ -700,4 +699,42 @@ const chatObserver = new IntersectionObserver(
 
 const chatSection = document.getElementById('chat-story');
 if (chatSection) chatObserver.observe(chatSection);
+
+/* ═══════════════════════════════════════════════════════
+   REVIEW CAROUSEL (Dot Syncing)
+═══════════════════════════════════════════════════════ */
+const reviewTrack = document.getElementById('reviewTrack');
+const dots = document.querySelectorAll('.r-nav .dot');
+
+if (reviewTrack && dots.length > 0) {
+    // 1. Update dot when user manually scrolls/swipes
+    reviewTrack.addEventListener('scroll', () => {
+        // Calculate which card is currently in the center of the view
+        const scrollPosition = reviewTrack.scrollLeft;
+        const cardWidth = reviewTrack.querySelector('.r-card').offsetWidth;
+        
+        // Math to find the active index
+        let activeIndex = Math.round(scrollPosition / cardWidth);
+        
+        // Safety check to ensure it doesn't exceed the number of dots
+        if (activeIndex > dots.length - 1) activeIndex = dots.length - 1;
+
+        // Update classes
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === activeIndex);
+        });
+    });
+
+    // 2. Scroll to card when user clicks a specific dot
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            const cards = reviewTrack.querySelectorAll('.r-card');
+            if(cards[index]) {
+                // Smooth scroll to the specific card
+                cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            }
+        });
+    });
+}
+
 });

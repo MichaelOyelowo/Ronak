@@ -1530,6 +1530,197 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     box-shadow: 0 12px 32px rgba(10, 17, 40, 0.25);
 }
 
+/* ═══════════════════════════════════════
+   REVIEWS SECTION (Editorial Pull-Quotes)
+═══════════════════════════════════════ */
+.reviews-section {
+    background-color: var(--bg); 
+    padding: 6rem 0;
+    overflow: hidden; 
+}
+
+.reviews-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ── Header ── */
+.r-head {
+    text-align: center;
+    padding: 0 2.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.r-eyebrow {
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1rem;
+}
+
+.r-title {
+    font-family: var(--display);
+    color: var(--indigo);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+.r-link {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--indigo);
+    border-bottom: 1px solid var(--indigo);
+    padding-bottom: 2px;
+    transition: opacity 0.3s var(--ease);
+}
+
+.r-link:hover { opacity: 0.6; }
+
+/* ── Carousel Body ── */
+.r-body {
+    width: 100%;
+    position: relative;
+    padding: 10px 2.5rem 30px 2.5rem; 
+}
+
+.r-track {
+    display: flex;
+    gap: 1.5rem; /* Tighter gap for elegance */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 20px; 
+    
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; 
+}
+.r-track::-webkit-scrollbar { display: none; }
+
+/* ── Review Cards (Minimalist Fashion Vibe) ── */
+.r-card {
+    min-width: 380px; 
+    max-width: 380px;
+    background: transparent; 
+    border: 1px solid var(--border-mid); /* Very fine, elegant border */
+    border-radius: 4px; /* Sharp corners */
+    padding: 2.5rem;
+    scroll-snap-align: center; 
+    
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+
+.r-card:hover {
+    border-color: var(--indigo);
+    box-shadow: 0 16px 40px rgba(24, 38, 85, 0.06);
+}
+
+/* Stars */
+.r-star {
+    display: flex; gap: 2px; margin-bottom: 1.5rem;
+}
+.r-star svg { fill: var(--indigo); height: 14px; width: 14px; } /* Swapped to indigo stars for maturity */
+
+/* Text */
+.r-card-title {
+    font-family: var(--body);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    margin-bottom: 1rem;
+}
+
+.r-text {
+    font-family: var(--display); /* Using the beautiful serif font */
+    font-size: 1.35rem; /* Larger, editorial font size */
+    line-height: 1.4;
+    color: var(--indigo);
+    margin: 0 0 2.5rem 0;
+    font-style: italic; /* Makes it look like a pull quote */
+    flex-grow: 1;
+}
+
+/* Footer (User Info stacked cleanly) */
+.r-footer {
+    display: flex;
+    flex-direction: column; /* Stacked completely solves the mobile squish */
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+}
+
+.r-user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.r-user-info strong { 
+    font-family: var(--body);
+    font-size: 0.85rem; 
+    font-weight: 800; 
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dark); 
+}
+
+.verified { 
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.65rem; 
+    font-weight: 700; 
+    color: #007aff; /* Authentic blue checkmark color */
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+}
+.verified svg { width: 12px; height: 12px; fill: currentColor; } 
+
+.r-product { 
+    font-family: var(--body);
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    color: var(--text-faint); 
+}
+
+/* ── Navigation Dots ── */
+.r-nav { display: flex; justify-content: center; align-items: center; margin-top: 10px; }
+.nav-dots { display: flex; gap: 8px; align-items: center; }
+
+.dot {
+    width: 8px; height: 8px; background-color: var(--border-mid); border-radius: 50px;
+    cursor: pointer; transition: all 0.4s var(--ease);
+}
+.dot.active { width: 24px; background-color: var(--indigo); }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .reviews-section { padding: 4rem 0; }
+    .r-head { padding: 0 1.5rem; margin-bottom: 2rem;}
+    .r-body { padding: 10px 1.5rem 30px 1.5rem; }
+    
+    .r-track { gap: 1rem; }
+    
+    .r-card {
+        min-width: 85vw; /* Perfectly sizes cards on mobile so users know they can swipe */
+        max-width: 85vw;
+        padding: 2rem 1.5rem;
+    }
+
+    .r-text { font-size: 1.2rem; } /* Slightly smaller for tiny screens */
+}
 
 
 /* ═══════════════════════════════════════
