@@ -558,7 +558,7 @@ document.addEventListener('keydown', (e) => {
 /* ═══════════════════════════════════════
    CHAT STORY
 ═══════════════════════════════════════ */
-const MESSAGES = [
+const MESSAGES =[
   { from: 'left',  text: 'Babe have you seen the new Ronaks pieces?? 😍', delay: 800 },
   { from: 'typing', delay: 1200 },
   { from: 'right', text: 'Yes oh!! I have been staring at the indigo drape since morning 😭', delay: 2400, tick: 3200 },
@@ -577,6 +577,7 @@ const MESSAGES = [
 
 const waBody    = document.getElementById('waBody');
 const waTimeEl  = document.getElementById('waTime');
+const waButton  = document.querySelector('.whatsapp-float'); /* 1. GRAB THE WHATSAPP BUTTON */
 let chatStarted = false;
 
 // Set current time in status bar
@@ -640,7 +641,14 @@ function startChat() {
   if (chatStarted) return;
   chatStarted = true;
 
+  let chatEndTime = 0; /* 2. CREATE A TIMER TRACKER */
+
   MESSAGES.forEach((msg, i) => {
+    
+    // 3. TRACK THE LONGEST DELAY TO KNOW EXACTLY WHEN THE CHAT FINISHES
+    const currentEventEnd = Math.max(msg.delay || 0, msg.tick || 0);
+    if (currentEventEnd > chatEndTime) chatEndTime = currentEventEnd;
+
     if (msg.from === 'typing') {
       setTimeout(() => {
         const typing = createTyping();
@@ -670,6 +678,13 @@ function startChat() {
       }
     }, msg.delay);
   });
+
+  // 4. TRIGGER WHATSAPP GIF 800ms AFTER THE VERY LAST MESSAGE/TICK FINISHES!
+  if (waButton) {
+    setTimeout(() => {
+      waButton.classList.add('is-visible');
+    }, chatEndTime + 800);
+  }
 }
 
 // Trigger when section scrolls into view
@@ -685,5 +700,4 @@ const chatObserver = new IntersectionObserver(
 
 const chatSection = document.getElementById('chat-story');
 if (chatSection) chatObserver.observe(chatSection);
-
 });
