@@ -1542,7 +1542,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .reviews-section {
   padding: 6rem 0;
-  background: var(--bg-low);
+  background: #e7e9f0;
   overflow: hidden;
   position: relative;
 }
