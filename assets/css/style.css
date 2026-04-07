@@ -1492,20 +1492,17 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .whatsapp-float {
     position: fixed;
-    bottom: 30px; /* Gives it breathing room from the bottom */
-    right: 30px;  /* Gives it breathing room from the right side */
+    bottom: 50px; 
+    right: 30px;  
     width: 60px;
     height: 60px;
-    background: #ffffff; /* White circle behind the GIF */
-    border-radius: 50%; /* Makes it a perfect circle */
+    background: #ffffff;
+    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* A premium drop shadow so it floats above the website */
     box-shadow: 0 8px 24px rgba(10, 17, 40, 0.15);
-    z-index: 990; /* Keeps it above all content, but just below the navbar */
-    
+    z-index: 990;
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
 }
 
@@ -1524,8 +1521,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* ── RESPONSIVE MOBILE SIZING ── */
 @media (max-width: 768px) {
     .whatsapp-float {
-        bottom: 20px; /* Slightly closer to the edge on mobile to save space */
-        right: 20px;
+        right: 18px;
         width: 50px;
         height: 50px;
     }
