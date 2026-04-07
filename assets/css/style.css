@@ -1545,6 +1545,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     background: var(--bg);
     padding: 6rem 0;
     border-bottom: 1px solid var(--border);
+    margin-top: 2rem;
+    
 }
 
 .location-inner {
@@ -1667,17 +1669,9 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: 100%;
     position: absolute;
     top: 0; left: 0;
-    
-    /* ── THE MAGIC FILTER ── 
-       Turns the bright Google Map into a sleek grayscale premium map */
-    filter: grayscale(100%) contrast(1.1) brightness(0.9);
     transition: filter 0.5s ease;
 }
 
-/* When the user hovers over the map to use it, the colors smoothly fade back in! */
-.location-map:hover iframe {
-    filter: grayscale(0%) contrast(1) brightness(1);
-}
 
 /* ═══════════════════════════════════════
    RESPONSIVE BREAKPOINTS
