@@ -1542,8 +1542,36 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 ═══════════════════════════════════════ */
 .reviews-section {
   padding: 6rem 0;
-  background: var(--bg);
+  background: var(--bg-low);
   overflow: hidden;
+  position: relative;
+}
+
+/* ── MAGIC WAVE STYLING ── */
+.wave-divider {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 1;
+}
+
+.wave-divider svg {
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 120px;
+}
+
+.wave-top {
+  top: 0;
+  transform: rotate(180deg); /* Flips the wave upside down to hang from ceiling */
+  color: var(--bg); /* Matches the color of the Products section above it */
+}
+
+.wave-bottom {
+  bottom: 0;
+  color: var(--bg); /* Matches the Dark Indigo of the Chat section below it */
 }
 
 .reviews-header {
@@ -1598,7 +1626,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
   gap: 1.5rem;
   width: max-content;
   animation: reviewsScroll 40s linear infinite;
-  padding: 1rem 0 2rem; /* bottom padding for card shadow */
+  padding: 1rem 0 2rem;
 }
 
 /* Pause on hover */
@@ -1608,7 +1636,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 @keyframes reviewsScroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* -50% because we duplicated the cards */
+  100% { transform: translateX(-50%); }
 }
 
 /* ── Review Card ── */
@@ -1722,7 +1750,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .reviews-section { padding: 4rem 0; }
   .review-card { width: 260px; padding: 1.4rem; }
   .reviews-track { gap: 1rem; }
 }
@@ -1848,13 +1875,13 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     background: var(--indigo);
     padding: 1rem 2rem;
     border: 1px solid var(--indigo);
-    border-radius: 2px; /* Sharp corners */
+    border-radius: 25px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: fit-content;
     transition: all 0.3s var(--ease);
-    box-shadow: 0 4px 12px rgba(24, 38, 85, 0.15);
+    box-shadow: rgba(0, 6, 102, 0.15) 0px 4px 14px;
 }
 
 .location-btn:hover {
