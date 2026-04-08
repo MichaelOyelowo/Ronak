@@ -431,7 +431,7 @@ if (editorialSection) {
 }
 
 /* ═══════════════════════════════════════
-   WISHLIST WITH LOCALSTORAGE
+   9. WISHLIST WITH LOCALSTORAGE
 ═══════════════════════════════════════ */
 const wishlistFloat = document.getElementById('wishlistFloat');
 const wishlistCount = document.getElementById('wishlistCount');
@@ -479,7 +479,7 @@ updateWishlistUI();
 
 
 /* ═══════════════════════════════════════
-   LIGHTBOX
+  10. LIGHTBOX
 ═══════════════════════════════════════ */
 const overlay   = document.getElementById('lightboxOverlay');
 const lbImg     = document.getElementById('lightboxImg');
@@ -521,7 +521,7 @@ function closeLightbox() {
 
 
 /* ═══════════════════════════════════════
-   VIDEO MODAL
+   11. VIDEO MODAL
 ═══════════════════════════════════════ */
 const videoModal     = document.getElementById('videoModal');
 const videoFull      = document.getElementById('videoFull');
@@ -555,8 +555,9 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeVideoModal();
 });
 
+
 /* ═══════════════════════════════════════
-   CHAT STORY
+        12. CHAT STORY
 ═══════════════════════════════════════ */
 const MESSAGES =[
   { from: 'left',  text: 'Babe have you seen the new Ronaks pieces?? 😍', delay: 800 },
@@ -701,7 +702,7 @@ const chatSection = document.getElementById('chat-story');
 if (chatSection) chatObserver.observe(chatSection);
 
 /* ═══════════════════════════════════════════════════════
-   REVIEW CAROUSEL (Dot Syncing)
+   13. REVIEW CAROUSEL (Dot Syncing)
 ═══════════════════════════════════════════════════════ */
 const reviewTrack = document.getElementById('reviewTrack');
 const dots = document.querySelectorAll('.r-nav .dot');
@@ -736,5 +737,56 @@ if (reviewTrack && dots.length > 0) {
         });
     });
 }
+
+/* ═══════════════════════════════════════════════════════
+       14. SMART CALENDAR TOGGLE & LOADER
+    ═══════════════════════════════════════════════════════ */
+    const scheduleBtn = document.getElementById('scheduleBtn');
+    const scheduleBtnText = document.getElementById('scheduleBtnText');
+    const calendarWrapper = document.getElementById('calendar-wrapper');
+    const calendarIframe = document.getElementById('calendar-iframe');
+    
+    let isIframeLoaded = false;
+
+    if (scheduleBtn && calendarWrapper && calendarIframe) {
+        
+        const toggleCalendar = (forceClose = false) => {
+            const isOpen = calendarWrapper.classList.contains('is-open');
+            
+            if (isOpen || forceClose) {
+                // Close It
+                calendarWrapper.classList.remove('is-open');
+                scheduleBtn.setAttribute('aria-expanded', 'false');
+                scheduleBtnText.textContent = 'Schedule a Visit';
+            } else {
+                // Open It
+                calendarWrapper.classList.add('is-open');
+                scheduleBtn.setAttribute('aria-expanded', 'true');
+                scheduleBtnText.textContent = 'Close Calendar';
+                
+                // Lazy-load the Google Calendar only on the first click
+                if (!isIframeLoaded) {
+                    const sourceUrl = calendarIframe.getAttribute('data-src');
+                    if (sourceUrl) {
+                        calendarIframe.src = sourceUrl;
+                        isIframeLoaded = true; // Marks it as loaded so we don't re-download it
+                    }
+                }
+            }
+        };
+
+        // Button Click Event
+        scheduleBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); 
+            toggleCalendar();
+        });
+
+        // Close calendar if user clicks outside of it
+        document.addEventListener('click', (e) => {
+            if (!calendarWrapper.contains(e.target) && !scheduleBtn.contains(e.target)) {
+                toggleCalendar(true); // Forces it closed
+            }
+        });
+    }
 
 });
