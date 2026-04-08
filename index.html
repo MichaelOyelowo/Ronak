@@ -895,7 +895,7 @@
            target="_blank" rel="noopener noreferrer"
            class="location-btn location-btn--outline"
            aria-label="Book a studio visit on calender" 
-           onclick="calendar.schedulingButton.load({url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3o7LsBhkOiKQBF95k6ZTPlyw00bva2p3_ipBlB8-Y1WMwSRJYM2CA61s-gN0zabEkQmdcfZIgu?gv=true', color: '#1e293b', label: 'Schedule a Visit', target: this}); return false;">
+           onclick="document.getElementById('calendar-frame').style.display='block'"
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
             <line x1="16" y1="2" x2="16" y2="6"/>
@@ -904,6 +904,16 @@
           </svg>
           Schedule a Visit
         </button>
+        <div id="calendar-frame" style="display:none; margin-top:20px;margin-bottom:20px;">
+          <iframe 
+            src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3o7LsBhkOiKQBF95k6ZTPlyw00bva2p3_ipBlB8-Y1WMwSRJYM2CA61s-gN0zabEkQmdcfZIgu?gv=true" 
+            style="border:0" 
+            width="100%" 
+            height="1200" 
+            frameborder="0" 
+            scrolling="no">
+          </iframe>
+        </div>
       </div>
     </div>
 
