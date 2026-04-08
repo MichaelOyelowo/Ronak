@@ -315,7 +315,7 @@
         </div>
       </div>
       
-      <a href="" class="products-view-all" aria-label="View all products in the shop">
+      <a href="shop.html" class="products-view-all" aria-label="View all products in the shop">
         View All Collection →
       </a>
     </header>
@@ -534,6 +534,143 @@
 <a href="https://wa.me/2349018766615?text=Hello%20Ronaks%20Adire!%20I%20am%20interested%20in%20your%20handcrafted%20fabrics%20and%20would%20like%20to%20make%20an%20inquiry." class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
   <img src="./assets/images/icons/whatsapp.gif" alt="WhatsApp Icon">
 </a>
+
+<!-- ═══════════════════════════════════════
+     UPLOAD YOUR DESIGN SECTION
+═══════════════════════════════════════ -->
+<section class="upload-section reveal-up" aria-labelledby="upload-heading">
+  <div class="upload-inner">
+
+    <!-- Left: Text -->
+    <div class="upload-content">
+      <p class="upload-eyebrow">Custom Orders</p>
+      <h2 class="upload-title" id="upload-heading">
+        Have a Design<br><em>in Mind?</em>
+      </h2>
+      <p class="upload-desc">
+        Share your design inspiration with us — a sketch, a photo, a reference image. Our artisans will bring it to life using authentic Adire techniques.
+      </p>
+
+      <div class="upload-steps" aria-label="How it works">
+        <div class="upload-step">
+          <span class="step-num" aria-hidden="true">01</span>
+          <div>
+            <strong>Upload your design</strong>
+            <span>Any image — sketch, photo or reference</span>
+          </div>
+        </div>
+        <div class="upload-step">
+          <span class="step-num" aria-hidden="true">02</span>
+          <div>
+            <strong>Fill your details</strong>
+            <span>Name, fabric preference and description</span>
+          </div>
+        </div>
+        <div class="upload-step">
+          <span class="step-num" aria-hidden="true">03</span>
+          <div>
+            <strong>We contact you</strong>
+            <span>Our team reaches out within 24 hours</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="upload-form-wrap">
+      <form class="upload-form" id="uploadForm" novalidate aria-label="Design upload form">
+
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="uploadZone" role="button" tabindex="0"
+             aria-label="Click or drag to upload your design image"
+             aria-describedby="upload-hint">
+          <div class="upload-zone-idle" id="uploadIdle">
+            <span class="upload-zone-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </span>
+            <p class="upload-zone-text">Drag & drop your design here</p>
+            <p class="upload-zone-sub" id="upload-hint">or click to browse — JPG, PNG, WEBP up to 10MB</p>
+            <button type="button" class="upload-browse-btn" id="uploadBrowseBtn" aria-label="Browse files to upload">
+              Choose File
+            </button>
+          </div>
+          <div class="upload-zone-preview" id="uploadPreview" aria-live="polite">
+            <img id="previewImg" src="" alt="Your uploaded design preview">
+            <button type="button" class="upload-remove-btn" id="uploadRemoveBtn" aria-label="Remove uploaded image">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <p class="upload-file-name" id="uploadFileName" aria-live="polite"></p>
+          </div>
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp"
+                 aria-hidden="true" tabindex="-1" style="display:none;">
+        </div>
+
+        <!-- Upload Progress -->
+        <div class="upload-progress" id="uploadProgress" aria-hidden="true">
+          <div class="upload-progress-bar" id="uploadProgressBar" role="progressbar"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+          <span class="upload-progress-label" id="uploadProgressLabel">Uploading...</span>
+        </div>
+
+        <!-- Form Fields -->
+        <div class="upload-fields">
+          <div class="upload-field">
+            <label for="designName" class="field-label">Your Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="designName" name="name" placeholder="e.g. Funmi Adeyemi"
+                   autocomplete="name" required aria-required="true">
+          </div>
+
+          <div class="upload-field">
+            <label for="designPhone" class="field-label">WhatsApp Number <span aria-hidden="true">*</span></label>
+            <input type="tel" id="designPhone" name="phone" placeholder="e.g. 08012345678"
+                   autocomplete="tel" required aria-required="true">
+          </div>
+
+          <div class="upload-field">
+            <label for="designFabric" class="field-label">Preferred Fabric</label>
+            <select id="designFabric" name="fabric" aria-label="Select preferred fabric type">
+              <option value="" disabled selected>Select a fabric</option>
+              <option value="Silk Batik">Silk Batik</option>
+              <option value="Customized Cotton">Customized Cotton</option>
+              <option value="Batik Cotton">Batik Cotton</option>
+              <option value="Tissue Chiffon">Tissue Chiffon</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+
+          <div class="upload-field upload-field--full">
+            <label for="designDesc" class="field-label">Describe Your Design</label>
+            <textarea id="designDesc" name="description" rows="4"
+                      placeholder="Tell us about your design — colours, patterns, occasion, size..."
+                      aria-label="Describe your design"></textarea>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="upload-submit-btn" id="uploadSubmitBtn" aria-label="Send design to Ronaks on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.122 1.526 5.856L0 24l6.343-1.497A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.373l-.36-.214-3.727.979.995-3.638-.234-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
+          </svg>
+          Send Design on WhatsApp
+        </button>
+
+        <p class="upload-privacy" id="formStatus" aria-live="polite">
+          Your details are sent directly to us via WhatsApp. We never store your data.
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</section>
 
 <!-- Reviews Section -->
 <section class="reviews-section" id="reviews-section">
@@ -816,19 +953,19 @@
       <h2 class="location-title" id="location-heading">
         Experience Adire<br><em>in Person</em>
       </h2>
-      <p class="location-desc">
+      <p class="location-desc reveal-up">
         Step into our workshop to feel the textures, see the vibrant indigo vats, and discover the meticulous craftsmanship behind every Ronaks piece.
       </p>
 
       <div class="location-details">
-        <div class="detail-item">
+        <div class="detail-item reveal-up">
           <div class="location-wave">
             <strong>Location</strong>
             <span class="location-dot" aria-label="Open today"></span>
           </div>
           <span>32, Bamboo,<br>AP Junction, Ile-Ife,<br>Osun State, Nigeria</span>
         </div>
-        <div class="detail-item">
+        <div class="detail-item reveal-left">
           <strong>Hours</strong>
           <span>Mon - Sat: 9:00 AM - 6:00 PM<br>Sunday: Closed</span>
         </div>
