@@ -1778,12 +1778,14 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* ═══════════════════════════════════════
    LOCATION SECTION (Visit Us)
 ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   LOCATION SECTION (Visit Us)
+═══════════════════════════════════════ */
 .location-section {
     background: var(--bg);
     padding: 6rem 0;
     border-bottom: 1px solid var(--border);
     margin-top: 2rem;
-    
 }
 
 .location-inner {
@@ -1791,12 +1793,12 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     margin: 0 auto;
     padding: 0 2.5rem;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 50/50 Split */
+    grid-template-columns: 1fr 1fr;
     align-items: stretch;
     gap: 4rem;
 }
 
-/* ── Left Side (Text) ── */
+/* ── Left Side ── */
 .location-content {
     display: flex;
     flex-direction: column;
@@ -1823,6 +1825,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     letter-spacing: -0.02em;
 }
 
+.location-title em {
+    font-style: italic;
+    color: var(--text-mid);
+}
+
 .location-desc {
     font-family: var(--body);
     font-size: 1rem;
@@ -1832,11 +1839,11 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     max-width: 480px;
 }
 
-/* Address & Hours Layout */
+/* Address & Hours */
 .location-details {
     display: flex;
     gap: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     padding-top: 2rem;
     border-top: 1px solid var(--border);
 }
@@ -1864,7 +1871,79 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     line-height: 1.6;
 }
 
-/* Get Directions Button */
+/* ── Contact Links ── */
+.location-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 2rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    padding: 0.9rem 1.1rem;
+    border: 1px solid var(--border);
+    background: var(--bg-low);
+    transition: background 0.2s var(--ease),
+                border-color 0.2s var(--ease),
+                transform 0.2s var(--ease);
+}
+
+.contact-link:hover {
+    background: var(--bg);
+    border-color: var(--indigo);
+    transform: translateX(4px);
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--indigo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.contact-icon svg {
+    width: 17px;
+    height: 17px;
+}
+
+.contact-icon--wa {
+    background: #25d366;
+}
+
+.contact-label {
+    font-family: var(--body);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.contact-value {
+    font-family: var(--body);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--indigo);
+    display: block;
+}
+
+/* ── Buttons ── */
+.location-btns {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
 .location-btn {
     font-family: var(--body);
     font-size: 0.7rem;
@@ -1873,15 +1952,23 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     text-transform: uppercase;
     color: var(--bg);
     background: var(--indigo);
-    padding: 1rem 2rem;
-    border: 1px solid var(--indigo);
+    padding: 1rem 1.75rem;
+    border: 1.5px solid var(--indigo);
     border-radius: 25px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     width: fit-content;
+    text-decoration: none;
     transition: all 0.3s var(--ease);
     box-shadow: rgba(0, 6, 102, 0.15) 0px 4px 14px;
+}
+
+.location-btn svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .location-btn:hover {
@@ -1890,7 +1977,19 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     box-shadow: none;
 }
 
-/* ── Right Side (The Map) ── */
+.location-btn--outline {
+    background: transparent;
+    color: var(--indigo);
+    box-shadow: none;
+}
+
+.location-btn--outline:hover {
+    background: var(--indigo);
+    color: var(--bg);
+    box-shadow: rgba(0, 6, 102, 0.15) 0px 4px 14px;
+}
+
+/* ── Right Side: Map ── */
 .location-map {
     width: 100%;
     min-height: 500px;
@@ -1899,19 +1998,77 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     border-radius: 2px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .location-map iframe {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0; left: 0;
-    transition: filter 0.5s ease;
+    flex: 1;
+    border: none;
+    display: block;
+    min-height: 400px;
 }
 
+/* Map badge */
+.map-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--indigo);
+    color: #fff;
+    font-family: var(--body);
+    font-size: 0.58rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+/* Hours bar below map */
+.map-hours {
+    background: var(--indigo);
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.hours-label {
+    font-family: var(--body);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+    display: block;
+    margin-bottom: 3px;
+}
+
+.hours-value {
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    display: block;
+}
+
+.hours-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #4caf50;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
 
 /* ═══════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
+   RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 1024px) {
     .location-inner {
@@ -1919,33 +2076,30 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
         padding: 0 2rem;
     }
     .location-details {
-        flex-direction: column; /* Stack address and hours on iPad */
+        flex-direction: column;
         gap: 1.5rem;
     }
 }
 
 @media (max-width: 768px) {
-    .location-section {
-        padding: 4rem 0;
-    }
-    
+    .location-section { padding: 4rem 0; }
+
     .location-inner {
-        grid-template-columns: 1fr; /* Stack Text on top, Map on bottom */
+        grid-template-columns: 1fr;
         padding: 0 1.5rem;
         gap: 3rem;
     }
 
-    .location-desc {
-        font-size: 0.95rem;
-    }
+    .location-desc { font-size: 0.95rem; }
+
+    .location-btns { flex-direction: column; }
 
     .location-btn {
-        width: 100%; /* Full width button on mobile */
+        width: 100%;
+        justify-content: center;
     }
 
-    .location-map {
-        min-height: 380px; /* Shorter map for mobile screens */
-    }
+    .location-map { min-height: 380px; }
 }
 
 /* ═══════════════════════════════════════
