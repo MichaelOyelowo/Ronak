@@ -789,4 +789,27 @@ if (reviewTrack && dots.length > 0) {
         });
     }
 
+    /* ═══════════════════════════════════════════════════════
+       14. NEWSLETTER FORM
+    ═══════════════════════════════════════════════════════ */
+    function handleNewsletterSubmit(e) {
+        e.preventDefault();
+        const input = document.getElementById('newsletterEmail');
+        const btn = e.target.querySelector('button');
+        if (!input.value) return;
+
+        // Swap button text to confirm
+        const original = btn.textContent;
+        btn.textContent = 'Subscribed ✓';
+        btn.style.color = '#1a6b3c';
+        input.value = '';
+        input.placeholder = 'Thank you!';
+
+        setTimeout(() => {
+            btn.textContent = original;
+            btn.style.color = '';
+            input.placeholder = 'Your email address';
+        }, 3000);
+    }
+
 });
