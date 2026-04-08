@@ -1778,9 +1778,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* ═══════════════════════════════════════
    LOCATION SECTION (Visit Us)
 ═══════════════════════════════════════ */
-/* ═══════════════════════════════════════
-   LOCATION SECTION (Visit Us)
-═══════════════════════════════════════ */
 .location-section {
     background: var(--bg);
     padding: 6rem 0;
@@ -1827,7 +1824,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .location-title em {
     font-style: italic;
-    color: var(--text-mid);
 }
 
 .location-desc {
@@ -1871,6 +1867,27 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     line-height: 1.6;
 }
 
+.location-wave {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.location-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--indigo);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+    animation: pulse-dot 1.5s infinite;
+}
+
+@keyframes pulse-dot {
+    0%,100%{opacity:1;transform:scale(1)}
+    50%{opacity:0.4;transform:scale(0.7)}
+}
+
 /* ── Contact Links ── */
 .location-contacts {
     display: flex;
@@ -1912,10 +1929,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .contact-icon svg {
     width: 17px;
     height: 17px;
-}
-
-.contact-icon--wa {
-    background: #25d366;
 }
 
 .contact-label {
@@ -2058,14 +2071,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     display: block;
 }
 
-.hours-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #4caf50;
-    flex-shrink: 0;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
-}
 
 /* ═══════════════════════════════════════
    RESPONSIVE
