@@ -811,5 +811,4 @@ if (reviewTrack && dots.length > 0) {
             input.placeholder = 'Your email address';
         }, 3000);
     }
-
 });
