@@ -550,9 +550,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ─────────────────────────────────────
-    // INIT: Read URL params then render
+    // INIT: Safety check before rendering
+    // If products array doesn't exist, something
+    // is wrong with the file path or load order
     // ─────────────────────────────────────
+    if (typeof products === 'undefined' || !Array.isArray(products)) {
+        console.error('products.js not loaded — check the script src path in shop.html');
+        return;
+    }
+
     readURLParams();
     render();
+
 
 }); // end DOMContentLoaded
