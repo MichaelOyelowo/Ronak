@@ -1192,7 +1192,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
    CHAT STORY SECTION
 ═══════════════════════════════════════ */
 .chat-story {
-  padding: 4rem 2.5rem;
+  padding: 3rem 2.5rem;
   background: linear-gradient(to bottom, #f5f5f3 0%, /* bright at top */ #f1f1ec 22%, /* very soft warm */ var(--bg) 100% /* back to warm base */);
   position: relative;
   overflow: hidden;
@@ -1540,7 +1540,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
    UPLOAD YOUR DESIGN SECTION
 ═══════════════════════════════════════ */
 .upload-section {
-    background: var(--bg-low);
+    background: rgba(255,255,255,0.8);
     padding: 6rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);

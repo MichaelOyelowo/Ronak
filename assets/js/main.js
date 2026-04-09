@@ -814,7 +814,7 @@ if (reviewTrack && dots.length > 0) {
 
     
     /* ═══════════════════════════════════════════════════════
-       15. NEWSLETTER FORM
+       16. NEWSLETTER FORM
     ═══════════════════════════════════════════════════════ */
     const CLOUD_NAME    = 'dffuf2gwh';    // found on your Cloudinary dashboard
     const UPLOAD_PRESET = 'ronaks_designs';     // the unsigned preset you create
