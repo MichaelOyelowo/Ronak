@@ -1579,19 +1579,41 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     flex-shrink: 0;
 }
 
+/* ═══════════════════════════════════════
+   CUSTOM ORDERS SECTION (Liquid Silk Text)
+═══════════════════════════════════════ */
 .upload-title {
-    font-family: var(--display);
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-family: 'Caveat', cursive;
+    font-size: clamp(3.5rem, 5vw, 5rem); /* Made it massive and impactful */
     font-weight: 800;
-    color: var(--indigo);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    line-height: 1.1;
     margin-bottom: 1.25rem;
+    
+    /* 1. The Liquid Silk & Gold Gradient */
+    background: linear-gradient(
+        to right, 
+        var(--indigo) 0%, 
+        #2a4ac8 30%,    /* Vibrant Royal Blue */
+        #e9c176 50%,    /* Flash of Gold */
+        #2a4ac8 70%,    /* Vibrant Royal Blue */
+        var(--indigo) 100%
+    );
+    background-size: 200% auto;
+    
+    /* 2. The Text Clip Trick */
+    color: transparent; 
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* 3. Starts the continuous gold shimmer sweep instantly */
+    animation: silkShine 4s linear infinite;
 }
 
-.upload-title em {
-    font-style: italic;
-    color: var(--text-mid);
+@keyframes silkShine {
+    to {
+        background-position: 200% center;
+    }
 }
 
 .upload-desc {
