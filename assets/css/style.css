@@ -1579,9 +1579,6 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     flex-shrink: 0;
 }
 
-/* ═══════════════════════════════════════
-   CUSTOM ORDERS SECTION (Liquid Silk Text)
-═══════════════════════════════════════ */
 .upload-title {
     font-family: 'Caveat', cursive;
     font-size: clamp(3.5rem, 5vw, 5rem); /* Made it massive and impactful */
@@ -1593,20 +1590,16 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     background: linear-gradient(
         to right, 
         var(--indigo) 0%, 
-        #2a4ac8 30%,    /* Vibrant Royal Blue */
-        #e9c176 50%,    /* Flash of Gold */
-        #2a4ac8 70%,    /* Vibrant Royal Blue */
+        #2a4ac8 30%,
+        #e9c176 50%,
+        #2a4ac8 70%,
         var(--indigo) 100%
     );
     background-size: 200% auto;
-    
-    /* 2. The Text Clip Trick */
     color: transparent; 
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-
-    /* 3. Starts the continuous gold shimmer sweep instantly */
     animation: silkShine 4s linear infinite;
 }
 
@@ -1644,7 +1637,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     font-size: 1.8rem;
     font-weight: 800;
     color: rgba(24, 38, 85, 0.12);
-    line-height: 1;
+    line-height: 1.2;
+    padding-top: 2px;
     flex-shrink: 0;
     width: 48px;
 }
@@ -1652,8 +1646,8 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 .upload-step div {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 3px;
-    padding-top: 4px;
 }
 
 .upload-step strong {
