@@ -78,7 +78,7 @@
     
     <div class="nav-menu-wrapper">
       <ul class="nav-links" id="navLinks" role="list">
-        <li role="none"><a href="#" data-page="home" aria-current="page">Home</a></li>
+        <li role="none"><a href="index.html" data-page="home" aria-current="page">Home</a></li>
         <li role="none"><a href="#" data-page="about">About Us</a></li>
         
         <li role="none" class="has-dropdown">
@@ -89,6 +89,7 @@
             </span>
           </button>
           <ul class="dropdown" id="shop-dropdown" role="list" aria-labelledby="shop-trigger">
+            <li role="none"><a href="shop.html" data-page="shop all">View All</a></li>
             <li role="none"><a href="#" data-page="shop" data-filter="silk-batik">Silk Batik</a></li>
             <li role="none"><a href="#" data-page="shop" data-filter="customized-cotton">Customized Cotton</a></li>
             <li role="none"><a href="#" data-page="shop" data-filter="batik-cotton">Batik Cotton</a></li>
@@ -110,7 +111,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
         </span>
       </label>
-      <a href="#" class="nav-cta" data-page="contact" role="button">Contact Us</a>
+      <a href="#contact-us" class="nav-cta" data-page="contact" role="button">Contact Us</a>
     </div>
   </nav>
 </header>
@@ -152,7 +153,7 @@
 
     <!-- Sliding Mobile Menu Wrapper -->
     <div class="mobile-nav-inner">
-      <a href="#" data-page="home" aria-current="page">Home</a>
+      <a href="index.html" data-page="home" aria-current="page">Home</a>
       <a href="#" data-page="about">About Us</a>
       
       <button class="mobile-shop-toggle" aria-expanded="false" aria-controls="mobileShopSub" id="mobileShopToggle">
@@ -162,6 +163,7 @@
         </span>
       </button>
       <div class="mobile-sub" id="mobileShopSub" aria-labelledby="mobileShopToggle">
+        <a href="shop.html" data-page="shop">View All</a>
         <a href="#" data-page="shop" data-filter="silk-batik">Silk Batik</a>
         <a href="#" data-page="shop" data-filter="customized-cotton">Customized Cotton</a>
         <a href="#" data-page="shop" data-filter="batik-cotton">Batik Cotton</a>
@@ -170,7 +172,7 @@
       <a href="#" data-page="training">Training</a>
       <a href="#" data-page="training">Designs</a>
       <a href="#" data-page="blog">Blog</a>
-      <a href="#" data-page="contact" class="mobile-nav-cta">Contact Us</a>
+      <a href="#contact-us" data-page="contact" class="mobile-nav-cta">Contact Us</a>
     </div>
   </nav>
 </header>
@@ -767,7 +769,7 @@
 
     <!-- Col 1: Brand -->
     <div class="footer-col footer-col--brand">
-      <a href="/" class="footer-logo" aria-label="Ronaks Adire — go to homepage">
+      <a href="index.html" class="footer-logo" aria-label="Ronaks Adire — go to homepage">
         <img src="./assets/images/general/ronak_logo.png" alt="Ronaks Adire Logo">
       </a>
       <p class="footer-tagline">
@@ -819,12 +821,12 @@
         <li role="none"><a href="#" data-page="training">Training</a></li>
         <li role="none"><a href="#" data-page="upload design">Designs</a></li>
         <li role="none"><a href="#" data-page="blog">Blog</a></li>
-        <li role="none"><a href="#" data-page="contact">Contact Us</a></li>
+        <li role="none"><a href="#contact-us" data-page="contact">Contact Us</a></li>
       </ul>
     </div>
 
     <!-- Col 4: Contact -->
-    <div class="footer-col">
+    <div class="footer-col" id="contact-us">
       <h4 class="footer-col-title">Get in Touch</h4>
       <ul class="footer-contact-list" role="list">
         <li role="none">
