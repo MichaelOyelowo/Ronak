@@ -811,4 +811,323 @@ if (reviewTrack && dots.length > 0) {
             input.placeholder = 'Your email address';
         }, 3000);
     }
+
+    
+    /* ═══════════════════════════════════════════════════════
+       15. NEWSLETTER FORM
+    ═══════════════════════════════════════════════════════ */
+    const CLOUD_NAME    = 'dffuf2gwh';    // found on your Cloudinary dashboard
+    const UPLOAD_PRESET = 'ronaks_designs';     // the unsigned preset you create
+    const WA_NUMBER     = '2349029702549';
+
+    // ── Grab all the elements we need from the DOM ──
+    const uploadForm     = document.getElementById('uploadForm');
+    const uploadZone     = document.getElementById('uploadZone');
+    const fileInput      = document.getElementById('fileInput');
+    const browseBtn      = document.getElementById('uploadBrowseBtn');
+    const removeBtn      = document.getElementById('uploadRemoveBtn');
+    const idleUI         = document.getElementById('uploadIdle');
+    const previewUI      = document.getElementById('uploadPreview');
+    const previewImg     = document.getElementById('previewImg');
+    const fileNameEl     = document.getElementById('uploadFileName');
+    const progressWrap   = document.getElementById('uploadProgress');
+    const progressBar    = document.getElementById('uploadProgressBar');
+    const progressLabel  = document.getElementById('uploadProgressLabel');
+    const submitBtn      = document.getElementById('uploadSubmitBtn');
+    const formStatus     = document.getElementById('formStatus');
+
+
+    // Only run this block if the upload form exists on the page
+    // This prevents errors on pages that don't have the form
+    if (!uploadForm) return;
+
+    // ── State variables ──
+    // These two track what the user has selected/uploaded
+    let selectedFile     = null;  // the raw File object from the input
+    let uploadedImageUrl = null;  // the final Cloudinary URL after upload
+
+    // HELPER: Validate the selected file
+    // Checks type and size before doing anything
+    // ─────────────────────────────────────
+    function validateFile(file) {
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+        const maxSize      = 10 * 1024 * 1024; // 10MB in bytes
+
+        if (!allowedTypes.includes(file.type)) {
+            showStatus('Please upload a JPG, PNG or WEBP image only.', 'error');
+            return false;
+        }
+        if (file.size > maxSize) {
+            showStatus('Image must be under 10MB.', 'error');
+            return false;
+        }
+        return true;
+    }
+
+    // ─────────────────────────────────────
+    // HELPER: Show a local preview of the image
+    // Uses FileReader to read the file as a data URL
+    // so we can show it without uploading yet
+    // ─────────────────────────────────────
+    function showPreview(file) {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+            previewImg.src = e.target.result;
+            previewImg.alt = `Preview of ${file.name}`;
+            fileNameEl.textContent = file.name;
+
+            // Swap the idle UI (upload icon + text) for the preview UI
+            idleUI.classList.add('hidden');
+            previewUI.classList.add('visible');
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    // ─────────────────────────────────────
+    // HELPER: Clear everything back to default
+    // Called when user removes the image or form resets
+    // ─────────────────────────────────────
+    function clearPreview() {
+        selectedFile        = null;
+        uploadedImageUrl    = null;
+        previewImg.src      = '';
+        fileNameEl.textContent = '';
+        fileInput.value     = ''; // clears the file input so same file can be re-selected
+
+        idleUI.classList.remove('hidden');
+        previewUI.classList.remove('visible');
+        progressWrap.classList.remove('visible');
+        progressBar.style.setProperty('--progress', '0%');
+        progressBar.setAttribute('aria-valuenow', 0);
+    }
+
+    // ─────────────────────────────────────
+    // HELPER: Update the status message below the button
+    // type can be 'info', 'error' or 'success'
+    // ─────────────────────────────────────
+    function showStatus(message, type = 'info') {
+        formStatus.textContent = message;
+        formStatus.style.color =
+            type === 'error'   ? '#c0392b' :
+            type === 'success' ? '#1a6b3c' :
+            'var(--text-faint)';
+    }
+
+    // ─────────────────────────────────────
+    // CORE: Upload the image to Cloudinary
+    // Returns a Promise that resolves with the image URL
+    // We use XMLHttpRequest (not fetch) so we can track upload progress
+    // ─────────────────────────────────────
+    function uploadToCloudinary(file) {
+        return new Promise((resolve, reject) => {
+
+            // FormData is how we send the file to Cloudinary's API
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', UPLOAD_PRESET);
+            formData.append('folder', 'ronaks_designs'); // organises uploads in a folder
+
+            const xhr = new XMLHttpRequest();
+
+            // Show the progress bar
+            progressWrap.classList.add('visible');
+            progressWrap.setAttribute('aria-hidden', 'false');
+
+            // This fires repeatedly as the upload progresses
+            // e.loaded = bytes sent, e.total = total bytes
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const percent = Math.round((e.loaded / e.total) * 100);
+                    // We use a CSS custom property --progress to drive the bar width
+                    progressBar.style.setProperty('--progress', percent + '%');
+                    progressBar.setAttribute('aria-valuenow', percent);
+                    progressLabel.textContent = `Uploading... ${percent}%`;
+                }
+            };
+
+            // This fires when the upload completes (success or fail)
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    progressLabel.textContent = 'Upload complete ✓';
+                    // secure_url is the permanent HTTPS link to the image
+                    resolve(response.secure_url);
+                } else {
+                    reject(new Error('Cloudinary returned an error: ' + xhr.status));
+                }
+            };
+
+            // This fires on network failure (no internet etc)
+            xhr.onerror = () => reject(new Error('Network error — check your connection.'));
+
+            // Open the request to Cloudinary's upload endpoint
+            xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`);
+            xhr.send(formData);
+        });
+    } 
+
+    // ─────────────────────────────────────
+    // CORE: Build the WhatsApp message text
+    // Takes the form data + image URL and formats it nicely
+    // encodeURIComponent converts special characters so the URL works
+    // ─────────────────────────────────────
+    function buildWhatsAppMessage({ name, phone, fabric, description, imageUrl }) {
+        const lines = [
+            `Hello Ronaks! I have a custom design request`,
+            ``,
+            `*Name:* ${name}`,
+            `*Phone:* ${phone}`,
+            `*Fabric:* ${fabric || 'Not specified'}`,
+            `*Description:* ${description || 'Not provided'}`,
+            ``,
+            imageUrl
+                ? `*Design Image:* ${imageUrl}`
+                : `_(No image uploaded)_`,
+            ``,
+            `Please let me know the next steps. Thank you!`
+        ];
+        // Join lines into one string, then encode it for a URL
+        return encodeURIComponent(lines.join('\n'));
+    }
+
+    // ─────────────────────────────────────
+    // RESET: Restore the submit button to its original state
+    // Called after submit (success or error)
+    // ─────────────────────────────────────
+    function resetSubmitBtn() {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" width="20" height="20">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.122 1.526 5.856L0 24l6.343-1.497A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.373l-.36-.214-3.727.979.995-3.638-.234-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
+            </svg>
+            Send Design on WhatsApp
+        `;
+    }
+
+    // ─────────────────────────────────────
+    // EVENT: Drag over the upload zone
+    // preventDefault() stops the browser from opening the file
+    // ─────────────────────────────────────
+    uploadZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadZone.classList.add('dragover');
+    });
+
+    uploadZone.addEventListener('dragleave', () => {
+        uploadZone.classList.remove('dragover');
+    });
+
+    uploadZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadZone.classList.remove('dragover');
+
+        const file = e.dataTransfer.files[0]; // only take the first file
+        if (file && validateFile(file)) {
+            selectedFile = file;
+            showPreview(file);
+        }
+    });
+
+    // ─────────────────────────────────────
+    // EVENT: Click browse button or click the zone itself
+    // Both trigger the hidden file input
+    // ─────────────────────────────────────
+    browseBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // stops the click from bubbling to the zone
+        fileInput.click();
+    });
+
+    uploadZone.addEventListener('click', () => {
+        // Only open file picker if we are not already showing a preview
+        if (!previewUI.classList.contains('visible')) {
+            fileInput.click();
+        }
+    });
+
+    // Keyboard accessibility — Enter or Space triggers the file picker
+    uploadZone.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && !previewUI.classList.contains('visible')) {
+            e.preventDefault();
+            fileInput.click();
+        }
+    });
+
+    // ─────────────────────────────────────
+    // EVENT: File selected via the input
+    // ─────────────────────────────────────
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file && validateFile(file)) {
+            selectedFile = file;
+            showPreview(file);
+        }
+    });
+
+    // ─────────────────────────────────────
+    // EVENT: Remove the selected image
+    // stopPropagation stops the click reaching the zone
+    // which would immediately re-open the file picker
+    // ─────────────────────────────────────
+    removeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearPreview();
+        showStatus('Your details are sent directly to us via WhatsApp. We never store your data.');
+    });
+
+    // ─────────────────────────────────────
+    // EVENT: Form submit — the main flow
+    // 1. Validate fields
+    // 2. Upload image to Cloudinary if one was selected
+    // 3. Build WhatsApp message with all details + image URL
+    // 4. Open WhatsApp
+    // 5. Reset the form
+    // ─────────────────────────────────────
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // stops the page from reloading
+
+        // Read field values
+        const name        = document.getElementById('designName').value.trim();
+        const phone       = document.getElementById('designPhone').value.trim();
+        const fabric      = document.getElementById('designFabric').value;
+        const description = document.getElementById('designDesc').value.trim();
+
+        // Validate required fields
+        if (!name)  { showStatus('Please enter your name.', 'error');             return; }
+        if (!phone) { showStatus('Please enter your WhatsApp number.', 'error');  return; }
+
+        // Disable button so user cannot click twice
+        submitBtn.disabled    = true;
+        submitBtn.textContent = 'Processing...';
+        showStatus('Please wait...');
+
+        try {
+            // Only upload if the user actually selected a file
+            if (selectedFile) {
+                showStatus('Uploading your design image...');
+                uploadedImageUrl = await uploadToCloudinary(selectedFile);
+                // await pauses here until uploadToCloudinary resolves with the URL
+            }
+
+            // Build the message and open WhatsApp in a new tab
+            const message = buildWhatsAppMessage({ name, phone, fabric, description, imageUrl: uploadedImageUrl });
+            window.open(`https://wa.me/${WA_NUMBER}?text=${message}`, '_blank');
+
+            // Reset everything
+            uploadForm.reset();
+            clearPreview();
+            showStatus('WhatsApp opened with your details! We will be in touch within 24 hours.', 'success');
+
+        } catch (err) {
+            // If Cloudinary upload failed, tell the user clearly
+            console.error('Upload error:', err);
+            showStatus('Image upload failed. You can remove the image and send without it, or try again.', 'error');
+
+        } finally {
+            // finally always runs — success or failure — so the button always resets
+            resetSubmitBtn();
+        }
+    });
 });
