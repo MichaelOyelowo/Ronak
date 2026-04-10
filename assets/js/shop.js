@@ -919,6 +919,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!val) { nameInput.focus(); return; }
 
         userName = val;
+
+        // ── Save name permanently to localStorage ──
+        // This is what greeting.js reads on return visits
+        try {
+            localStorage.setItem('ronaks_user_name', userName);
+        } catch (e) {}
+
+        nameWrap.classList.add('hidden');
+        addUserMsg(userName);
+
         nameWrap.classList.add('hidden');
 
         addUserMsg(userName);

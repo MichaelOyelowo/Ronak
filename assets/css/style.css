@@ -2960,7 +2960,121 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 }
 
 
+/* ═══════════════════════════════════════
+   RETURNING USER GREETING TOAST
+═══════════════════════════════════════ */
+.greeting-toast {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateX(calc(100% + 2rem));
+    transition: opacity 0.4s var(--ease),
+                transform 0.4s var(--ease);
+    pointer-events: none;
+    max-width: 340px;
+    width: calc(100vw - 3rem);
+}
 
+.greeting-toast.greeting-toast--visible {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.greeting-toast-inner {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--indigo);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(24, 38, 85, 0.12);
+    padding: 1rem 1rem 1rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Avatar circle with first letter of name */
+.greeting-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--indigo);
+    color: #fff;
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.greeting-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.greeting-title {
+    font-family: var(--body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+    margin-bottom: 3px;
+}
+
+.greeting-title strong {
+    color: var(--indigo);
+    font-weight: 800;
+}
+
+.greeting-sub {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--text-faint);
+    line-height: 1.45;
+}
+
+.greeting-close {
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-start;
+    padding: 0;
+}
+
+.greeting-close:hover {
+    background: var(--bg-low);
+    color: var(--text-dark);
+}
+
+.greeting-close svg {
+    width: 13px;
+    height: 13px;
+}
+
+@media (max-width: 480px) {
+    .greeting-toast {
+        top: auto;
+        bottom: 5rem;
+        right: 1rem;
+        left: 1rem;
+        max-width: 100%;
+        width: auto;
+    }
+}
 
 
 /* ═══════════════════════════════════════
