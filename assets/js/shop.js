@@ -898,7 +898,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Step 2 — intro
         await addBotMsg(
-            `We craft handmade Adire fabrics for every occasion — and we can always create something just for you.`,
+            `We craft handmade Adire fabrics for every occasion and we can always create something just for you.`,
             1400
         );
 
@@ -925,13 +925,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Respond with name
         await addBotMsg(
-            `Nice to meet you, <strong>${userName}</strong>! 🎉`,
+            `Nice to meet you, <strong>${userName}</strong>!`,
             1000
         );
 
         // Ask the key question
         await addBotMsg(
-            `Are you finding the design you're looking for today?`,
+            `I hope you are able to find the design you're looking for today?`,
             1300
         );
 
