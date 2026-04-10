@@ -2860,7 +2860,104 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 /* END OF INDEX.HTML STYLING */
 
 
+/* ═══════════════════════════════════════
+   LEGAL PAGES (Privacy & Terms)
+═══════════════════════════════════════ */
+.legal-section {
+    background: var(--bg);
+    padding: 6rem 0;
+    min-height: 70vh;
+}
 
+/* Keeps the text narrow so it is easy and comfortable to read */
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+}
+
+.legal-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.legal-title {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 800;
+    color: var(--indigo);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.legal-date {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+}
+
+/* Content Typography */
+.legal-content {
+    font-family: var(--body);
+    color: var(--text-mid);
+}
+
+.legal-content h2 {
+    font-family: var(--display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--indigo);
+    margin: 2.5rem 0 1rem 0;
+}
+
+.legal-content p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+}
+
+.legal-content ul {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+}
+
+.legal-content li {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+    color: var(--text-mid);
+}
+
+.legal-content li strong {
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+/* Links inside the legal text */
+.legal-content a {
+    color: var(--indigo);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.legal-content a:hover {
+    color: var(--indigo-hover);
+}
+
+@media (max-width: 768px) {
+    .legal-section { padding: 4rem 0; }
+    .legal-container { padding: 0 1.5rem; }
+    .legal-header { margin-bottom: 3rem; }
+    .legal-content h2 { font-size: 1.5rem; margin-top: 2rem; }
+    .legal-content p, .legal-content li { font-size: 0.95rem; }
+}
 
 
 
