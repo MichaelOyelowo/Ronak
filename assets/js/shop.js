@@ -929,10 +929,6 @@ document.addEventListener("DOMContentLoaded", () => {
         nameWrap.classList.add('hidden');
         addUserMsg(userName);
 
-        nameWrap.classList.add('hidden');
-
-        addUserMsg(userName);
-
         // Respond with name
         await addBotMsg(
             `Nice to meet you, <strong>${userName}</strong>!`,
