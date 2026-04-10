@@ -754,6 +754,283 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3000);
     };
 
+    // ═══════════════════════════════════════
+// SHOP ASSISTANT PANEL
+// Shows once per day — stored in localStorage
+// ═══════════════════════════════════════
+
+(function () {
+
+    const STORAGE_KEY  = 'ronaks_assistant_shown';
+    const WA_NUMBER    = '234901234567';
+
+    const panel        = document.getElementById('assistantPanel');
+    const closeBtn     = document.getElementById('assistantClose');
+    const messagesEl   = document.getElementById('assistantMessages');
+    const typingEl     = document.getElementById('assistantTyping');
+    const nameWrap     = document.getElementById('assistantNameWrap');
+    const nameInput    = document.getElementById('assistantNameInput');
+    const sendBtn      = document.getElementById('assistantSendBtn');
+    const choicesEl    = document.getElementById('assistantChoices');
+
+    if (!panel) return;
+
+    let userName = '';
+
+    // ── Check if shown today ──
+    function hasShownToday() {
+        try {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (!stored) return false;
+            const today = new Date().toDateString();
+            return stored === today;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function markShownToday() {
+        try {
+            localStorage.setItem(STORAGE_KEY, new Date().toDateString());
+        } catch (e) {}
+    }
+
+    // ── Open / close ──
+    function openPanel() {
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        markShownToday();
+        startFlow();
+    }
+
+    function closePanel() {
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+    }
+
+    closeBtn.addEventListener('click', closePanel);
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panel.classList.contains('is-open')) {
+            closePanel();
+        }
+    });
+
+    // ── Add a bot message with typing delay ──
+    // Returns a Promise so we can await it
+    function addBotMsg(html, typingDelay = 1200) {
+        return new Promise(resolve => {
+
+            // Show typing indicator for typingDelay ms
+            typingEl.style.display = 'flex';
+            messagesEl.scrollTop   = messagesEl.scrollHeight;
+
+            setTimeout(() => {
+                typingEl.style.display = 'none';
+
+                const div = document.createElement('div');
+                div.className = 'assistant-msg';
+
+                const now  = new Date();
+                const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                div.innerHTML = `
+                    <div class="assistant-bubble">${html}</div>
+                    <span class="assistant-msg-time">${time}</span>
+                `;
+
+                // Insert before the typing indicator
+                messagesEl.insertBefore(div, typingEl);
+                messagesEl.scrollTop = messagesEl.scrollHeight;
+
+                resolve();
+            }, typingDelay);
+        });
+    }
+
+    // ── Add a user message (right-aligned, indigo) ──
+    function addUserMsg(text) {
+        typingEl.style.display = 'none';
+
+        const div = document.createElement('div');
+        div.className = 'assistant-msg assistant-msg--user';
+        div.innerHTML = `<div class="assistant-bubble">${text}</div>`;
+
+        messagesEl.insertBefore(div, typingEl);
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    // ── Render choice buttons ──
+    function showChoices(choices) {
+        typingEl.style.display  = 'none';
+        nameWrap.classList.add('hidden');
+        choicesEl.classList.remove('hidden');
+        choicesEl.innerHTML = '';
+
+        choices.forEach(choice => {
+            const btn = document.createElement('button');
+            btn.className = `choice-btn choice-btn--${choice.type}`;
+            btn.setAttribute('aria-label', choice.label);
+            btn.innerHTML = choice.icon
+                ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${choice.icon}</svg>${choice.label}`
+                : choice.label;
+
+            btn.addEventListener('click', () => choice.action());
+            choicesEl.appendChild(btn);
+        });
+    }
+
+    // ── Hide choice buttons ──
+    function hideChoices() {
+        choicesEl.classList.add('hidden');
+        choicesEl.innerHTML = '';
+    }
+
+    // ── THE CONVERSATION FLOW ──
+    async function startFlow() {
+
+        // Step 1 — greeting
+        await addBotMsg(
+            `Hi there! Welcome to <strong>Ronaks Adire</strong> 👋`,
+            900
+        );
+
+        // Step 2 — intro
+        await addBotMsg(
+            `We craft handmade Adire fabrics for every occasion — and we can always create something just for you.`,
+            1400
+        );
+
+        // Step 3 — ask name
+        await addBotMsg(
+            `Before I help — what's your name?`,
+            1200
+        );
+
+        // Show name input
+        typingEl.style.display = 'none';
+        nameInput.focus();
+    }
+
+    // ── Handle name submission ──
+    async function handleNameSubmit() {
+        const val = nameInput.value.trim();
+        if (!val) { nameInput.focus(); return; }
+
+        userName = val;
+        nameWrap.classList.add('hidden');
+
+        addUserMsg(userName);
+
+        // Respond with name
+        await addBotMsg(
+            `Nice to meet you, <strong>${userName}</strong>! 🎉`,
+            1000
+        );
+
+        // Ask the key question
+        await addBotMsg(
+            `Are you finding the design you're looking for today?`,
+            1300
+        );
+
+        typingEl.style.display = 'none';
+
+        // Show yes / no choices
+        showChoices([
+            {
+                type  : 'yes',
+                label : 'Yes, I found something I love!',
+                icon  : '<polyline points="20 6 9 17 4 12"/>',
+                action: async () => {
+                    hideChoices();
+                    addUserMsg('Yes, I found something I love!');
+
+                    await addBotMsg(
+                        `That is wonderful, ${userName}! 🎊`,
+                        900
+                    );
+                    await addBotMsg(
+                        `Just tap <strong>Order on WhatsApp</strong> on any product and our team will handle everything from there. Enjoy!`,
+                        1300
+                    );
+
+                    typingEl.style.display = 'none';
+
+                    // Auto close after 4 seconds
+                    setTimeout(closePanel, 4000);
+                }
+            },
+            {
+                type  : 'no',
+                label : "No, I can't quite find what I want",
+                icon  : '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+                action: async () => {
+                    hideChoices();
+                    addUserMsg("No, I can't quite find what I want");
+
+                    await addBotMsg(
+                        `No worries at all, ${userName}! We do fully custom Adire — for weddings, events, everyday wear, anything you have in mind.`,
+                        1100
+                    );
+
+                    await addBotMsg(
+                        `How would you like to show us what you're thinking?`,
+                        1300
+                    );
+
+                    typingEl.style.display = 'none';
+
+                    // Show the two paths
+                    showChoices([
+                        {
+                            type  : 'upload',
+                            label : 'Upload my design or reference image',
+                            icon  : '<polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>',
+                            action: () => {
+                                closePanel();
+                                // Scroll to the upload section on the page
+                                const uploadSection = document.querySelector('.upload-section');
+                                if (uploadSection) {
+                                    uploadSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                } else {
+                                    // Fallback — go to homepage upload section
+                                    window.location.href = './index.html#upload-section';
+                                }
+                            }
+                        },
+                        {
+                            type  : 'chat',
+                            label : 'Describe it to us on WhatsApp',
+                            icon  : '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+                            action: () => {
+                                const msg = encodeURIComponent(
+                                    `Hello Ronaks! My name is ${userName} and I have a custom Adire design in mind that I couldn't find on your shop. I'd love to discuss it with you!`
+                                );
+                                window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+                                closePanel();
+                            }
+                        }
+                    ]);
+                }
+            }
+        ]);
+    }
+
+    // ── Name input events ──
+    sendBtn.addEventListener('click', handleNameSubmit);
+    nameInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') handleNameSubmit();
+    });
+
+    // ── Trigger after 5 seconds if not shown today ──
+    if (!hasShownToday()) {
+        setTimeout(openPanel, 5000);
+    }
+
+})(); // end assistant IIFE
+
     // ─────────────────────────────────────
     // INIT: Read URL params then render
     // ─────────────────────────────────────
