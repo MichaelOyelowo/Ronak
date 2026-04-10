@@ -1,6 +1,9 @@
 /* ═══════════════════════════════════════
    SHOP PAGE — HERO BANNER
 ═══════════════════════════════════════ */
+[hidden] { display: none !important; }
+
+
 .shop-hero {
     background: var(--indigo);
     padding: 5rem 0 4rem;
@@ -387,6 +390,140 @@
     font-weight: 500;
     color: var(--text-faint);
 }
+
+/* ═══════════════════════════════════════
+   WISHLIST TOAST NOTIFICATION
+═══════════════════════════════════════ */
+.wishlist-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--indigo);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(24, 38, 85, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px 12px 12px;
+    max-width: 320px;
+    width: calc(100vw - 2rem);
+
+    /* Start hidden — slides up on .toast--visible */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s var(--ease),
+                transform 0.3s var(--ease);
+    pointer-events: none;
+}
+
+.wishlist-toast.toast--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Product thumbnail */
+.toast-img-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 4px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--bg-low);
+}
+
+.toast-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Text content */
+.toast-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.toast-action {
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--indigo);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.toast-action svg {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+}
+
+.toast-name {
+    font-family: var(--display);
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toast-link {
+    font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--indigo);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(24, 38, 85, 0.3);
+    width: fit-content;
+    margin-top: 2px;
+    transition: border-color 0.2s;
+}
+
+.toast-link:hover {
+    border-color: var(--indigo);
+}
+
+/* Close button */
+.toast-close {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-faint);
+    flex-shrink: 0;
+    transition: color 0.2s;
+    padding: 0;
+    align-self: flex-start;
+}
+
+.toast-close:hover { color: var(--text-dark); }
+.toast-close svg { width: 14px; height: 14px; }
+
+@media (max-width: 480px) {
+    .wishlist-toast {
+        bottom: 1rem;
+        right: 1rem;
+        max-width: calc(100vw - 2rem);
+    }
+}
+
 
 /* ═══════════════════════════════════════
    RESPONSIVE

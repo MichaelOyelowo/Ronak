@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // SHOP PAGE CONFIG
     // ═══════════════════════════════════════
 
-    const WA_NUMBER      = '2349029702549';
+    const WA_NUMBER      = '234901234567'; // your WhatsApp number in international format without the + sign
     const PRODUCTS_PER_PAGE = 8; // how many to show before Load More
 
     // ── State ──
@@ -174,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
                             <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.122 1.526 5.856L0 24l6.343-1.497A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.373l-.36-.214-3.727.979.995-3.638-.234-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
                         </svg>
-                        Order on WhatsApp
+                        Order Now
                     </a>
                 </div>
             </article>
@@ -323,38 +323,152 @@ document.addEventListener("DOMContentLoaded", () => {
     // ─────────────────────────────────────
     // WISHLIST: Toggle a product in/out of wishlist
     // ─────────────────────────────────────
-    function toggleWishlist(productId) {
-        const idx = state.wishlist.indexOf(productId);
+    // ─────────────────────────────────────
 
-        if (idx === -1) {
-            // Not in wishlist — add it
-            state.wishlist.push(productId);
-        } else {
-            // Already in wishlist — remove it
-            state.wishlist.splice(idx, 1);
+
+        // Load wishlist from localStorage on start
+        // If nothing saved yet, default to empty array
+        function loadWishlist() {
+            try {
+                const saved = localStorage.getItem('ronaks_wishlist');
+                return saved ? JSON.parse(saved) : [];
+            } catch (e) {
+                // If localStorage is blocked or corrupted, fail silently
+                return [];
+            }
         }
 
-        // Update the floating wishlist counter
-        const count = state.wishlist.length;
-        wishlistCount.textContent = count;
-        wishlistFloat.classList.toggle('visible', count > 0);
-        wishlistFloat.setAttribute('aria-label', `Wishlist — ${count} item${count !== 1 ? 's' : ''}`);
+        // Save wishlist back to localStorage every time it changes
+        function saveWishlist() {
+            try {
+                localStorage.setItem('ronaks_wishlist', JSON.stringify(state.wishlist));
+            } catch (e) {
+                console.warn('Could not save wishlist:', e);
+            }
+        }
 
-        // Update just this button without full re-render
-        const btn = shopGrid.querySelector(`.wishlist-btn[data-product-id="${productId}"]`);
-        if (btn) {
-            const isNowWishlisted = state.wishlist.includes(productId);
-            btn.classList.toggle('active', isNowWishlisted);
-            btn.setAttribute('aria-pressed', isNowWishlisted ? 'true' : 'false');
-
+        // Toggle a product in or out of the wishlist
+        function toggleWishlist(productId) {
+            const idx     = state.wishlist.indexOf(productId);
             const product = products.find(p => p.id === productId);
-            if (product) {
+            let   added   = false;
+
+            if (idx === -1) {
+                // Not in wishlist — add it
+                state.wishlist.push(productId);
+                added = true;
+            } else {
+                // Already in wishlist — remove it
+                state.wishlist.splice(idx, 1);
+                added = false;
+            }
+
+            // Persist to localStorage immediately
+            saveWishlist();
+
+            // Update the floating counter
+            updateWishlistCounter();
+
+            // Update just this button's visual state
+            // without triggering a full re-render
+            const btn = shopGrid.querySelector(
+                `.wishlist-btn[data-product-id="${productId}"]`
+            );
+            if (btn) {
+                const wishlisted = state.wishlist.includes(productId);
+                btn.classList.toggle('active', wishlisted);
+                btn.setAttribute('aria-pressed', wishlisted ? 'true' : 'false');
                 btn.setAttribute('aria-label',
-                    `${isNowWishlisted ? 'Remove' : 'Add'} ${product.name} ${isNowWishlisted ? 'from' : 'to'} wishlist`
+                    `${wishlisted ? 'Remove' : 'Add'} ${product?.name || ''} ${wishlisted ? 'from' : 'to'} wishlist`
+                );
+            }
+
+            // Show toast notification
+            if (product) showWishlistToast(product, added);
+        }
+
+        function updateWishlistCounter() {
+            const count = state.wishlist.length;
+            if (wishlistCount) wishlistCount.textContent = count;
+            if (wishlistFloat) {
+                wishlistFloat.classList.toggle('visible', count > 0);
+                wishlistFloat.setAttribute('aria-label',
+                    `Wishlist — ${count} item${count !== 1 ? 's' : ''}`
                 );
             }
         }
-    }
+
+        // ─────────────────────────────────────
+        // TOAST NOTIFICATION
+        // Slides in from bottom right
+        // Auto-dismisses after 3.5 seconds
+        // ─────────────────────────────────────
+        let toastTimer = null; // track active timer so we can cancel it
+
+        function showWishlistToast(product, added) {
+            // Remove any existing toast first
+            const existing = document.getElementById('wishlistToast');
+            if (existing) existing.remove();
+            if (toastTimer) clearTimeout(toastTimer);
+
+            // Build the toast HTML
+            const toast = document.createElement('div');
+            toast.id        = 'wishlistToast';
+            toast.className = 'wishlist-toast';
+            toast.setAttribute('role', 'status');
+            toast.setAttribute('aria-live', 'polite');
+            toast.setAttribute('aria-atomic', 'true');
+
+            toast.innerHTML = `
+                <div class="toast-img-wrap">
+                    <img src="${product.image}" alt="${product.name}">
+                </div>
+                <div class="toast-content">
+                    <p class="toast-action">
+                        ${added
+                            ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Added to Wishlist`
+                            : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Removed from Wishlist`
+                        }
+                    </p>
+                    <p class="toast-name">${product.name}</p>
+                    ${added
+                        ? `<a href="./wishlist.html" class="toast-link">View Wishlist →</a>`
+                        : ''
+                    }
+                </div>
+                <button class="toast-close" aria-label="Dismiss notification">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            `;
+
+            document.body.appendChild(toast);
+
+            // Trigger slide-in animation on next frame
+            // requestAnimationFrame ensures the element is painted before
+            // we add the class, so the CSS transition actually runs
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    toast.classList.add('toast--visible');
+                });
+            });
+
+            // Close button
+            toast.querySelector('.toast-close').addEventListener('click', () => {
+                dismissToast(toast);
+            });
+
+            // Auto dismiss after 3.5 seconds
+            toastTimer = setTimeout(() => dismissToast(toast), 3500);
+        }
+
+        function dismissToast(toast) {
+            toast.classList.remove('toast--visible');
+            // Remove from DOM after the CSS transition finishes (0.3s)
+            setTimeout(() => toast.remove(), 300);
+        }
 
     // ─────────────────────────────────────
     // BIND: Wishlist button events
@@ -550,17 +664,13 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ─────────────────────────────────────
-    // INIT: Safety check before rendering
-    // If products array doesn't exist, something
-    // is wrong with the file path or load order
+    // INIT: Read URL params then render
     // ─────────────────────────────────────
-    if (typeof products === 'undefined' || !Array.isArray(products)) {
-        console.error('products.js not loaded — check the script src path in shop.html');
-        return;
-    }
+        // Load persisted wishlist from localStorage before first render
+    state.wishlist = loadWishlist();
+    updateWishlistCounter();
 
     readURLParams();
     render();
-
 
 }); // end DOMContentLoaded
