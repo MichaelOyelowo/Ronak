@@ -549,9 +549,9 @@
         width: 100%;
         overflow-x: auto;
         padding-bottom: 4px;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
     }
-    .filter-group { flex-wrap: nowrap; overflow-x: auto; }
+    .filter-group { flex-wrap: wrap; overflow-x: auto; }
 
     .shop-grid-inner { padding: 0 1.25rem; }
     .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }

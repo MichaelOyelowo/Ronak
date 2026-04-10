@@ -607,39 +607,130 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ─────────────────────────────────────
-    // NAVBAR: Mobile hamburger
-    // Copy of your existing main.js logic
-    // ─────────────────────────────────────
-    const hamburger       = document.getElementById('hamburger');
-    const mobileNavInner  = document.querySelector('.mobile-nav-inner');
-    const mobileShopToggle = document.getElementById('mobileShopToggle');
-    const mobileShopSub   = document.getElementById('mobileShopSub');
 
-    if (hamburger && mobileNavInner) {
+        /* ═══════════════════════════════════════════════════════
+       2. TYPEWRITER PLACEHOLDER
+    ═══════════════════════════════════════════════════════ */
+    const searchInputs = document.querySelectorAll('input[name="search"]');
+
+    if (searchInputs.length > 0) {
+        const phrases =['Search Batik...', 'Search Silk...', 'Search Chiffon...', 'Search Tie-Dye...'];
+        let phraseIndex = 0;
+        let charIndex   = 0;
+        let isDeleting  = false;
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            const textToShow    = isDeleting
+                ? currentPhrase.substring(0, charIndex - 1)
+                : currentPhrase.substring(0, charIndex + 1);
+
+            searchInputs.forEach(input => input.setAttribute('placeholder', textToShow));
+
+            if (isDeleting) charIndex--; else charIndex++;
+
+            let delay = isDeleting ? 40 : 80;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                delay      = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting  = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                delay       = 500;
+            }
+
+            setTimeout(typeWriter, delay);
+        }
+
+        setTimeout(typeWriter, 1000);
+    }
+
+/* ═══════════════════════════════════════════════════════
+       . DESKTOP DROPDOWN
+    ═══════════════════════════════════════════════════════ */
+    const shopTrigger  = document.getElementById('shop-trigger');
+    const shopDropdown = document.getElementById('shop-dropdown');
+
+    if (shopTrigger && shopDropdown) {
+        function setDropdown(open) {
+            shopTrigger.setAttribute('aria-expanded', String(open));
+        }
+
+        shopTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = shopTrigger.getAttribute('aria-expanded') === 'true';
+            setDropdown(!isOpen);
+        });
+
+        shopTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const isOpen = shopTrigger.getAttribute('aria-expanded') === 'true';
+                setDropdown(!isOpen);
+            }
+            if (e.key === 'Escape') {
+                setDropdown(false);
+                shopTrigger.focus();
+            }
+        });
+
+        shopDropdown.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                setDropdown(false);
+                shopTrigger.focus();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!shopTrigger.closest('li').contains(e.target)) {
+                setDropdown(false);
+            }
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            if (!shopTrigger.closest('li').contains(e.target)) {
+                setDropdown(false);
+            }
+        }, { passive: true });
+    }
+
+
+    /* ═══════════════════════════════════════════════════════
+       . MOBILE HAMBURGER
+    ═══════════════════════════════════════════════════════ */
+    const hamburger = document.getElementById('hamburger');
+
+    if (hamburger) {
         hamburger.addEventListener('click', () => {
             const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
-            hamburger.setAttribute('aria-expanded', !isOpen);
+            hamburger.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
+                hamburger.setAttribute('aria-expanded', 'false');
+                hamburger.focus();
+            }
         });
     }
+
+
+    /* ═══════════════════════════════════════════════════════
+       . MOBILE SHOP SUB-MENU
+    ═══════════════════════════════════════════════════════ */
+    const mobileShopToggle = document.getElementById('mobileShopToggle');
+    const mobileShopSub    = document.getElementById('mobileShopSub');
 
     if (mobileShopToggle && mobileShopSub) {
         mobileShopToggle.addEventListener('click', () => {
             const isOpen = mobileShopToggle.getAttribute('aria-expanded') === 'true';
-            mobileShopToggle.setAttribute('aria-expanded', !isOpen);
+            mobileShopToggle.setAttribute('aria-expanded', String(!isOpen));
             mobileShopSub.classList.toggle('open', !isOpen);
         });
     }
 
-    // ─────────────────────────────────────
-    // NAVBAR: Desktop scroll effect
-    // ─────────────────────────────────────
-    const deskNav = document.getElementById('deskNav');
-    if (deskNav) {
-        window.addEventListener('scroll', () => {
-            deskNav.classList.toggle('scrolled', window.scrollY > 60);
-        }, { passive: true });
-    }
+
 
     // ─────────────────────────────────────
     // NEWSLETTER
