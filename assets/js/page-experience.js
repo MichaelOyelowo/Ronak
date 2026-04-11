@@ -30,7 +30,7 @@
                     <p class="cookie-text">
                         We use cookies to improve your browsing experience on Ronaks Adire.
                         By clicking <strong>Accept</strong>, you agree to our use of cookies.
-                        <a href="#" class="cookie-link">Privacy Policy</a>
+                        <a href="privacy.html" class="cookie-link">Privacy Policy</a>
                     </p>
                 </div>
                 <div class="cookie-btns">
