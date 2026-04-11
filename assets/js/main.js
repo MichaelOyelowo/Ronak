@@ -60,6 +60,12 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeWriter, 1000);
     }
 
+    const searchInput = document.querySelectorAll('.search-input');
+    searchInput.forEach(input => {
+        input.addEventListener('focus', () => {
+            window.location.href = './shop.html';
+        });
+    });
 
     /* ═══════════════════════════════════════════════════════
        3. DESKTOP DROPDOWN
