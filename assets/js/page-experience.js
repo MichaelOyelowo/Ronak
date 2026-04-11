@@ -1,108 +1,7 @@
 (function () {
 
     // ═══════════════════════════════════════
-    // 1. PAGE PRELOADER
-    // ═══════════════════════════════════════
-
-    function initPreloader() {
-        // Create the preloader element
-        const preloader = document.createElement('div');
-        preloader.id        = 'sitePreloader';
-        preloader.className = 'site-preloader';
-        preloader.setAttribute('aria-hidden', 'true');
-        preloader.setAttribute('role', 'presentation');
-
-        preloader.innerHTML = `
-            <div class="preloader-content">
-                <p class="preloader-logo">RONAKS</p>
-                <p class="preloader-sub">Adire &amp; Textile</p>
-            </div>
-            <div class="preloader-bar-wrap">
-                <div class="preloader-bar" id="preloaderBar"></div>
-            </div>
-        `;
-
-        // Insert as first child of body so it sits on top of everything
-        document.body.insertBefore(preloader, document.body.firstChild);
-
-        // Prevent scroll while preloader is active
-        document.body.style.overflow = 'hidden';
-
-        // Dismiss after 1.8 seconds — enough to feel intentional
-        // but not long enough to frustrate
-        setTimeout(dismissPreloader, 1800);
-    }
-
-    function dismissPreloader() {
-        const preloader = document.getElementById('sitePreloader');
-        if (!preloader) return;
-
-        // Fade out
-        preloader.classList.add('site-preloader--done');
-        document.body.style.overflow = '';
-
-        // Remove from DOM after transition finishes
-        setTimeout(() => {
-            if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
-        }, 600);
-    }
-
-    // ═══════════════════════════════════════
-    // 2. PAGE TRANSITIONS
-    // Indigo curtain sweeps in when leaving
-    // then sweeps out when new page loads
-    // ═══════════════════════════════════════
-
-    function initPageTransitions() {
-        // Create the transition curtain
-        const curtain = document.createElement('div');
-        curtain.id        = 'pageCurtain';
-        curtain.className = 'page-curtain';
-        curtain.setAttribute('aria-hidden', 'true');
-        document.body.appendChild(curtain);
-
-        // On page load — sweep the curtain OUT (right to left)
-        // This reveals the new page content
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                curtain.classList.add('page-curtain--reveal');
-            });
-        });
-
-        // Intercept all internal link clicks
-        document.addEventListener('click', (e) => {
-            const link = e.target.closest('a');
-            if (!link) return;
-
-            const href = link.getAttribute('href');
-            if (!href) return;
-
-            // Skip: external links, anchors, new tab, no href, javascript:
-            const isExternal   = link.hostname !== window.location.hostname;
-            const isAnchor     = href.startsWith('#');
-            const isNewTab     = link.target === '_blank';
-            const isJavascript = href.startsWith('javascript');
-            const isMailTo     = href.startsWith('mailto');
-            const isTel        = href.startsWith('tel');
-
-            if (isExternal || isAnchor || isNewTab || isJavascript || isMailTo || isTel) return;
-
-            // Prevent default navigation
-            e.preventDefault();
-
-            // Sweep curtain IN (left to right) — covers the page
-            curtain.classList.remove('page-curtain--reveal');
-            curtain.classList.add('page-curtain--cover');
-
-            // Navigate after curtain finishes (0.45s)
-            setTimeout(() => {
-                window.location.href = href;
-            }, 450);
-        });
-    }
-
-    // ═══════════════════════════════════════
-    // 3. COOKIE CONSENT BANNER
+    // 1. COOKIE CONSENT BANNER
     // Simple Accept / Reject — no categories
     // Stored in localStorage permanently
     // ═══════════════════════════════════════
@@ -181,7 +80,7 @@
     }
 
     // ═══════════════════════════════════════
-    // 5. BACK TO TOP BUTTON
+    // 2. BACK TO TOP BUTTON
     // Appears after scrolling 400px
     // Smooth scrolls to top on click
     // ═══════════════════════════════════════
@@ -229,8 +128,6 @@
     // ═══════════════════════════════════════
 
     function init() {
-        initPreloader();
-        initPageTransitions();
         initCookieBanner();
         initBackToTop();
     }
