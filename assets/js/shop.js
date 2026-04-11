@@ -926,6 +926,9 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem('ronaks_user_name', userName);
         } catch (e) {}
 
+        // ── Clear the input immediately ──
+        nameInput.value = '';
+
         nameWrap.classList.add('hidden');
         addUserMsg(userName);
 
