@@ -2969,7 +2969,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     right: 1.5rem;
     z-index: 9999;
     opacity: 0;
-    transform: translateX(calc(100% + 2rem));
+    transform: translateY(-16px);
     transition: opacity 0.4s var(--ease),
                 transform 0.4s var(--ease);
     pointer-events: none;
@@ -2979,7 +2979,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 .greeting-toast.greeting-toast--visible {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
     pointer-events: auto;
 }
 

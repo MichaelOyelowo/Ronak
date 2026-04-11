@@ -1,16 +1,17 @@
 (function () {
 
-    // ── Read the saved name ──
-    // This was stored by the shop assistant when they typed their name
     function getSavedName() {
         try {
             return localStorage.getItem('ronaks_user_name') || null;
-        } catch (e) {
-            return null;
-        }
+        } catch (e) { return null; }
     }
 
-    // ── Get time-based greeting ──
+    function getNameSavedAt() {
+        try {
+            return parseInt(localStorage.getItem('ronaks_user_name_at') || '0', 10);
+        } catch (e) { return 0; }
+    }
+
     function getGreeting() {
         const hour = new Date().getHours();
         if (hour >= 5  && hour < 12) return 'Good morning';
@@ -19,23 +20,18 @@
         return 'Welcome back';
     }
 
-    // ── Get time-based message ──
-    function getSubMessage(hour) {
+    function getSubMessage() {
+        const hour = new Date().getHours();
         if (hour >= 5  && hour < 12) return 'Ready to explore new collections today?';
         if (hour >= 12 && hour < 17) return 'Great to have you back at Ronaks.';
         if (hour >= 17 && hour < 21) return 'Lovely to see you again this evening.';
         return 'Browsing late — we love the dedication.';
     }
 
-    // ── Check if already greeted this session ──
-    // We only show once per browser session so it
-    // doesn't pop up on every page navigation
     function hasGreetedThisSession() {
         try {
             return sessionStorage.getItem('ronaks_greeted') === 'true';
-        } catch (e) {
-            return false;
-        }
+        } catch (e) { return false; }
     }
 
     function markGreetedThisSession() {
@@ -44,13 +40,23 @@
         } catch (e) {}
     }
 
-    // ── Build and show the greeting toast ──
-    function showGreeting(name) {
-        const hour       = new Date().getHours();
-        const greeting   = getGreeting();
-        const subMessage = getSubMessage(hour);
+    // ─────────────────────────────────────
+    // KEY FIX — only greet if name was saved
+    // more than 60 seconds ago.
+    // This prevents the awkward "welcome back"
+    // immediately after they typed their name
+    // on the same visit.
+    // On a genuine return visit the timestamp
+    // will be hours or days old so it passes.
+    // ─────────────────────────────────────
+    function isReturnVisit() {
+        const savedAt = getNameSavedAt();
+        if (!savedAt) return false;
+        const secondsAgo = (Date.now() - savedAt) / 1000;
+        return secondsAgo > 60; // must be at least 60 seconds old
+    }
 
-        // Build toast element
+    function showGreeting(name) {
         const toast = document.createElement('div');
         toast.id        = 'greetingToast';
         toast.className = 'greeting-toast';
@@ -65,12 +71,14 @@
                 </div>
                 <div class="greeting-content">
                     <p class="greeting-title">
-                        ${greeting}, <strong>${name}</strong>! 👋
+                        ${getGreeting()}, <strong>${name}</strong>! 👋
                     </p>
-                    <p class="greeting-sub">${subMessage}</p>
+                    <p class="greeting-sub">${getSubMessage()}</p>
                 </div>
                 <button class="greeting-close" id="greetingClose" aria-label="Dismiss greeting">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="2.5" stroke-linecap="round"
+                         stroke-linejoin="round" aria-hidden="true">
                         <line x1="18" y1="6" x2="6" y2="18"/>
                         <line x1="6" y1="6" x2="18" y2="18"/>
                     </svg>
@@ -80,22 +88,17 @@
 
         document.body.appendChild(toast);
 
-        // Trigger slide-in on next paint
         requestAnimationFrame(() => {
             requestAnimationFrame(() => {
                 toast.classList.add('greeting-toast--visible');
             });
         });
 
-        // Close button
         document.getElementById('greetingClose').addEventListener('click', () => {
             dismissGreeting(toast);
         });
 
-        // Auto dismiss after 5 seconds
         setTimeout(() => dismissGreeting(toast), 5000);
-
-        // Mark greeted for this session
         markGreetedThisSession();
     }
 
@@ -107,15 +110,12 @@
         }, 400);
     }
 
-    // ── INIT ──
-    // Wait for DOM then check conditions
     function init() {
         const name = getSavedName();
+        if (!name)               return; // no name saved yet
+        if (!isReturnVisit())    return; // name saved too recently — same visit
+        if (hasGreetedThisSession()) return; // already greeted this session
 
-        // Only show if we have a name and haven't greeted this session
-        if (!name || hasGreetedThisSession()) return;
-
-        // Delay slightly so page content loads first
         setTimeout(() => showGreeting(name), 1500);
     }
 

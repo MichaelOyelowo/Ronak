@@ -762,7 +762,7 @@ document.addEventListener("DOMContentLoaded", () => {
 (function () {
 
     const STORAGE_KEY  = 'ronaks_assistant_shown';
-    const WA_NUMBER    = '234901234567';
+    const WA_NUMBER    = '2349018766615'; // For WhatsApp orders from the assistant
 
     const panel        = document.getElementById('assistantPanel');
     const closeBtn     = document.getElementById('assistantClose');
@@ -920,11 +920,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         userName = val;
 
-        // ── Save name permanently to localStorage ──
-        // This is what greeting.js reads on return visits
         try {
-            localStorage.setItem('ronaks_user_name', userName);
-        } catch (e) {}
+        localStorage.setItem('ronaks_user_name', userName);
+        // Save the exact time the name was entered
+        // greeting.js uses this to know if it's a return visit
+        localStorage.setItem('ronaks_user_name_at', Date.now().toString());
+    } catch (e) {}
 
         // ── Clear the input immediately ──
         nameInput.value = '';
