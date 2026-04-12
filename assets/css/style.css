@@ -3065,7 +3065,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     height: 13px;
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
     .greeting-toast {
         top: auto;
         bottom: 5rem;
@@ -3074,7 +3074,7 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
         max-width: 100%;
         width: auto;
     }
-}
+} */
 
 
 /* ═══════════════════════════════════════
@@ -3259,6 +3259,296 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     }
     .back-to-top svg { width: 16px; height: 16px; }
 }
+
+
+/* ═══════════════════════════════════════
+   SPIN WHEEL MODAL
+═══════════════════════════════════════ */
+
+/* Backdrop */
+.spin-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 20, 0.55);
+    z-index: 9800;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease), visibility 0.35s;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+.spin-backdrop--visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal */
+.spin-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -44%) scale(0.94);
+    z-index: 9900;
+    width: 92%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(24, 38, 85, 0.22);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s var(--ease),
+                transform 0.35s var(--ease),
+                visibility 0.35s;
+    outline: none;
+}
+
+.spin-modal--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Confetti canvas sits on top of everything inside modal */
+.spin-confetti {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    border-radius: 16px;
+}
+
+/* Header */
+.spin-header {
+    background: var(--indigo);
+    padding: 1.25rem 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spin-eyebrow {
+    font-family: var(--body);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 3px;
+}
+
+.spin-title {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.spin-close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+}
+
+.spin-close-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* Body */
+.spin-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.1rem;
+}
+
+.spin-sub {
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    text-align: center;
+    line-height: 1.6;
+}
+
+.spin-sub strong { color: var(--indigo); }
+
+/* Wheel */
+.spin-wheel-wrap {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    flex-shrink: 0;
+}
+
+.spin-pointer {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 20px solid var(--indigo);
+    z-index: 10;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+#wheelCanvas {
+    border-radius: 50%;
+    box-shadow: 0 8px 32px rgba(24, 38, 85, 0.18);
+    display: block;
+}
+
+.spin-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 36px;
+    height: 36px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spin-center-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--indigo);
+    border-radius: 50%;
+}
+
+/* Result */
+.spin-result {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    padding: 0 0.5rem;
+    animation: spinResultIn 0.4s var(--ease) both;
+}
+
+@keyframes spinResultIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.spin-result-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.spin-result-title {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--indigo);
+}
+
+.spin-result-sub {
+    font-family: var(--body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    line-height: 1.6;
+}
+
+.spin-result-sub strong { color: var(--indigo); }
+
+/* Claim button */
+.spin-claim-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 0.85rem;
+    background: #25d366;
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-pill);
+    font-family: var(--body);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    margin-top: 4px;
+}
+
+.spin-claim-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
+.spin-claim-btn:hover { background: #1da851; transform: translateY(-2px); }
+
+/* Action button */
+.spin-action-btn {
+    font-family: var(--body);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--indigo);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.9rem;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    box-shadow: 0 6px 20px rgba(24, 38, 85, 0.3);
+}
+
+.spin-action-btn:hover:not(:disabled) {
+    background: var(--indigo-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(24, 38, 85, 0.4);
+}
+
+.spin-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spin-attempts-text {
+    font-family: var(--body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: var(--text-faint);
+    text-align: center;
+}
+
+.spin-attempts-text strong { color: var(--indigo); }
+
+/* Responsive */
+@media (max-width: 480px) {
+    .spin-modal { width: 96%; }
+    .spin-body  { padding: 1.25rem 1rem; }
+    .spin-wheel-wrap { width: 230px; height: 230px; }
+    #wheelCanvas { width: 230px !important; height: 230px !important; }
+}
+
+
+
 
 
 /* ═══════════════════════════════════════
