@@ -3852,6 +3852,124 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     .value-card { padding: 2rem; }
 }
 
+/* ═══════════════════════════════════════
+   THE VISIONARIES (Team Section)
+═══════════════════════════════════════ */
+.about-team {
+    background: var(--bg-card); /* Clean white background */
+    padding: 8rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.team-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+}
+
+.team-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 4rem auto;
+}
+
+.team-header h2 {
+    font-family: var(--display);
+    font-size: clamp(2.5rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--indigo);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+.team-subtitle {
+    font-family: var(--body);
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+}
+
+.team-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Sharp, editorial portrait images */
+.team-image {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Classic fashion portrait ratio */
+    background: var(--bg-low);
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.team-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(20%); /* Adds a slight editorial/magazine tone to the photos */
+    transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+}
+
+.team-profile:hover .team-image img {
+    transform: scale(1.03);
+    filter: grayscale(0%); /* Returns to full color on hover */
+}
+
+/* Typography for the profiles */
+.team-name {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--indigo);
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+}
+
+.team-role {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    display: block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-mid); /* Elegant dividing line */
+}
+
+.team-bio p {
+    font-family: var(--body);
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    font-style: italic; /* Makes it read like a personal quote */
+}
+
+/* ── RESPONSIVE BREAKPOINTS ── */
+@media (max-width: 1024px) {
+    .team-grid { gap: 2.5rem; }
+    .team-header { margin-bottom: 3rem; }
+}
+
+@media (max-width: 768px) {
+    .about-team { padding: 5rem 0; }
+    .team-container { padding: 0 1.5rem; }
+    .team-grid { grid-template-columns: 1fr; gap: 4rem; } /* Stacks profiles on mobile */
+    .team-header h2 { font-size: 2.2rem; }
+    .team-image { max-width: 400px; margin: 0 auto; } /* Keeps images from getting too massive on iPads */
+}
+
+
 
 
 /* ═══════════════════════════════════════
