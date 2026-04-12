@@ -4,13 +4,382 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us</title>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-msg-slider">
+    <p class="topbar-msg">Free &amp; fast delivery on orders over <strong>₦50,000</strong></p>
+    <p class="topbar-msg"><strong>Nationwide Delivery</strong> Available</p>
+    <p class="topbar-msg">Custom designs &amp; <strong>Bulk/Wholesale</strong> available</p>
+  </div>
+  
+  <div class="topbar-socials" aria-label="Social media">
+    <a href="https://instagram.com/ronaksadire" target="_blank" rel="noopener noreferrer" aria-label="Ronaks on Instagram">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+    </a>
+    <a href="#" aria-label="Ronaks on TikTok">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z" fill="currentColor"/></svg>
+    </a>
+    <a href="https://wa.me/2347068394191" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" fill="currentColor"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- Desktop Nav -->
+<header class="desk-nav">
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
+    <div class="nav-logo">
+      <a href="index.html" class="logo" data-page="home" aria-label="Ronaks — go to homepage">
+        <img src="assets/images/general/ronak_logo.png" alt="Ronaks Adire Logo">
+      </a>
+    </div>
+    
+    <div class="nav-menu-wrapper">
+      <ul class="nav-links" id="navLinks" role="list">
+        <li role="none"><a href="index.html" data-page="home" aria-current="page">Home</a></li>
+        <li role="none"><a href="about-us.html" data-page="about">About Us</a></li>
+        
+        <li role="none" class="has-dropdown">
+          <button class="nav-dropdown-trigger" id="shop-trigger" aria-haspopup="true" aria-expanded="false" aria-controls="shop-dropdown">
+            Shop 
+            <span class="chevron" aria-hidden="true">
+              <svg viewBox="0 -960 960 960" fill="currentColor"><path d="M480-360 280-560h400L480-360Z"/></svg>
+            </span>
+          </button>
+          <ul class="dropdown" id="shop-dropdown" role="list" aria-labelledby="shop-trigger">
+            <li role="none"><a href="shop.html" data-page="shop all">View All Products</a></li>
+            <li role="none"><a href="./shop.html?filter=silk-batik" data-page="shop" data-filter="silk-batik">Silk Batik</a></li>
+            <li role="none"><a href="./shop.html?filter=customized-cotton" data-page="shop" data-filter="customized-cotton">Customized Cotton</a></li>
+            <li role="none"><a href="./shop.html?filter=batik-cotton" data-page="shop" data-filter="batik-cotton">Batik Cotton</a></li>
+            <li role="none"><a href="./shop.html?filter=tissue-chiffon" data-page="shop" data-filter="tissue-chiffon">Tissue Chiffon</a></li>
+          </ul>
+        </li>
+        
+        <li role="none"><a href="#" data-page="training">Training</a></li>
+        <li role="none"><a href="#" data-page="upload design">Designs</a></li>
+        <li role="none"><a href="./wishlist.html" data-page="blog">your Wishlist</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-right">
+      <!-- Modern Search Pill -->
+      <label for="searchInput" class="search-wrapper">
+        <input type="text" name="search" id="searchInput" class="search-input" placeholder="Search..." aria-label="Search site">
+        <span class="search-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+        </span>
+      </label>
+      <a href="#contact-us" class="nav-cta" data-page="contact" role="button">Contact Us</a>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Navigation -->
+<header class="mobile-header">
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    
+    <div class="mobile-top-row">
+      <div class="nav-logo">
+        <a href="index.html" class="logo" data-page="home" aria-label="Ronaks — go to homepage">
+          <img src="assets/images/general/ronak_logo.png" alt="Ronaks Adire Logo">
+        </a>
+      </div>
+      
+      <div class="nav-right">
+        <!-- Mobile Search Pill -->
+        <label for="mobileSearchInput" class="search-wrapper">
+          <input type="text" name="search" id="mobileSearchInput" class="search-input" placeholder="Search..." aria-label="Search site">
+          <span class="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+          </span>
+        </label>
+
+        <button class="hamburger" id="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileNav">
+          <span aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="menu-open" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+              <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/>
+            </svg>
+          </span>
+          <span aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" class="menu-close" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000">
+              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+            </svg>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Sliding Mobile Menu Wrapper -->
+    <div class="mobile-nav-inner">
+      <a href="index.html" data-page="home" aria-current="page">Home</a>
+      <a href="about-us.html" data-page="about">About Us</a>
+      
+      <button class="mobile-shop-toggle" aria-expanded="false" aria-controls="mobileShopSub" id="mobileShopToggle">
+        Shop
+        <span class="chevron" aria-hidden="true">
+          <svg viewBox="0 -960 960 960" fill="currentColor"><path d="M480-360 280-560h400L480-360Z"/></svg>
+        </span>
+      </button>
+      <div class="mobile-sub" id="mobileShopSub" aria-labelledby="mobileShopToggle">
+        <a href="shop.html" data-page="shop">View All</a>
+        <a href="./shop.html?filter=silk-batik" data-page="shop" data-filter="silk-batik">Silk Batik</a>
+        <a href="./shop.html?filter=customized-cotton" data-page="shop" data-filter="customized-cotton">Customized Cotton</a>
+        <a href="./shop.html?filter=batik-cotton" data-page="shop" data-filter="batik-cotton">Batik Cotton</a>
+        <a href="./shop.html?filter=tissue-chiffon" data-page="shop" data-filter="tissue-chiffon">Tissue Chiffon</a>
+      </div>
+      <a href="#" data-page="training">Training</a>
+      <a href="#" data-page="training">Designs</a>
+      <a href="./wishlist.html" data-page="blog">Your Wishlist</a>
+      <a href="#contact-us" data-page="contact" class="mobile-nav-cta">Contact Us</a>
+    </div>
+  </nav>
+</header>
 
 
+<!-- ═══════════════════════════════════════
+   ABOUT HERO SECTION
+═══════════════════════════════════════ -->
+<section class="about-hero">
+  <div class="about-hero-container">
+    <p class="about-eyebrow reveal-fade">Our Story</p>
+    <h1 class="about-title reveal-up delay-100">
+      Preserving the Soul of<br>
+      <em>Yoruba Artistry.</em>
+    </h1>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+   THE HERITAGE (Split Editorial Layout)
+═══════════════════════════════════════ -->
+<section class="about-story-section">
+  <div class="about-grid">
+    <!-- Left: The Story Text -->
+    <div class="about-text-content reveal-up delay-200">
+      <h2>Born in the Cradle of Humanity</h2>
+      <p>Ronaks Adire was founded in the heart of <strong>Ile-Ife, Osun State</strong>—the ancestral home of the Yoruba people. For centuries, the women of this historic city have passed down the sacred art of resist-dyeing through matrilineal lines, turning plain cloth into profound visual language.</p>
+      <p>We are not just a fashion brand; we are custodians of this rich history. Every yard of Silk Batik, Customized Cotton, and Tissue Chiffon that leaves our atelier carries the fingerprints of master artisans who have dedicated their lives to mastering the vat.</p>
+    </div>
+    
+    <!-- Right: Editorial Image -->
+    <div class="about-image-wrapper reveal-left delay-300">
+      <!-- Replace with an image of your workshop, dye pits, or a beautiful fabric drape -->
+      <img src="https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?q=80&w=800&auto=format&fit=crop" alt="Dyeing process at Ronaks Adire">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+   THE CRAFT (3-Column Process Grid)
+═══════════════════════════════════════ -->
+<section class="about-craft-section">
+  <div class="craft-container">
+    <div class="craft-header reveal-up">
+      <h2>The Anatomy of Adire</h2>
+      <p>True luxury cannot be rushed. Our fabrics are crafted entirely by hand, meaning no two pieces are ever identical. It is a meticulous journey from raw textile to wearable art.</p>
+    </div>
+
+    <div class="craft-grid">
+      <!-- Step 1 -->
+      <div class="craft-card reveal-up delay-100">
+        <span class="craft-number">01</span>
+        <h3>The Motif (Eleko)</h3>
+        <p>Using cassava paste or melted wax, our artisans hand-draw intricate patterns onto the fabric. These motifs are not random; they are ancient proverbs, prayers, and symbols of natural divinity.</p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="craft-card reveal-up delay-200">
+        <span class="craft-number">02</span>
+        <h3>The Immersion</h3>
+        <p>The fabric is submerged into deep vats of rich, natural dye. It is lifted, oxidized in the African sun, and dipped again—a rhythmic process repeated until the perfect, intoxicating depth of color is achieved.</p>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="craft-card reveal-up delay-300">
+        <span class="craft-number">03</span>
+        <h3>The Reveal</h3>
+        <p>The wax or paste is carefully washed away to reveal the breathtaking contrast beneath. The fabric is then dried, pressed, and finished to achieve the buttery softness our Silk and Chiffon collections are known for.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+   VISION BANNER
+═══════════════════════════════════════ -->
+<section class="about-vision reveal-fade">
+  <div class="vision-overlay">
+    <h2 class="reveal-up">"We do not just make clothes. We weave the history of our ancestors into the fabric of the modern world."</h2>
+    <a href="./shop.html" class="vision-btn reveal-up delay-200">Explore The Collection</a>
+  </div>
+</section>
+
+  <!-- WhatsApp float -->
+    <a href="https://wa.me/2349018766615?text=Hello%20Ronaks%20Adire!%20I%20am%20interested%20in%20your%20handcrafted%20fabrics%20and%20would%20like%20to%20make%20an%20inquiry."
+       target="_blank" rel="noopener noreferrer"
+       class="whatsapp-float is-visible"
+       aria-label="Chat with Ronaks on WhatsApp">
+        <img src="./assets/images/icons/whatsapp.gif" alt="WhatsApp">
+    </a>
 
 
+<!-- ═══════════════════════════════════════
+     NEWSLETTER STRIP
+═══════════════════════════════════════ -->
+<div class="footer-newsletter">
+  <div class="footer-newsletter-inner">
+    <div class="newsletter-text reveal-up">
+      <p class="newsletter-eyebrow">Stay in the loop</p>
+      <h3 class="newsletter-title">Join the Inner Circle</h3>
+      <p class="newsletter-sub">Early access to new drops, artisan stories and exclusive offers.</p>
+    </div>
+    <form class="newsletter-form" aria-label="Newsletter signup" onsubmit="handleNewsletterSubmit(event)">
+      <input
+        type="email"
+        id="newsletterEmail"
+        name="email"
+        placeholder="Your email address"
+        autocomplete="email"
+        required
+        aria-label="Email address for newsletter">
+      <button type="submit" aria-label="Subscribe to newsletter">
+        Subscribe
+      </button>
+    </form>
+  </div>
+</div>
 
+<!-- ═══════════════════════════════════════
+     FOOTER BODY
+═══════════════════════════════════════ -->
+<footer class="footer-body" role="contentinfo" aria-label="Site footer">
+  <div class="footer-inner">
+
+    <!-- Col 1: Brand -->
+    <div class="footer-col footer-col--brand">
+      <a href="index.html" class="footer-logo" aria-label="Ronaks Adire — go to homepage">
+        <img src="./assets/images/general/ronak_logo.png" alt="Ronaks Adire Logo">
+      </a>
+      <p class="footer-tagline">
+        Handcrafted Nigerian Adire fabrics from the heart of Ile-Ife. Each piece is hand-dyed using centuries-old techniques passed down through generations.
+      </p>
+      <div class="footer-socials" role="list" aria-label="Social media links">
+        <a href="https://instagram.com/ronaksadire" target="_blank" rel="noopener noreferrer" class="social-link" role="listitem" aria-label="Follow Ronaks on Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+          </svg>
+        </a>
+        <a href="https://facebook.com/ronaksadire" target="_blank" rel="noopener noreferrer" class="social-link" role="listitem" aria-label="Follow Ronaks on Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+        <a href="https://tiktok.com/@ronaksadire" target="_blank" rel="noopener noreferrer" class="social-link" role="listitem" aria-label="Follow Ronaks on TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.26 8.26 0 0 0 4.84 1.56V6.79a4.85 4.85 0 0 1-1.07-.1z"/>
+          </svg>
+        </a>
+        <a href="https://wa.me/2349018766615" target="_blank" rel="noopener noreferrer" class="social-link social-link--wa" role="listitem" aria-label="Chat with Ronaks on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.122 1.526 5.856L0 24l6.343-1.497A11.946 11.946 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.373l-.36-.214-3.727.979.995-3.638-.234-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.58 6.58 2.182 12 2.182c5.42 0 9.818 4.398 9.818 9.818 0 5.42-4.398 9.818-9.818 9.818z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Col 2: Shop -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Collections</h4>
+      <ul class="footer-links" role="list">
+        <li><a href="./shop.html?filter=silk-batik">Silk Batik</a></li>
+        <li><a href="./shop.html?filter=customized-cotton">Customized Cotton</a></li>
+        <li><a href="./shop.html?filter=batik-cotton">Batik Cotton</a></li>
+        <li><a href="./shop.html?filter=tissue-chiffon">Tissue Chiffon</a></li>
+        <li><a href="./shop.html">View All Products</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Quick Links -->
+    <div class="footer-col">
+      <h4 class="footer-col-title">Quick Links</h4>
+      <ul class="footer-links" role="list">
+        <li role="none"><a href="./index.html" data-page="home">Home</a></li>
+        <li role="none"><a href="./about-us.html" data-page="about">About Us</a></li>
+        <li role="none"><a href="#" data-page="training">Training</a></li>
+        <li role="none"><a href="#" data-page="upload design">Designs</a></li>
+        <li role="none"><a href="./wishlist.html" data-page="blog">Your Wishlist</a></li>
+        <li role="none"><a href="#contact-us" data-page="contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Contact -->
+    <div class="footer-col" id="contact-us">
+      <h4 class="footer-col-title">Get in Touch</h4>
+      <ul class="footer-contact-list" role="list">
+        <li role="none">
+          <a href="tel:+234902976615" aria-label="Call Ronaks">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.06 6.06l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </span>
+            <span>+234 901 876 6615</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="mailto:hello@ronaksadire.com" aria-label="Email Ronaks">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </span>
+            <span>hello@ronaksadire.com</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="https://maps.app.goo.gl/utBFmjdLh7eSfYnt9" target="_blank" rel="noopener noreferrer" aria-label="Get directions to Ronaks studio">
+            <span class="footer-contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </span>
+            <span>32 Bamboo, AP Junction, <br>Ede Road, Ile-Ife,<br>Osun State, Nigeria</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     FOOTER BOTTOM BAR
+═══════════════════════════════════════ -->
+<div class="footer-bottom" role="contentinfo">
+  <div class="footer-bottom-inner">
+    <p class="footer-copy">
+      <span>&copy; <script>document.write(new Date().getFullYear())</script> Ronaks Adire</span>
+      <span class="footer-copy-sep">·</span>
+      <span>All rights reserved</span>
+      <span class="footer-copy-sep">·</span>
+      <span>Handcrafted in Ile-Ife, Nigeria 🇳🇬</span>
+    </p>
+    <nav class="footer-legal" aria-label="Legal links">
+      <a href="returns.html" aria-label="Returns Policy">Returns Policy</a>
+      <a href="privacy.html" aria-label="Privacy Policy">Privacy Policy</a>
+      <a href="terms.html" aria-label="Terms of Service">Terms of Service</a>
+    </nav>
+  </div>
+</div>
+
+<script src="./assets/js/greetings.js"></script>
+<script src="./assets/js/main.js"></script>
 </body>
 </html>
