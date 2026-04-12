@@ -3539,179 +3539,127 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 
 /* ═══════════════════════════════════════
-   ABOUT PAGE STYLES
+   ABOUT US (Corporate Luxury Style)
 ═══════════════════════════════════════ */
 
 /* ── 1. Hero Section ── */
-.about-hero {
-    background: var(--bg);
-    padding: 8rem 0 4rem 0;
+.about-hero-modern {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+}
+
+.about-hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 1;
+}
+
+.about-hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+}
+
+.about-hero-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10, 17, 40, 0.65); /* Deep indigo overlay for text readability */
+}
+
+.about-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+    color: #ffffff;
+}
+
+.about-eyebrow-light {
+    font-family: var(--body);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #e9c176; /* Gold accent */
+    margin-bottom: 1.5rem;
+}
+
+.about-headline {
+    font-family: var(--display);
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.about-subheadline {
+    font-family: var(--body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── 2. The Approach (Saatva Style) ── */
+.about-approach {
+    background: var(--bg);
+    padding: 6rem 0;
     border-bottom: 1px solid var(--border);
 }
 
-.about-hero-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-}
-
-.about-eyebrow {
-    font-family: var(--body);
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 1.5rem;
-}
-
-.about-title {
-    font-family: var(--display);
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 800;
-    color: var(--indigo);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
-}
-
-/* Ties the Liquid Silk gradient trick into the About Page! */
-.about-title em {
-    font-family: 'Caveat', cursive;
-    font-style: normal;
-    background: linear-gradient(to right, var(--indigo) 0%, #2a4ac8 30%, #e9c176 50%, #2a4ac8 70%, var(--indigo) 100%);
-    background-size: 200% auto;
-    color: transparent; 
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: silkShine 4s linear infinite;
-    padding-right: 10px;
-}
-
-/* ── 2. The Heritage (Split Grid) ── */
-.about-story-section {
-    background: var(--bg);
-    padding: 6rem 0;
-}
-
-.about-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr; /* Image is slightly larger than text */
-    gap: 6rem;
-    align-items: center;
-}
-
-.about-text-content h2 {
-    font-family: var(--display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: var(--indigo);
-    line-height: 1.1;
-    margin-bottom: 2rem;
-}
-
-.about-text-content p {
-    font-family: var(--body);
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-}
-
-.about-text-content strong {
-    color: var(--text-dark);
-    font-weight: 700;
-}
-
-.about-image-wrapper {
-    position: relative;
-    aspect-ratio: 4 / 5; /* Classic portrait fashion ratio */
-    border-radius: 4px;
-    overflow: hidden;
-    box-shadow: 0 20px 50px rgba(24, 38, 85, 0.08);
-}
-
-.about-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 1s var(--ease);
-}
-
-.about-image-wrapper:hover img {
-    transform: scale(1.05);
-}
-
-/* ── 3. The Craft (3 Columns) ── */
-.about-craft-section {
-    background: var(--bg-low); /* Soft contrast from the white sections */
-    padding: 8rem 0;
-}
-
-.craft-container {
+.approach-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2.5rem;
 }
 
-.craft-header {
+.approach-text {
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto 5rem auto;
 }
 
-.craft-header h2 {
+.approach-text h2 {
     font-family: var(--display);
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    font-weight: 800;
+    font-size: 2.5rem;
     color: var(--indigo);
     margin-bottom: 1.5rem;
 }
 
-.craft-header p {
+.approach-text p {
     font-family: var(--body);
     font-size: 1.1rem;
     color: var(--text-mid);
     line-height: 1.7;
 }
 
-.craft-grid {
+.approach-pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 4rem;
 }
 
-.craft-card {
-    background: var(--bg);
-    padding: 3rem 2.5rem;
-    border-radius: 4px;
-    border: 1px solid var(--border);
-    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+.pillar-box {
+    text-align: center;
 }
 
-.craft-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 16px 40px rgba(24, 38, 85, 0.06);
-    border-color: var(--indigo);
+.pillar-box svg {
+    width: 40px;
+    height: 40px;
+    stroke: var(--indigo);
+    margin-bottom: 1.5rem;
 }
 
-.craft-number {
-    font-family: var(--display);
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: rgba(24, 38, 85, 0.1); /* Ghosted number in the background */
-    line-height: 1;
-    display: block;
-    margin-bottom: 1rem;
-}
-
-.craft-card h3 {
+.pillar-box h3 {
     font-family: var(--body);
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -3719,89 +3667,190 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
     margin-bottom: 1rem;
 }
 
-.craft-card p {
+.pillar-box p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+}
+
+/* ── 3. Founder's Note ── */
+.about-founder {
+    background: var(--bg-card); /* Crisp white background */
+    padding: 6rem 0;
+}
+
+.founder-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.founder-image {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--bg-low);
+    border-radius: 2px; /* Sharp corners */
+}
+
+.founder-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+}
+
+.about-eyebrow {
     font-family: var(--body);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.founder-content h2 {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--indigo);
+    line-height: 1.2;
+    margin-bottom: 2.5rem;
+}
+
+.founder-letter p {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+}
+
+.founder-signature {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.signature-text {
+    font-family: 'Caveat', cursive; /* Handwritten look */
+    font-size: 2rem;
+    color: var(--indigo);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.signature-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+}
+
+/* ── 4. Core Values (FundingRock Style Bento) ── */
+.about-values {
+    background: var(--bg-low);
+    padding: 6rem 0;
+}
+
+.values-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    padding: 0 2.5rem;
+}
+
+.values-header h2 {
+    font-family: var(--display);
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--indigo);
+    margin-bottom: 1rem;
+}
+
+.values-header p {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+}
+
+.values-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.value-card {
+    background: var(--bg-card);
+    padding: 3.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(24, 38, 85, 0.08);
+    border-color: var(--indigo);
+}
+
+.value-icon {
+    font-family: var(--display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--indigo);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-mid);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.value-card h3 {
+    font-family: var(--body);
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.value-card p {
     font-size: 0.95rem;
     color: var(--text-mid);
     line-height: 1.7;
 }
 
-/* ── 4. Vision Banner ── */
-.about-vision {
-    position: relative;
-    background: url('https://images.unsplash.com/photo-1591369822096-ffd140ec948f?q=80&w=2000&auto=format&fit=crop') center/cover fixed;
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.vision-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(11, 25, 122, 0.75); /* Deep indigo overlay */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 2.5rem;
-    text-align: center;
-}
-
-.vision-overlay h2 {
-    font-family: var(--display);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    font-style: italic;
-    color: #ffffff;
-    max-width: 900px;
-    line-height: 1.3;
-    margin-bottom: 3rem;
-}
-
-.vision-btn {
-    font-family: var(--body);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--indigo);
-    background: #ffffff;
-    padding: 1.25rem 2.5rem;
-    border-radius: 50px;
-    transition: all 0.3s var(--ease);
-}
-
-.vision-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-}
-
 /* ── RESPONSIVE BREAKPOINTS ── */
 @media (max-width: 1024px) {
-    .about-grid { gap: 3rem; }
-    .craft-grid { gap: 1.5rem; }
-    .craft-card { padding: 2rem 1.5rem; }
+    .approach-pillars { gap: 2rem; }
+    .founder-container { gap: 3rem; }
+    .value-card { padding: 2.5rem; }
 }
 
 @media (max-width: 768px) {
-    .about-hero { padding: 5rem 0 3rem 0; }
+    .about-hero-modern { height: 60vh; }
+    .about-headline { font-size: 2.5rem; }
     
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
+    .about-approach { padding: 4rem 0; }
+    .approach-text h2 { font-size: 2rem; }
+    .approach-pillars { grid-template-columns: 1fr; gap: 3rem; padding-top: 3rem; }
     
-    /* Swap order on mobile so image is on top of text */
-    .about-image-wrapper { order: -1; }
-
-    .about-craft-section { padding: 5rem 0; }
-    .craft-grid { grid-template-columns: 1fr; }
+    .about-founder { padding: 4rem 0; }
+    .founder-container { grid-template-columns: 1fr; }
+    .founder-image { order: -1; max-width: 500px; margin: 0 auto; }
+    .founder-content h2 { font-size: 1.8rem; }
     
-    .about-vision { height: 60vh; }
-    .vision-overlay h2 { font-size: 1.8rem; }
+    .about-values { padding: 4rem 0; }
+    .values-header h2 { font-size: 2.2rem; }
+    .values-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .value-card { padding: 2rem; }
 }
-
 
 
 
