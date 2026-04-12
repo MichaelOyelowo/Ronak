@@ -4,93 +4,129 @@
     const STORAGE_KEY   = 'ronaks_spin';
     const TRIGGER_DELAY = 3000;
 
+    // ── 8 segments: 4 prizes alternating with 4 Try Again ──
+    // Indices: 0,2,4,6 = prizes | 1,3,5,7 = Try Again
     const SEGMENTS = [
-        { label: 'Free\nDelivery',  color: '#182655', text: '#fff',    win: true,  reward: 'free-delivery' },
-        { label: 'Try\nAgain',      color: '#e8e6e1', text: '#182655', win: false, reward: null            },
-        { label: '₦2,000\nOff',     color: '#253A82', text: '#fff',    win: true,  reward: 'n2000-off'     },
-        { label: 'Try\nAgain',      color: '#e8e6e1', text: '#182655', win: false, reward: null            },
-        { label: '5%\nDiscount',    color: '#182655', text: '#fff',    win: true,  reward: '5-percent'     },
-        { label: 'Try\nAgain',      color: '#e8e6e1', text: '#182655', win: false, reward: null            },
-        { label: 'Free\nDelivery',  color: '#253A82', text: '#fff',    win: true,  reward: 'free-delivery' },
-        { label: 'Try\nAgain',      color: '#e8e6e1', text: '#182655', win: false, reward: null            },
+        { label: '₦10,000\nOff',       color: '#182655', text: '#fff',    prize: true,  reward: 'n10000-off'    },
+        { label: 'Try\nAgain',          color: '#e8e6e1', text: '#182655', prize: false, reward: null            },
+        { label: '15%\nDiscount',       color: '#253A82', text: '#fff',    prize: true,  reward: '15-percent'    },
+        { label: 'Try\nAgain',          color: '#e8e6e1', text: '#182655', prize: false, reward: null            },
+        { label: 'Free\nDelivery',      color: '#182655', text: '#fff',    prize: true,  reward: 'free-delivery' },
+        { label: 'Try\nAgain',          color: '#e8e6e1', text: '#182655', prize: false, reward: null            },
+        { label: 'Priority\nProduction',color: '#253A82', text: '#fff',    prize: true,  reward: 'priority'      },
+        { label: 'Try\nAgain',          color: '#e8e6e1', text: '#182655', prize: false, reward: null            },
     ];
 
     const REWARDS = {
+        'n10000-off': {
+            icon:  '🎁',
+            title: '₦10,000 Off Won!',
+            sub:   'Get <strong>₦10,000 off</strong> your next Ronaks order. Claim on WhatsApp now!',
+            wa:    `Hello Ronaks! I just won *₦10,000 Off* on your spin wheel 🎉. Please apply my discount to my next order. Thank you!`
+        },
+        '15-percent': {
+            icon:  '✨',
+            title: '15% Discount Won!',
+            sub:   'Enjoy <strong>15% off</strong> your entire next Ronaks order — on any product!',
+            wa:    `Hello Ronaks! I just won a *15% Discount* on your spin wheel 🎉. Please apply my discount to my next order. Thank you!`
+        },
         'free-delivery': {
             icon:  '🚚',
             title: 'Free Delivery Won!',
-            sub:   'Your next Ronaks order ships <strong>completely free</strong> — no minimum spend.',
-            wa:    `Hello Ronaks! I just won *Free Delivery* on your spin wheel 🎉. Please apply my free delivery reward to my next order. Thank you!`
+            sub:   '<strong>Free delivery</strong> on your next order above ₦50,000 — no delivery fee!',
+            wa:    `Hello Ronaks! I just won *Free Delivery* on your spin wheel 🎉. Please apply free delivery to my next order above ₦50,000. Thank you!`
         },
-        'n2000-off': {
-            icon:  '🎁',
-            title: '₦2,000 Off Won!',
-            sub:   'Get <strong>₦2,000 off</strong> any order above ₦30,000. Claim on WhatsApp now!',
-            wa:    `Hello Ronaks! I just won *₦2,000 Off* on your spin wheel 🎉. Please apply my discount to my next order above ₦30,000. Thank you!`
-        },
-        '5-percent': {
-            icon:  '✨',
-            title: '5% Discount Won!',
-            sub:   'Enjoy <strong>5% off</strong> your entire next Ronaks order!',
-            wa:    `Hello Ronaks! I just won a *5% Discount* on your spin wheel 🎉. Please apply my discount to my next order. Thank you!`
+        'priority': {
+            icon:  '⚡',
+            title: 'Priority Production Won!',
+            sub:   'Your next order gets <strong>48-hour priority production</strong> — we make yours first!',
+            wa:    `Hello Ronaks! I just won *Priority Production (48hrs)* on your spin wheel 🎉. Please apply priority production to my next order. Thank you!`
         }
     };
 
     // ─────────────────────────────────────
     // STORAGE
-    // Tracks: date, spinsToday, dayStreak
+    // Tracks: date, spins used today,
+    //         streak (days visited),
+    //         wonDate (date of last win)
     // ─────────────────────────────────────
-    function getSpinData() {
+    function getData() {
         try {
             const raw = localStorage.getItem(STORAGE_KEY);
-            return raw ? JSON.parse(raw) : { date: null, spins: 0, streak: 0 };
-        } catch (e) {
-            return { date: null, spins: 0, streak: 0 };
-        }
+            return raw ? JSON.parse(raw) : {};
+        } catch (e) { return {}; }
     }
 
-    function saveSpinData(data) {
-        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch (e) {}
+    function saveData(obj) {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(obj)); } catch (e) {}
     }
 
-    function getTodayData() {
-        const data  = getSpinData();
+    // Check if user won recently (within 7 days)
+    function wonRecently() {
+        const d = getData();
+        if (!d.wonDate) return false;
+        const daysSinceWin = (Date.now() - d.wonDate) / (1000 * 60 * 60 * 24);
+        return daysSinceWin < 7;
+    }
+
+    // Is this a returning user (visited before today)?
+    function isReturningUser() {
+        const d     = getData();
         const today = new Date().toDateString();
-        if (data.date !== today) {
-            // New day — check if they are returning (streak)
-            return {
-                spins  : 0,
-                streak : data.date ? data.streak + 1 : 0,
-                isNewDay: true
-            };
-        }
-        return { spins: data.spins, streak: data.streak, isNewDay: false };
+        // They have a record from a previous day
+        return d.lastVisit && d.lastVisit !== today;
     }
 
-    function recordSpin(spins, streak) {
-        saveSpinData({
-            date  : new Date().toDateString(),
-            spins,
-            streak
+    // How many spins used today
+    function spinsToday() {
+        const d     = getData();
+        const today = new Date().toDateString();
+        return d.spinDate === today ? (d.spins || 0) : 0;
+    }
+
+    // Record a spin
+    function recordSpin() {
+        const d     = getData();
+        const today = new Date().toDateString();
+        saveData({
+            ...d,
+            spinDate  : today,
+            spins     : (d.spinDate === today ? (d.spins || 0) : 0) + 1,
+            lastVisit : today,
         });
     }
 
-    function canShowToday() {
-        const data  = getSpinData();
+    // Record a win — prevents showing wheel for 7 days
+    function recordWin() {
+        const d = getData();
+        saveData({ ...d, wonDate: Date.now() });
+    }
+
+    // Update last visit on page load (for streak tracking)
+    function updateVisit() {
+        const d     = getData();
         const today = new Date().toDateString();
-        if (data.date !== today) return true; // new day — always show
-        return data.spins < 3; // max 3 spins per day
+        if (d.lastVisit !== today) {
+            saveData({ ...d, lastVisit: today });
+        }
+    }
+
+    // Should we show the wheel at all?
+    function shouldShow() {
+        if (wonRecently()) return false;       // won in last 7 days — hide
+        if (spinsToday() >= 3) return false;   // used all 3 spins today — hide
+        return true;
     }
 
     // ─────────────────────────────────────
     // BUILD HTML
     // ─────────────────────────────────────
     function buildHTML() {
-        const savedName = (() => {
+        const name = (() => {
             try { return localStorage.getItem('ronaks_user_name') || ''; } catch(e) { return ''; }
         })();
 
-        const greeting = savedName ? `, <strong>${savedName}</strong>` : '';
+        const greeting = name ? `, <strong>${name}</strong>` : '';
 
         const backdrop = document.createElement('div');
         backdrop.className = 'spin-backdrop';
@@ -107,17 +143,20 @@
 
         modal.innerHTML = `
             <canvas class="spin-confetti" id="spinConfetti" aria-hidden="true"></canvas>
+
             <div class="spin-header">
                 <div>
                     <p class="spin-eyebrow">Exclusive for you</p>
                     <h2 class="spin-title">Spin &amp; Win!</h2>
                 </div>
-                <button class="spin-close-btn" id="spinCloseBtn" aria-label="Close spin wheel">✕</button>
+                <button class="spin-close-btn" id="spinCloseBtn" aria-label="Close">✕</button>
             </div>
+
             <div class="spin-body">
                 <p class="spin-sub" id="spinSub">
                     Try your luck today${greeting} — <strong>real rewards</strong> up for grabs!
                 </p>
+
                 <div class="spin-wheel-wrap">
                     <div class="spin-pointer" aria-hidden="true"></div>
                     <canvas id="wheelCanvas" width="260" height="260"></canvas>
@@ -125,6 +164,7 @@
                         <div class="spin-center-dot"></div>
                     </div>
                 </div>
+
                 <div class="spin-result" id="spinResult" aria-live="polite" aria-atomic="true">
                     <span class="spin-result-icon" id="spinResultIcon" aria-hidden="true"></span>
                     <p class="spin-result-title" id="spinResultTitle"></p>
@@ -137,7 +177,9 @@
                         Claim on WhatsApp
                     </button>
                 </div>
+
                 <button class="spin-action-btn" id="spinActionBtn">Spin the Wheel</button>
+
                 <p class="spin-attempts-text" id="spinAttemptsText">
                     You have <strong>3 spins</strong> today
                 </p>
@@ -149,9 +191,7 @@
     }
 
     // ─────────────────────────────────────
-    // DRAW WHEEL
-    // Fixed text rendering — all labels
-    // are now always right-side up
+    // DRAW WHEEL — text always right-side up
     // ─────────────────────────────────────
     function drawWheel(canvas, angle) {
         const ctx = canvas.getContext('2d');
@@ -178,36 +218,29 @@
             ctx.lineWidth = 2;
             ctx.stroke();
 
-            // ── Text fix ──
-            // Calculate the angle of the segment's midpoint
+            // Text — always readable
             const midAngle = start + ARC / 2;
+            const normMid  = ((midAngle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+            const isLeft   = normMid > Math.PI / 2 && normMid < (3 * Math.PI) / 2;
 
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(midAngle);
+            ctx.font      = 'bold 10px Manrope, sans-serif';
+            ctx.fillStyle = seg.text;
 
-            // Check if text would be upside down (left half of wheel)
-            // If so, flip it so it always reads correctly
-            const isLeftSide = midAngle % (2 * Math.PI) > Math.PI / 2 &&
-                               midAngle % (2 * Math.PI) < (3 * Math.PI) / 2;
+            const lines = seg.label.split('\n');
 
-            if (isLeftSide) {
-                // Flip and write from the other direction
+            if (isLeft) {
                 ctx.rotate(Math.PI);
                 ctx.textAlign = 'left';
-                const lines = seg.label.split('\n');
-                ctx.fillStyle = seg.text;
-                ctx.font = 'bold 10.5px Manrope, sans-serif';
                 lines.forEach((line, li) => {
-                    ctx.fillText(line, -(r - 12), (li - (lines.length - 1) / 2) * 14);
+                    ctx.fillText(line, -(r - 10), (li - (lines.length - 1) / 2) * 13);
                 });
             } else {
                 ctx.textAlign = 'right';
-                const lines = seg.label.split('\n');
-                ctx.fillStyle = seg.text;
-                ctx.font = 'bold 10.5px Manrope, sans-serif';
                 lines.forEach((line, li) => {
-                    ctx.fillText(line, r - 12, (li - (lines.length - 1) / 2) * 14);
+                    ctx.fillText(line, r - 10, (li - (lines.length - 1) / 2) * 13);
                 });
             }
 
@@ -223,7 +256,7 @@
     }
 
     // ─────────────────────────────────────
-    // INIT WHEEL + LOGIC
+    // WHEEL LOGIC
     // ─────────────────────────────────────
     function initWheel() {
         const canvas       = document.getElementById('wheelCanvas');
@@ -236,17 +269,21 @@
         const actionBtn    = document.getElementById('spinActionBtn');
         const attemptsText = document.getElementById('spinAttemptsText');
 
-        const NUM     = SEGMENTS.length;
-        const ARC     = (2 * Math.PI) / NUM;
-        let   angle   = 0;
-        let   spinning = false;
+        const NUM  = SEGMENTS.length;
+        const ARC  = (2 * Math.PI) / NUM;
+        let angle   = 0;
+        let spinning = false;
 
-        const { spins: spinsToday, streak, isNewDay } = getTodayData();
-        let   currentSpins = spinsToday;
+        const returning = isReturningUser();
+        let   usedToday = spinsToday();
 
-        // Update attempt display
-        function updateAttempts() {
-            const remaining = 3 - currentSpins;
+        // Odd indices are all "Try Again" — safe landing zones for day 1
+        const TRY_AGAIN_INDICES = [1, 3, 5, 7];
+        // Prize indices
+        const PRIZE_INDICES = [0, 2, 4, 6];
+
+        function updateUI() {
+            const remaining = 3 - usedToday;
             if (remaining > 0) {
                 attemptsText.innerHTML = `You have <strong>${remaining} spin${remaining !== 1 ? 's' : ''}</strong> left today`;
             } else {
@@ -255,10 +292,10 @@
             }
         }
 
-        updateAttempts();
+        updateUI();
         drawWheel(canvas, angle);
 
-        // ── Smooth spin animation ──
+        // ── Animate to a target angle ──
         function spinTo(targetAngle, duration, onDone) {
             const start      = performance.now();
             const startAngle = angle;
@@ -267,11 +304,9 @@
             function frame(now) {
                 const elapsed  = now - start;
                 const progress = Math.min(elapsed / duration, 1);
-                // Quartic ease-out — fast start, dramatic slow finish
                 const eased    = 1 - Math.pow(1 - progress, 4);
                 angle = startAngle + delta * eased;
                 drawWheel(canvas, angle);
-
                 if (progress < 1) {
                     requestAnimationFrame(frame);
                 } else {
@@ -283,31 +318,33 @@
             requestAnimationFrame(frame);
         }
 
-        // ── Land on a specific segment index ──
-        function getTargetAngle(segIndex, offsetFromCenter = 0) {
-            const fullRotations = (5 + Math.floor(Math.random() * 3)) * 2 * Math.PI;
-            const segCenter     = (Math.PI / 2) + segIndex * ARC + ARC / 2;
-            return angle + fullRotations + segCenter - (angle % (2 * Math.PI)) + offsetFromCenter;
+        // ── Calculate target angle for a segment ──
+        // offset: positive = past center, negative = before center
+        function targetFor(segIndex, offset = 0) {
+            const fullRots  = (5 + Math.floor(Math.random() * 3)) * 2 * Math.PI;
+            const segCenter = (Math.PI / 2) + segIndex * ARC + ARC / 2;
+            return angle + fullRots + segCenter - (angle % (2 * Math.PI)) + offset;
         }
 
-        // ── Show result ──
+        // ── Show result message ──
         function showResult(icon, title, sub, showClaim, rewardKey) {
-            resultIcon.textContent  = icon;
-            resultTitle.textContent = title;
-            resultSub.innerHTML     = sub;
+            resultIcon.textContent   = icon;
+            resultTitle.textContent  = title;
+            resultSub.innerHTML      = sub;
             spinResult.style.display = 'flex';
 
+            // Only show WhatsApp button on actual wins
             claimBtn.hidden = !showClaim;
+
             if (showClaim && rewardKey) {
-                const reward = REWARDS[rewardKey];
+                const r = REWARDS[rewardKey];
                 claimBtn.onclick = () => {
-                    const msg = encodeURIComponent(reward.wa);
-                    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+                    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(r.wa)}`, '_blank');
                 };
             }
         }
 
-        // ── Spin click ──
+        // ── Spin button ──
         actionBtn.addEventListener('click', () => {
             if (spinning || actionBtn.disabled) return;
             spinning = true;
@@ -315,99 +352,106 @@
             spinResult.style.display = 'none';
             claimBtn.hidden = true;
 
-            currentSpins++;
-            recordSpin(currentSpins, streak);
+            recordSpin();
+            usedToday++;
 
-            // ── IS THIS A RETURNING USER? (streak > 0 = came back) ──
-            const isReturningUser = streak > 0;
-
-            if (isReturningUser) {
-                // ── RETURNING USER WINS ON FIRST SPIN OF THE DAY ──
-                const winOptions = [0, 2, 4]; // Free Delivery, ₦2000, 5%
-                const winIdx     = winOptions[Math.floor(Math.random() * winOptions.length)];
-                const target     = getTargetAngle(winIdx);
+            if (returning) {
+                // ════════════════════════════════
+                // RETURNING USER — wins on spin 1
+                // Pick a random prize segment
+                // ════════════════════════════════
+                const winIdx   = PRIZE_INDICES[Math.floor(Math.random() * PRIZE_INDICES.length)];
+                const target   = targetFor(winIdx);
 
                 spinTo(target, 5000, () => {
                     spinning = false;
-                    actionBtn.disabled = true;
-                    attemptsText.textContent = 'You won! Come back tomorrow for more! 🎯';
+                    actionBtn.disabled  = true;
+                    attemptsText.textContent = 'You won! 🎉 Come back in 7 days for more!';
+                    spinSub.innerHTML = '🎊 You came back and you WON!';
 
                     const reward = REWARDS[SEGMENTS[winIdx].reward];
-                    spinSub.innerHTML = '🎊 You came back and you WON!';
                     showResult(reward.icon, reward.title, reward.sub, true, SEGMENTS[winIdx].reward);
+
+                    // Record win — hides wheel for 7 days
+                    recordWin();
                     launchConfetti();
                 });
 
             } else {
-                // ── FIRST TIME USER — 3 TRY AGAIN SPINS ──
-                // Each spin lands on a "Try Again" segment (odd indices: 1,3,5,7)
-                // but gets progressively closer to a real reward
-                // to keep them hooked 😄
+                // ════════════════════════════════
+                // DAY 1 USER — always Try Again
+                // Wheel ALWAYS lands on a Try Again
+                // segment regardless of visual spin
+                // Spin 1: comfortable miss
+                // Spin 2: just past a prize (heartbreak)
+                // Spin 3: stops at edge of prize (torture 😂)
+                // ════════════════════════════════
 
-                const tryAgainSegments = [1, 3, 5, 7]; // all "Try Again" segments
-
-                if (currentSpins === 1) {
-                    // Spin 1 — land comfortably on Try Again, far from rewards
-                    // Segment index 7 (bottom Try Again — clearly away from top rewards)
-                    const target = getTargetAngle(7, 0);
+                if (usedToday === 1) {
+                    // Spin 1 — comfortable miss on segment 7 (bottom Try Again)
+                    // Far from any prize — no false hope yet
+                    const target = targetFor(7, 0.05);
 
                     spinTo(target, 4000, () => {
                         spinning = false;
-                        updateAttempts();
-                        spinSub.innerHTML = `<strong>Try again</strong> — your reward is close! 🔥`;
+                        updateUI();
+                        spinSub.innerHTML = `<strong>Try again</strong> — your reward is in there! 🔥`;
                         showResult(
                             '😮',
                             'Not quite!',
-                            `Keep going — you have <strong>${3 - currentSpins} more spin${3 - currentSpins !== 1 ? 's' : ''}</strong> left today!`,
-                            false, null
+                            `Keep going — you have <strong>${3 - usedToday} more spin${3 - usedToday !== 1 ? 's' : ''}</strong> left today!`,
+                            false, // ← NO WhatsApp button
+                            null
                         );
                         actionBtn.textContent = 'Spin Again!';
-                        actionBtn.disabled = false;
+                        actionBtn.disabled    = false;
                     });
 
-                } else if (currentSpins === 2) {
-                    // Spin 2 — land on Try Again but JUST past a reward segment
-                    // Stops at segment 3 which is just after ₦2,000 Off (segment 2)
+                } else if (usedToday === 2) {
+                    // Spin 2 — stops JUST after ₦10,000 Off (index 0)
+                    // Lands on Try Again (index 1) but very close to the edge
                     // User sees the needle sweep past the prize — so close! 😂
-                    const target = getTargetAngle(3, -0.15); // just past ₦2,000 Off
+                    const target = targetFor(1, -0.12); // just past ₦10,000 Off
 
                     spinTo(target, 4500, () => {
                         spinning = false;
-                        updateAttempts();
-                        spinSub.innerHTML = `You were <strong>SO close!</strong> One more spin! 🔥🔥`;
+                        updateUI();
+                        spinSub.innerHTML = `You were <strong>SO close!</strong> One more chance! 🔥🔥`;
                         showResult(
                             '😱',
-                            'So close!!',
-                            `The needle just slipped past your reward! You have <strong>1 final spin</strong> today — this could be it! 🎯`,
-                            false, null
+                            'SO close!!',
+                            `The needle just slipped past ₦10,000 Off! You have <strong>1 final spin</strong> today — this could be it! 🎯`,
+                            false, // ← NO WhatsApp button
+                            null
                         );
                         actionBtn.textContent = 'Final Spin!';
-                        actionBtn.disabled = false;
+                        actionBtn.disabled    = false;
                     });
 
                 } else {
-                    // Spin 3 — land on Try Again but stop RIGHT at the edge of a reward
-                    // Needle stops about 0.05 radians before Free Delivery (segment 0)
-                    // Looks like it ALMOST landed on it — pure heartbreak 😂
-                    const target = getTargetAngle(1, 0.08); // just before Free Delivery
+                    // Spin 3 — stops RIGHT at the border of Priority Production (index 6)
+                    // Lands on Try Again (index 7) but the needle is almost touching index 6
+                    // Pure heartbreak — come back tomorrow 😂
+                    const target = targetFor(7, -0.06); // right at the edge of index 6
 
                     spinTo(target, 5000, () => {
                         spinning = false;
-                        actionBtn.disabled = true;
+                        actionBtn.disabled  = true;
                         attemptsText.textContent = 'Come back tomorrow — your reward is waiting! 🎯';
                         spinSub.innerHTML = `<strong>Come back tomorrow</strong> — it's almost yours! 😤`;
                         showResult(
                             '😤',
                             'Ugh, so close!',
-                            `You almost had it! <strong>Come back tomorrow</strong> and spin again — your reward will be waiting for you! 🎁`,
-                            false, null
+                            `You almost landed on <strong>Priority Production</strong>! Come back tomorrow and spin again — your reward will be there! 🎁`,
+                            false, // ← NO WhatsApp button ever on day 1
+                            null
                         );
                     });
                 }
             }
         });
 
-        // Close events
+        // Close handlers
         document.getElementById('spinBackdrop').addEventListener('click', closeModal);
         document.getElementById('spinCloseBtn').addEventListener('click', closeModal);
         document.addEventListener('keydown', (e) => {
@@ -438,7 +482,7 @@
     }
 
     // ─────────────────────────────────────
-    // CONFETTI
+    // CONFETTI — only fires on real wins
     // ─────────────────────────────────────
     function launchConfetti() {
         const canvas = document.getElementById('spinConfetti');
@@ -453,15 +497,15 @@
 
         for (let i = 0; i < 90; i++) {
             particles.push({
-                x:     Math.random() * canvas.width,
-                y:     -10 - Math.random() * 40,
-                w:     5 + Math.random() * 7,
-                h:     8 + Math.random() * 8,
+                x: Math.random() * canvas.width,
+                y: -10 - Math.random() * 40,
+                w: 5 + Math.random() * 7,
+                h: 8 + Math.random() * 8,
                 color: colors[Math.floor(Math.random() * colors.length)],
-                vx:    (Math.random() - 0.5) * 5,
-                vy:    3 + Math.random() * 5,
-                rot:   Math.random() * 360,
-                vrot:  (Math.random() - 0.5) * 10,
+                vx: (Math.random() - 0.5) * 5,
+                vy: 3 + Math.random() * 5,
+                rot: Math.random() * 360,
+                vrot: (Math.random() - 0.5) * 10,
                 alpha: 1,
             });
         }
@@ -493,7 +537,8 @@
     // INIT
     // ─────────────────────────────────────
     function init() {
-        if (!canShowToday()) return;
+        updateVisit(); // track visit for returning user detection
+        if (!shouldShow()) return;
         buildHTML();
         initWheel();
         setTimeout(openModal, TRIGGER_DELAY);
