@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         { id:12, name:"Blue Batik Cotton",    category:"batik-cotton",      categoryLabel:"Batik Cotton",       price:45000, originalPrice:null,   image:"./assets/images/homepage/midnight_sky_adire.webp",badge:"new-arrival", badgeLabel:"New Arrival" },
     ];
 
-    const WA_NUMBER = '2349029702549';
+    const WA_NUMBER = '2349018766615';
 
     // ── DOM ──
     const wishlistGrid    = document.getElementById('wishlistGrid');

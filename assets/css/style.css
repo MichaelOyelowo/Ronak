@@ -3539,434 +3539,669 @@ button { cursor: pointer; font-family: inherit; background: none; border: none; 
 
 
 /* ═══════════════════════════════════════
-   ABOUT US (Corporate Luxury Style)
+   ABOUT PAGE
 ═══════════════════════════════════════ */
 
-/* ── 1. Hero Section ── */
+/* ── Hero ── */
 .about-hero-modern {
-    position: relative;
-    height: 70vh;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  position: relative;
+  height: 90vh;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .about-hero-bg {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    z-index: 1;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .about-hero-bg img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
 }
 
 .about-hero-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(10, 17, 40, 0.65); /* Deep indigo overlay for text readability */
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,17,40,0.3) 0%,
+    rgba(10,17,40,0.6) 60%,
+    rgba(10,17,40,0.8) 100%
+  );
 }
 
 .about-hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 2rem;
-    color: #ffffff;
+  position: relative;
+  z-index: 2;
+  max-width: 780px;
+  padding: 0 2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .about-eyebrow-light {
-    font-family: var(--body);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #e9c176; /* Gold accent */
-    margin-bottom: 1.5rem;
+  font-family: var(--body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
 }
 
 .about-headline {
-    font-family: var(--display);
-    font-size: clamp(3rem, 6vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+  font-family: var(--display);
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
 }
 
 .about-subheadline {
-    font-family: var(--body);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.9);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  max-width: 560px;
 }
 
-/* ── 2. The Approach (Saatva Style) ── */
-.about-approach {
-    background: var(--bg);
-    padding: 6rem 0;
-    border-bottom: 1px solid var(--border);
+.about-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.45);
+  font-family: var(--body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
 }
 
-.approach-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
+.about-hero-cta:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.8);
 }
 
-.approach-text {
-    max-width: 800px;
-    margin: 0 auto 4rem auto;
-    text-align: center;
+/* ── Numbers Bar ── */
+.about-numbers-bar {
+  background: var(--indigo);
+  padding: 2.5rem 0;
 }
 
-.approach-text h2 {
-    font-family: var(--display);
-    font-size: 2.5rem;
-    color: var(--indigo);
-    margin-bottom: 1.5rem;
+.about-numbers-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.approach-text p {
-    font-family: var(--body);
-    font-size: 1.1rem;
-    color: var(--text-mid);
-    line-height: 1.7;
+.about-number-item {
+  flex: 1;
+  text-align: center;
+  padding: 0 2rem;
 }
 
-.approach-pillars {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    border-top: 1px solid var(--border);
-    padding-top: 4rem;
+.about-number {
+  display: block;
+  font-family: var(--display);
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
 }
 
-.pillar-box {
-    text-align: center;
+.about-number-label {
+  font-family: var(--body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
 }
 
-.pillar-box svg {
-    width: 40px;
-    height: 40px;
-    stroke: var(--indigo);
-    margin-bottom: 1.5rem;
+.about-number-divider {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
 }
 
-.pillar-box h3 {
-    font-family: var(--body);
-    font-size: 1rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--indigo);
-    margin-bottom: 1rem;
+/* ── Our Story ── */
+.about-story {
+  background: var(--bg);
+  padding: 7rem 0;
 }
 
-.pillar-box p {
-    font-size: 0.95rem;
-    color: var(--text-mid);
-    line-height: 1.6;
+.about-story-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 6rem;
+  align-items: center;
 }
 
-/* ── 3. Founder's Note ── */
-.about-founder {
-    background: var(--bg-card); /* Crisp white background */
-    padding: 6rem 0;
+.about-story-img {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
-.founder-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-    display: grid;
-    grid-template-columns: 1fr 1.2fr;
-    gap: 5rem;
-    align-items: center;
+.about-story-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.founder-image {
-    width: 100%;
-    aspect-ratio: 4/5;
-    background: var(--bg-low);
-    border-radius: 2px; /* Sharp corners */
-}
-
-.founder-image img {
-    width: 100%; height: 100%;
-    object-fit: cover;
+.about-story-img-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-family: var(--body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--indigo);
 }
 
 .about-eyebrow {
-    font-family: var(--body);
-    font-size: 0.65rem;
-    font-weight: 800;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    margin-bottom: 1.5rem;
-    display: block;
+  font-family: var(--body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.about-story-text h2 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 800;
+  color: var(--indigo);
+  line-height: 1.15;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.about-story-text p {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+
+/* ── Approach (keep your existing CSS, just update) ── */
+.about-approach {
+  background: var(--bg-low);
+  padding: 6rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.approach-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.approach-text {
+  max-width: 680px;
+  margin: 0 auto 4rem;
+  text-align: center;
+}
+
+.approach-text h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--indigo);
+  line-height: 1.2;
+  margin: 0.5rem 0 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.approach-text p {
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+.approach-pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  border-top: 1px solid var(--border);
+  padding-top: 4rem;
+}
+
+.pillar-box {
+  text-align: center;
+}
+
+.pillar-box svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--indigo);
+  margin-bottom: 1.25rem;
+}
+
+.pillar-box h3 {
+  font-family: var(--body);
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--indigo);
+  margin-bottom: 0.75rem;
+}
+
+.pillar-box p {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* ── Process ── */
+.about-process {
+  background: var(--bg);
+  padding: 6rem 0;
+}
+
+.process-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.process-header {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 4.5rem;
+}
+
+.process-header h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--indigo);
+  margin: 0.5rem 0 1rem;
+  letter-spacing: -0.02em;
+}
+
+.process-header p {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-faint);
+  line-height: 1.7;
+}
+
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.process-step {
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+  margin: -1px 0 0 -1px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.process-step:hover {
+  background: var(--bg-low);
+  border-color: var(--indigo);
+  z-index: 1;
+}
+
+.process-num {
+  font-family: var(--display);
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--indigo);
+  opacity: 0.1;
+  line-height: 1;
+  margin-bottom: 1.25rem;
+}
+
+.process-text h3 {
+  font-family: var(--body);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+}
+
+.process-text p {
+  font-family: var(--body);
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.75;
+}
+
+/* ── Founder ── */
+.about-founder {
+  background: var(--bg-low);
+  padding: 7rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.founder-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 5rem;
+  align-items: center;
+}
+
+.founder-image {
+  aspect-ratio: 4/5;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.founder-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .founder-content h2 {
-    font-family: var(--display);
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--indigo);
-    line-height: 1.2;
-    margin-bottom: 2.5rem;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  font-weight: 700;
+  color: var(--indigo);
+  line-height: 1.25;
+  margin: 0.5rem 0 2rem;
 }
 
 .founder-letter p {
-    font-size: 1rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-    margin-bottom: 1.25rem;
+  font-family: var(--body);
+  font-size: 0.95rem;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
 }
 
 .founder-signature {
-    margin-top: 3rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .signature-text {
-    font-family: 'Caveat', cursive; /* Handwritten look */
-    font-size: 2rem;
-    color: var(--indigo);
-    line-height: 1;
-    margin-bottom: 0.25rem;
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--indigo);
+  font-style: italic;
 }
 
 .signature-title {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-faint);
+  font-family: var(--body);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-faint);
 }
 
-/* ── 4. Core Values (FundingRock Style Bento) ── */
+/* ── Values (keep existing, just clean up) ── */
 .about-values {
-    background: var(--bg-low);
-    padding: 6rem 0;
+  background: var(--bg);
+  padding: 6rem 0;
+  border-top: 1px solid var(--border);
 }
 
 .values-header {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 4rem auto;
-    padding: 0 2.5rem;
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto 4rem;
+  padding: 0 2.5rem;
 }
 
 .values-header h2 {
-    font-family: var(--display);
-    font-size: 2.8rem;
-    font-weight: 800;
-    color: var(--indigo);
-    margin-bottom: 1rem;
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--indigo);
+  margin: 0.5rem 0 1rem;
 }
 
 .values-header p {
-    font-size: 1.05rem;
-    color: var(--text-mid);
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-faint);
+  line-height: 1.7;
 }
 
 .values-grid {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
 }
 
 .value-card {
-    background: var(--bg-card);
-    padding: 3.5rem;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  background: var(--bg-low);
+  padding: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s;
 }
 
 .value-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(24, 38, 85, 0.08);
-    border-color: var(--indigo);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(24,38,85,0.07);
+  border-color: var(--indigo);
 }
 
 .value-icon {
-    font-family: var(--display);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--indigo);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--border-mid);
-    padding-bottom: 0.5rem;
-    display: inline-block;
+  font-family: var(--display);
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--indigo);
+  opacity: 0.2;
+  margin-bottom: 1.25rem;
+  display: block;
 }
 
 .value-card h3 {
-    font-family: var(--body);
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
+  font-family: var(--body);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
 
 .value-card p {
-    font-size: 0.95rem;
-    color: var(--text-mid);
-    line-height: 1.7;
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.75;
 }
 
-/* ── RESPONSIVE BREAKPOINTS ── */
-@media (max-width: 1024px) {
-    .approach-pillars { gap: 2rem; }
-    .founder-container { gap: 3rem; }
-    .value-card { padding: 2.5rem; }
+/* ── FAQ ── */
+.about-faq {
+  background: var(--bg-low);
+  padding: 6rem 0;
+  border-top: 1px solid var(--border);
 }
 
-@media (max-width: 768px) {
-    .about-hero-modern { height: 60vh; }
-    .about-headline { font-size: 2.5rem; }
-    
-    .about-approach { padding: 4rem 0; }
-    .approach-text h2 { font-size: 2rem; }
-    .approach-pillars { grid-template-columns: 1fr; gap: 3rem; padding-top: 3rem; }
-    
-    .about-founder { padding: 4rem 0; }
-    .founder-container { grid-template-columns: 1fr; }
-    .founder-image { order: -1; max-width: 500px; margin: 0 auto; }
-    .founder-content h2 { font-size: 1.8rem; }
-    
-    .about-values { padding: 4rem 0; }
-    .values-header h2 { font-size: 2.2rem; }
-    .values-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-    .value-card { padding: 2rem; }
+.faq-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.faq-header h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--indigo);
+  margin-top: 0.5rem;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.faq-item:first-child {
+  border-top: 1px solid var(--border);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  background: transparent;
+  border: none;
+  font-family: var(--body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.faq-question:hover { color: var(--indigo); }
+.faq-question[aria-expanded="true"] { color: var(--indigo); }
+
+.faq-chevron { flex-shrink: 0; transition: transform 0.3s var(--ease); }
+.faq-chevron svg { width: 18px; height: 18px; }
+.faq-question[aria-expanded="true"] .faq-chevron { transform: rotate(180deg); }
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease), padding 0.3s ease;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+  padding-bottom: 1.5rem;
+}
+
+.faq-answer p {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.85;
 }
 
 /* ═══════════════════════════════════════
-   THE VISIONARIES (Team Section)
+   RESPONSIVE
 ═══════════════════════════════════════ */
-.about-team {
-    background: var(--bg-card); /* Clean white background */
-    padding: 8rem 0;
-    border-bottom: 1px solid var(--border);
-}
-
-.team-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-}
-
-.team-header {
-    text-align: center;
-    max-width: 700px;
-    margin: 0 auto 4rem auto;
-}
-
-.team-header h2 {
-    font-family: var(--display);
-    font-size: clamp(2.5rem, 4vw, 3.2rem);
-    font-weight: 800;
-    color: var(--indigo);
-    margin-bottom: 1.5rem;
-    line-height: 1.1;
-}
-
-.team-subtitle {
-    font-family: var(--body);
-    font-size: 1.05rem;
-    color: var(--text-mid);
-    line-height: 1.7;
-}
-
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4rem;
-}
-
-.team-profile {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-/* Sharp, editorial portrait images */
-.team-image {
-    width: 100%;
-    aspect-ratio: 3 / 4; /* Classic fashion portrait ratio */
-    background: var(--bg-low);
-    border-radius: 2px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-}
-
-.team-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: grayscale(20%); /* Adds a slight editorial/magazine tone to the photos */
-    transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
-}
-
-.team-profile:hover .team-image img {
-    transform: scale(1.03);
-    filter: grayscale(0%); /* Returns to full color on hover */
-}
-
-/* Typography for the profiles */
-.team-name {
-    font-family: var(--display);
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--indigo);
-    margin-bottom: 0.25rem;
-    line-height: 1.1;
-}
-
-.team-role {
-    font-family: var(--body);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--text-faint);
-    display: block;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-mid); /* Elegant dividing line */
-}
-
-.team-bio p {
-    font-family: var(--body);
-    font-size: 1rem;
-    color: var(--text-mid);
-    line-height: 1.8;
-    font-style: italic; /* Makes it read like a personal quote */
-}
-
-/* ── RESPONSIVE BREAKPOINTS ── */
 @media (max-width: 1024px) {
-    .team-grid { gap: 2.5rem; }
-    .team-header { margin-bottom: 3rem; }
+  .about-story-inner { gap: 4rem; }
+  .founder-container { gap: 3.5rem; }
+  .process-steps { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .about-team { padding: 5rem 0; }
-    .team-container { padding: 0 1.5rem; }
-    .team-grid { grid-template-columns: 1fr; gap: 4rem; } /* Stacks profiles on mobile */
-    .team-header h2 { font-size: 2.2rem; }
-    .team-image { max-width: 400px; margin: 0 auto; } /* Keeps images from getting too massive on iPads */
+  .about-hero-modern { height: 75vh; }
+
+  .about-numbers-inner { flex-wrap: wrap; }
+  .about-number-item { flex: 1 1 50%; padding: 1rem; }
+  .about-number-divider { display: none; }
+
+  .about-story { padding: 4rem 0; }
+  .about-story-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+  .about-story-img { aspect-ratio: 16/9; }
+
+  .approach-pillars {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-top: 3rem;
+  }
+
+  .process-steps { grid-template-columns: 1fr; }
+
+  .founder-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 1.5rem;
+  }
+  .founder-image { max-width: 400px; margin: 0 auto; }
+
+  .values-grid { grid-template-columns: 1fr; }
+
+  .about-story-inner,
+  .approach-container,
+  .process-inner,
+  .values-grid,
+  .values-header,
+  .faq-inner,
+  .process-header { padding: 0 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .about-headline { font-size: 2.2rem; }
+  .about-number { font-size: 1.8rem; }
+  .process-step { padding: 1.75rem 1.25rem; }
+  .value-card { padding: 2rem; }
 }
 
 

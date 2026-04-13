@@ -820,11 +820,11 @@ if (reviewTrack && dots.length > 0) {
 
     
     /* ═══════════════════════════════════════════════════════
-       16. NEWSLETTER FORM
+       16. UPLOAD TO CLOUDINARY
     ═══════════════════════════════════════════════════════ */
-    const CLOUD_NAME    = 'dffuf2gwh';    // found on your Cloudinary dashboard
+    const CLOUD_NAME    = 'dweacouwm';    // found on your Cloudinary dashboard
     const UPLOAD_PRESET = 'ronaks_designs';     // the unsigned preset you create
-    const WA_NUMBER     = '2349029702549';
+    const WA_NUMBER     = '2349018766615';
 
     // ── Grab all the elements we need from the DOM ──
     const uploadForm     = document.getElementById('uploadForm');
@@ -1137,25 +1137,4 @@ if (reviewTrack && dots.length > 0) {
         }
     });
 
-        /* ═══════════════════════════════════════
-    FAQ ACCORDION
-    ═══════════════════════════════════════ */
-    document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const answer = btn.nextElementSibling;
-        const isOpen = btn.getAttribute('aria-expanded') === 'true';
-
-        // Close all others first
-        document.querySelectorAll('.faq-question').forEach(other => {
-        other.setAttribute('aria-expanded', 'false');
-        other.nextElementSibling.classList.remove('open');
-        });
-
-        // Toggle current
-        if (!isOpen) {
-        btn.setAttribute('aria-expanded', 'true');
-        answer.classList.add('open');
-        }
-    });
-    });
 });
