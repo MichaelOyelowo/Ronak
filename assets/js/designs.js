@@ -1,8 +1,5 @@
 /* ═══════════════════════════════════════
    DESIGNS DATA
-   To add a design: add an object to this array
-   To move to shop: remove it from here, add to shop
-   Max recommended: 15
 ═══════════════════════════════════════ */
 const DESIGNS = [
   {
@@ -39,7 +36,7 @@ const DESIGNS = [
     collection: 'Collection I',
     status: 'available',
     image: './assets/images/homepage/earth_brown.webp',
-    story: 'Ile means "home" in Yoruba. The warm terracotta and brown tones of this cotton piece echo the red earth of Ile-Ife — the city that Yoruba tradition holds as the origin of all human life. Wearing it is wearing your roots.'
+    story: 'Ile means "home" in Yoruba. The warm terracotta and brown tones of this cotton piece echo the red earth of Ile-Ife. Wearing it is wearing your roots.'
   },
   {
     name: 'Ibadandun',
@@ -57,7 +54,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/artcraft.jpg',
-    story: 'Bold diagonal lightning patterns in deep crimson and black — inspired by Sango, the Yoruba deity of thunder and power. This is not a subtle piece. It is for the person who enters a room and changes it. Currently in the vat.'
+    story: 'Bold diagonal lightning patterns in deep crimson and black — inspired by Sango, the Yoruba deity of thunder and power. Currently in the vat.'
   },
   {
     name: 'Heritage Weave',
@@ -66,7 +63,7 @@ const DESIGNS = [
     collection: 'Collection I',
     status: 'available',
     image: './assets/images/homepage/heritage.webp',
-    story: 'Our most requested pattern. A dense, interlocking grid of resist lines that references the weave structure of traditional Aso-Oke — reimagined in hand-dyed chiffon. Lightweight, breathable, and impossible to ignore.'
+    story: 'Our most requested pattern. A dense, interlocking grid of resist lines that references the weave structure of traditional Aso-Oke — reimagined in hand-dyed chiffon.'
   },
   {
     name: 'Labalaba',
@@ -75,7 +72,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/indigo.webp',
-    story: 'Labalaba means butterfly in Yoruba. This silk piece features a resist pattern that opens outward from the shoulders toward the hem — a design about transformation. Almost ready.'
+    story: 'Labalaba means butterfly in Yoruba. A resist pattern that opens outward from the shoulders toward the hem — a design about transformation. Almost ready.'
   },
   {
     name: 'Osun Grove',
@@ -84,7 +81,7 @@ const DESIGNS = [
     collection: 'Collection I',
     status: 'available',
     image: './assets/images/homepage/earth_brown.webp',
-    story: 'The Sacred Grove of Osun in Osogbo is a UNESCO World Heritage Site. This cotton piece captures its green-gold light filtering through ancient trees — resist-dyed in layers that mimic the forest canopy.'
+    story: 'The Sacred Grove of Osun in Osogbo is a UNESCO World Heritage Site. This cotton piece captures its green-gold light filtering through ancient trees.'
   },
   {
     name: 'Egungun',
@@ -93,7 +90,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/new-arrival.jpg',
-    story: 'Inspired by the Egungun masquerade — the Yoruba ancestral festival of colour, spirit, and memory. Fragmented resist blocks in contrasting tones that reference the layered costume of the masquerade. Still in development.'
+    story: 'Inspired by the Egungun masquerade — the Yoruba ancestral festival of colour, spirit, and memory. Fragmented resist blocks in contrasting tones. Still in development.'
   },
   {
     name: 'Igora',
@@ -102,7 +99,7 @@ const DESIGNS = [
     collection: 'Collection I',
     status: 'available',
     image: './assets/images/homepage/midnight_sky_adire.webp',
-    story: 'One of the oldest named Adire patterns. Igora references the traditional Yoruba market — a place of movement, exchange, and colour. Dense repeat pattern in navy and white that gets richer with every wash.'
+    story: 'One of the oldest named Adire patterns. Dense repeat pattern in navy and white that gets richer with every wash.'
   },
   {
     name: 'Ara Orun',
@@ -111,7 +108,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/heritage.webp',
-    story: 'Ara Orun means "citizen of heaven" in Yoruba. Soft white-on-white resist patterns that are almost invisible until the fabric moves in light. A deeply reverential piece still being carefully finished.'
+    story: 'Ara Orun means "citizen of heaven" in Yoruba. Soft white-on-white resist patterns that are almost invisible until the fabric moves in light.'
   },
   {
     name: 'Agbado Lines',
@@ -120,7 +117,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/artcraft.jpg',
-    story: 'Inspired by rows of corn — agbado in Yoruba — this geometric pattern uses vertical resist lines of varying widths to create a rhythm across the cotton. Simple, structural, and deeply satisfying up close.'
+    story: 'Inspired by rows of corn — agbado in Yoruba. Vertical resist lines of varying widths create a rhythm across the cotton. Simple, structural, and deeply satisfying up close.'
   },
   {
     name: 'Ife Red',
@@ -129,7 +126,7 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/earth_brown.webp',
-    story: 'The red laterite soil of Ile-Ife has a colour unlike anywhere else in Nigeria. This cotton piece replicates that exact warmth using a combination of natural dyes layered over three days. Raw, earthy, unmistakably from the source.'
+    story: 'The red laterite soil of Ile-Ife has a colour unlike anywhere else in Nigeria. This cotton piece replicates that exact warmth using natural dyes layered over three days.'
   },
   {
     name: 'Obatala White',
@@ -138,12 +135,12 @@ const DESIGNS = [
     collection: 'Collection II',
     status: 'coming-soon',
     image: './assets/images/homepage/indigo.webp',
-    story: 'Obatala is the Yoruba deity of creation, purity, and white cloth. This silk piece breaks from our indigo tradition entirely — undyed white silk with cassava resist patterns that create texture without colour. A statement of restraint.'
+    story: 'Obatala is the Yoruba deity of creation and white cloth. Undyed white silk with cassava resist patterns that create texture without colour. A statement of restraint.'
   }
 ];
 
 /* ═══════════════════════════════════════
-   RENDER FUNCTION
+   RENDER
 ═══════════════════════════════════════ */
 const designsMasonry = document.getElementById('designsMasonry');
 const designsCountEl = document.getElementById('designsCount');
@@ -152,37 +149,31 @@ const designsEmptyEl = document.getElementById('designsEmpty');
 function renderDesigns(filter = 'all') {
   if (!designsMasonry) return;
 
+  // Clear existing cards
   designsMasonry.innerHTML = '';
 
   const filtered = DESIGNS.filter(d => {
-    if (filter === 'all') return true;
-    if (filter === d.status) return true;
+    if (filter === 'all')       return true;
+    if (filter === d.status)    return true;
     if (filter === d.fabricKey) return true;
     return false;
   });
 
-  // Update count
   designsCountEl.textContent = `${filtered.length} design${filtered.length !== 1 ? 's' : ''}`;
-
-  // Show/hide empty state
   designsEmptyEl.style.display = filtered.length === 0 ? 'block' : 'none';
 
-  filtered.forEach((design, i) => {
+  filtered.forEach(design => {
     const isComingSoon = design.status === 'coming-soon';
 
-    // Stagger delay classes
-    const delays = ['', 'delay-100', 'delay-200'];
-    const delay  = delays[i % 3];
-
     const card = document.createElement('article');
-    card.className = `design-card reveal-up ${delay}`;
+    card.className = 'design-card'; // NO reveal-up — that's the fix
     card.dataset.status = design.status;
     card.dataset.fabric = design.fabricKey;
 
     card.innerHTML = `
-      <div class="design-img-wrap ${isComingSoon ? 'design-img-wrap--blur' : ''}">
+      <div class="design-img-wrap${isComingSoon ? ' design-img-wrap--blur' : ''}">
         <img src="${design.image}"
-             alt="${design.name} — ${design.fabric} Adire design by Ronaks${isComingSoon ? ' — Coming Soon' : ''}"
+             alt="${design.name} — ${design.fabric} Adire by Ronaks"
              loading="lazy">
         <div class="design-img-overlay">
           <span class="design-status ${isComingSoon ? 'design-status--soon' : 'design-status--available'}">
