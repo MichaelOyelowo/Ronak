@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return `
                 <div class="hero-img-card hero-img-card--${i + 1}" style="${styles}">
                     ${img.img 
-                    ? `<img src="${img.img}" alt="${img.label}" fetchpriority="high" loading="eager" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+                    ? `<img src="${img.img}" alt="${img.label}" fetchpriority="high" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
                         <div style="background: #e0e0e0; width: 100%; height: 100%; display: none;"></div>` 
                     : `<div style="background: #e0e0e0; width: 100%; height: 100%;"></div>`
                     }
