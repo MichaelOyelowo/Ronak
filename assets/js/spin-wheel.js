@@ -2,7 +2,7 @@
 
     const WA_NUMBER     = '2349029702549';
     const STORAGE_KEY   = 'ronaks_spin';
-    const TRIGGER_DELAY = 3000;
+    const TRIGGER_DELAY = 5000;
 
     // ── 8 segments: 4 prizes alternating with 4 Try Again ──
     const SEGMENTS =[
