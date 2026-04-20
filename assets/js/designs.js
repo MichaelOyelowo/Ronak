@@ -3,13 +3,13 @@
 ═══════════════════════════════════════ */
 const DESIGNS = [
   {
-    name: 'Olokun Rising',
+    name: 'Aso-Oke Inspired Drape',
     fabric: 'Silk Batik',
     fabricKey: 'silk-batik',
     collection: 'Collection I',
     status: 'available',
-    image: './assets/images/homepage/indigo.webp',
-    story: 'Named after the Yoruba deity of the deep sea, this pattern mirrors the movement of water — unpredictable, fluid, and endlessly deep. The indigo wash deepens from the centre outward, as if the dye itself is breathing.'
+    image: './assets/images/products/cotton-batik/cotton-batik4.webp',
+    story: 'Customized cotton drape inspired by traditional Aso-Oke weaving.'
   },
   {
     name: 'Midnight Sky',
@@ -39,22 +39,22 @@ const DESIGNS = [
     story: 'Ile means "home" in Yoruba. The warm terracotta and brown tones of this cotton piece echo the red earth of Ile-Ife. Wearing it is wearing your roots.'
   },
   {
-    name: 'Ibadandun',
+    name: 'Royal Ocean Silk',
     fabric: 'Silk Batik',
     fabricKey: 'silk-batik',
     collection: 'Collection I',
     status: 'available',
-    image: './assets/images/homepage/new-arrival.jpg',
-    story: 'The name translates as "Ibadan is sweet." Interlocking circles in deep indigo on ivory silk, each ring connected to the next without beginning or end. A pattern about belonging.'
+    image: './assets/images/products/tie-dye/tie-dye3.png',
+    story: 'Classic blue & white indigo batik. Elegant and beautifully fluid. The silk takes the dye in a way that creates subtle variations in tone across the fabric, making each piece unique.'
   },
   {
-    name: "Sango's Mark",
+    name: "",
     fabric: 'Batik Cotton',
     fabricKey: 'batik-cotton',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/artcraft.jpg',
-    story: 'Bold diagonal lightning patterns in deep crimson and black — inspired by Sango, the Yoruba deity of thunder and power. Currently in the vat.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156161/adire83_xuwrjv.png',
+    story: ''
   },
   {
     name: 'Heritage Weave',
@@ -62,7 +62,7 @@ const DESIGNS = [
     fabricKey: 'tissue-chiffon',
     collection: 'Collection I',
     status: 'available',
-    image: './assets/images/homepage/heritage.webp',
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156159/adire85_f6bq6p.png',
     story: 'Our most requested pattern. A dense, interlocking grid of resist lines that references the weave structure of traditional Aso-Oke — reimagined in hand-dyed chiffon.'
   },
   {
@@ -71,44 +71,44 @@ const DESIGNS = [
     fabricKey: 'silk-batik',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/indigo.webp',
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156159/adire84_pc2lhs.png',
     story: 'Labalaba means butterfly in Yoruba. A resist pattern that opens outward from the shoulders toward the hem — a design about transformation. Almost ready.'
   },
   {
-    name: 'Osun Grove',
+    name: 'Grove',
     fabric: 'Customized Cotton',
     fabricKey: 'customized-cotton',
     collection: 'Collection I',
     status: 'available',
-    image: './assets/images/homepage/earth_brown.webp',
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776144947/adire23_ohgbqd.webp',
     story: 'The Sacred Grove of Osun in Osogbo is a UNESCO World Heritage Site. This cotton piece captures its green-gold light filtering through ancient trees.'
   },
   {
-    name: 'Egungun',
+    name: '',
     fabric: 'Customized Cotton',
     fabricKey: 'customized-cotton',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/new-arrival.jpg',
-    story: 'Inspired by the Egungun masquerade — the Yoruba ancestral festival of colour, spirit, and memory. Fragmented resist blocks in contrasting tones. Still in development.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156157/adire72_bgy1ni.png',
+    story: 'A passionate throw for elegant evening wear.'
   },
   {
-    name: 'Igora',
+    name: '',
     fabric: 'Batik Cotton',
     fabricKey: 'batik-cotton',
     collection: 'Collection I',
     status: 'available',
-    image: './assets/images/homepage/midnight_sky_adire.webp',
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156111/adire38_w2q87l.png',
     story: 'One of the oldest named Adire patterns. Dense repeat pattern in navy and white that gets richer with every wash.'
   },
   {
-    name: 'Ara Orun',
+    name: '',
     fabric: 'Tissue Chiffon',
     fabricKey: 'tissue-chiffon',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/heritage.webp',
-    story: 'Ara Orun means "citizen of heaven" in Yoruba. Soft white-on-white resist patterns that are almost invisible until the fabric moves in light.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156137/adire67_i5zmzp.png',
+    story: 'Rich, powerful red tones on the finest imported silk.'
   },
   {
     name: 'Agbado Lines',
@@ -116,26 +116,26 @@ const DESIGNS = [
     fabricKey: 'batik-cotton',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/artcraft.jpg',
-    story: 'Inspired by rows of corn — agbado in Yoruba. Vertical resist lines of varying widths create a rhythm across the cotton. Simple, structural, and deeply satisfying up close.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156138/adire69_afrifz.png',
+    story: 'High-contrast black and white for maximum visual impact.``'
   },
   {
-    name: 'Ife Red',
+    name: '',
     fabric: 'Customized Cotton',
     fabricKey: 'customized-cotton',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/earth_brown.webp',
-    story: 'The red laterite soil of Ile-Ife has a colour unlike anywhere else in Nigeria. This cotton piece replicates that exact warmth using natural dyes layered over three days.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156141/adire71_e4qiwv.png',
+    story: 'A warm, glowing fabric inspired by the sands.'
   },
   {
-    name: 'Obatala White',
+    name: '',
     fabric: 'Silk Batik',
     fabricKey: 'silk-batik',
     collection: 'Collection II',
     status: 'coming-soon',
-    image: './assets/images/homepage/indigo.webp',
-    story: 'Obatala is the Yoruba deity of creation and white cloth. Undyed white silk with cassava resist patterns that create texture without colour. A statement of restraint.'
+    image: 'https://res.cloudinary.com/dweacouwm/image/upload/v1776156143/adire74_upjoqr.png',
+    story: 'Subtle, dark elegance with beautiful flowing movement'
   }
 ];
 
