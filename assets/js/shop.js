@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // SHOP PAGE CONFIG
     // ═══════════════════════════════════════
 
-    const WA_NUMBER      = '234901234567'; // your WhatsApp number in international format without the + sign
+    const WA_NUMBER      = '2349018766615'; // your WhatsApp number in international format without the + sign
     const PRODUCTS_PER_PAGE = 8; // how many to show before Load More
 
     // ── State ──
